@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GURiN World — モンスター診断</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0a0a0f; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+.wrap { background: #0f0f1a; border-radius: 16px; padding: 2rem; max-width: 520px; width: 100%; border: 0.5px solid #1a1a2a; }
+.gw-title { font-size: 11px; letter-spacing: 0.15em; color: #00C8C8; margin-bottom: 0.5rem; text-transform: uppercase; }
+.gw-heading { font-size: 24px; font-weight: 500; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+.gw-sub { font-size: 13px; color: #555; margin-bottom: 1.5rem; }
+.intro-desc { font-size: 14px; color: #777; line-height: 1.9; margin-bottom: 2rem; }
+.start-btn { background: transparent; border: 1px solid #00C8C8; border-radius: 10px; padding: 14px 18px; color: #00C8C8; font-size: 15px; text-align: center; cursor: pointer; width: 100%; transition: background 0.2s; }
+.start-btn:hover { background: rgba(0,200,200,0.1); }
+.progress-bar { background: #1a1a2a; border-radius: 4px; height: 3px; margin-bottom: 0.5rem; }
+.progress-fill { background: #00C8C8; height: 3px; border-radius: 4px; transition: width 0.4s ease; }
+.stage-info { font-size: 12px; color: #444; text-align: right; margin-bottom: 1.5rem; }
+.q-label { font-size: 11px; color: #00C8C8; margin-bottom: 0.75rem; letter-spacing: 0.08em; }
+.q-text { font-size: 17px; font-weight: 500; color: #fff; margin-bottom: 1.5rem; line-height: 1.6; }
+.options { display: flex; flex-direction: column; gap: 10px; }
+.opt-btn { background: transparent; border: 0.5px solid #2a2a3a; border-radius: 10px; padding: 14px 18px; color: #bbb; font-size: 14px; text-align: left; cursor: pointer; transition: border-color 0.2s, background 0.2s, color 0.2s; line-height: 1.5; }
+.opt-btn:hover { border-color: #00C8C8; color: #fff; background: rgba(0,200,200,0.06); }
+.opt-btn.selected { border-color: #00C8C8; color: #00C8C8; background: rgba(0,200,200,0.1); }
+.result-title { font-size: 11px; color: #00C8C8; letter-spacing: 0.12em; margin-bottom: 1.25rem; }
+.result-card { background: #0a0a14; border: 0.5px solid #00C8C8; border-radius: 14px; padding: 1.5rem; margin-bottom: 1rem; }
+.monster-no { font-size: 11px; color: #00C8C8; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+.monster-name { font-size: 30px; font-weight: 500; color: #fff; margin-bottom: 0.25rem; }
+.monster-type { font-size: 12px; color: #555; background: #1a1a2a; border-radius: 6px; padding: 3px 10px; display: inline-block; margin-bottom: 1rem; }
+.monster-desc { font-size: 14px; color: #999; line-height: 1.8; margin-bottom: 1.25rem; }
+.weakness-label { font-size: 11px; color: #FF6B6B; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+.weakness-val { font-size: 18px; color: #FF6B6B; font-weight: 500; margin-bottom: 1.25rem; }
+.rona-box { background: #080810; border-left: 2px solid #00C8C8; padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 1rem; }
+.rona-line { font-size: 14px; color: #ccc; line-height: 1.9; }
+.rona-line::before { content: "🐱  "; }
+.final-msg { font-size: 12px; color: #333; line-height: 1.8; margin-top: 0.5rem; }
+.mini-section-label { font-size: 11px; color: #444; letter-spacing: 0.1em; margin: 1.25rem 0 0.75rem; }
+.mini-card { background: #0f0f1a; border: 0.5px solid #1e1e2e; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 0.75rem; }
+.mini-name { font-size: 15px; font-weight: 500; color: #bbb; margin-bottom: 0.25rem; }
+.mini-weak { font-size: 12px; color: #FF6B6B; }
+.restart-btn { background: transparent; border: 0.5px solid #2a2a3a; border-radius: 10px; padding: 12px 24px; color: #555; font-size: 14px; cursor: pointer; width: 100%; margin-top: 0.5rem; transition: border-color 0.2s, color 0.2s; }
+.restart-btn:hover { border-color: #00C8C8; color: #00C8C8; }
+.footer { text-align: center; font-size: 11px; color: #333; margin-top: 1.5rem; letter-spacing: 0.05em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div id="intro-screen">
+    <div class="gw-title">GURiN World</div>
+    <div class="gw-heading">今日のモンスターを<br>見つけよう</div>
+    <div class="gw-sub">人間界脱出ゲーム — モンスター診断</div>
+    <div class="intro-desc">
+      モンスターは敵ではない。<br>
+      気づく対象である。<br><br>
+      5つの問いに答えると、<br>
+      今日の自分のモンスターが現れる。
+    </div>
+    <button class="start-btn" onclick="startQuiz()">診断をはじめる</button>
+  </div>
+
+  <div id="quiz-screen" style="display:none">
+    <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+    <div class="stage-info" id="stage-info">1 / 5</div>
+    <div class="q-label" id="q-label">Q1</div>
+    <div class="q-text" id="q-text"></div>
+    <div class="options" id="options"></div>
+  </div>
+
+  <div id="result-screen" style="display:none">
+    <div class="result-title">診断結果 — 今日のモンスター</div>
+    <div class="result-card" id="main-result"></div>
+    <div id="secondary-section"></div>
+    <button class="restart-btn" onclick="restart()">もう一度診断する</button>
+    <div class="footer">GURiN World — マボロシ世界の歩き方</div>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    text: "最近、こんな気持ちになることがある？",
+    options: [
+      { text: "「ちゃんとしなきゃ」「もっとうまくやらなきゃ」と思う", monsters: ["ネバナラヌ"] },
+      { text: "「あの人はすごい」「自分だけ取り残されている」と感じる", monsters: ["クラベル"] },
+      { text: "「どうせ無理だ」「今さら遅い」と思う", monsters: ["ムリダ"] },
+      { text: "「まだ足りない」「準備が足りない」と感じる", monsters: ["フノレツ"] }
+    ]
+  },
+  {
+    text: "決断や行動の前によくあること、どれに近い？",
+    options: [
+      { text: "「もし失敗したら？」と考えて動けなくなる", monsters: ["モシモ"] },
+      { text: "「損か得か」をずっと計算してしまう", monsters: ["ソントク"] },
+      { text: "「あの時こうしていれば」と過去に戻ってしまう", monsters: ["ノニ"] },
+      { text: "「誰かのためにやらなきゃ」と感じる", monsters: ["ノタメニ"] }
+    ]
+  },
+  {
+    text: "SNSを開いたとき、どんな気持ちになる？",
+    options: [
+      { text: "フォロワー数や数字が気になってしまう", monsters: ["クラベル", "ソントク"] },
+      { text: "「こんな自分じゃダメだ」と思う", monsters: ["ネバナラヌ", "フノレツ"] },
+      { text: "「発信できない、まだ早い」と感じる", monsters: ["ムリダ", "モシモ"] },
+      { text: "あまり気にならない", monsters: [] }
+    ]
+  },
+  {
+    text: "今、何かチャレンジしたいことがあるとしたら？",
+    options: [
+      { text: "「どうせうまくいかない」と思う", monsters: ["ムリダ"] },
+      { text: "「準備が整ってから」と先延ばしにしている", monsters: ["ネバナラヌ", "フノレツ"] },
+      { text: "「誰かに迷惑をかけるかも」と躊躇する", monsters: ["ノタメニ"] },
+      { text: "「失敗したときのことを考えると怖い」", monsters: ["モシモ"] }
+    ]
+  },
+  {
+    text: "最近、心の中でよくつぶやく言葉は？",
+    options: [
+      { text: "「〜しなければ」「〜すべきだ」", monsters: ["ネバナラヌ"] },
+      { text: "「〜だったのに」「あの時は良かった」", monsters: ["ノニ"] },
+      { text: "「足りない」「もっと必要だ」", monsters: ["フノレツ"] },
+      { text: "「誰かのため」「みんなのために」", monsters: ["ノタメニ"] }
+    ]
+  }
+];
+
+const monsters = {
+  "ネバナラヌ": { no: "No.001", type: "固定観念種", desc: "「〜しなければならない」をエネルギーに生きる。ルールブックを抱え込み、自由を忘れさせる。", weakness: "余白", rona: ["ルールは便利だけどね", "ルールの奴隷になると迷宮になるよ"] },
+  "ノタメニ": { no: "No.002", type: "他者優先種", desc: "他人の期待を背負いすぎる。自分の声が聞こえなくなる。", weakness: "本音", rona: ["優しさと我慢は別物だよ"] },
+  "ノニ": { no: "No.003", type: "後悔種", desc: "終わった出来事を何度も再生する。", weakness: "今ここ", rona: ["過去はメモリーだよ", "ライブ配信じゃない"] },
+  "モシモ": { no: "No.004", type: "妄想種", desc: "まだ起きていない未来を大量生産する。", weakness: "最初の一歩", rona: ["未来は予想より創造だよ"] },
+  "フノレツ": { no: "No.005", type: "不足連鎖種", desc: "不満・不足・不備を連鎖増殖する。", weakness: "あるを見る目", rona: ["持ってない物より", "持ってる物を数えてみよう"] },
+  "クラベル": { no: "No.006", type: "比較種", desc: "他人の数字を見せ続ける。", weakness: "自路（じろ）", rona: ["君の道は君しか歩けないよ"] },
+  "ソントク": { no: "No.007", type: "計算種", desc: "損か得かだけで世界を測ろうとする。", weakness: "循環を見る目", rona: ["計算できない豊かさもあるんだ"] },
+  "ムリダ": { no: "No.008", type: "限界種", desc: "挑戦の直前に現れる。本当は壁ではなく霧。", weakness: "小さな一歩", rona: ["飛んでから羽が生えることもあるよ"] }
+};
+
+let scores = {};
+let current = 0;
+
+function startQuiz() {
+  document.getElementById('intro-screen').style.display = 'none';
+  document.getElementById('quiz-screen').style.display = 'block';
+  showQuestion();
+}
+
+function showQuestion() {
+  const q = questions[current];
+  document.getElementById('q-label').textContent = 'Q' + (current + 1);
+  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('stage-info').textContent = (current + 1) + ' / ' + questions.length;
+  document.getElementById('progress').style.width = (current / questions.length * 100) + '%';
+  const opts = document.getElementById('options');
+  opts.innerHTML = '';
+  q.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = opt.text;
+    btn.onclick = () => selectOption(opt.monsters, btn);
+    opts.appendChild(btn);
+  });
+}
+
+function selectOption(monsterList, btn) {
+  document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  setTimeout(() => {
+    monsterList.forEach(m => { scores[m] = (scores[m] || 0) + 1; });
+    current++;
+    if (current >= questions.length) showResult();
+    else showQuestion();
+  }, 300);
+}
+
+function showResult() {
+  document.getElementById('quiz-screen').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const topName = sorted.length > 0 ? sorted[0][0] : 'ネバナラヌ';
+  const top = monsters[topName];
+  document.getElementById('main-result').innerHTML = `
+    <div class="monster-no">${top.no} — メインモンスター</div>
+    <div class="monster-name">${topName}</div>
+    <div class="monster-type">${top.type}</div>
+    <div class="monster-desc">${top.desc}</div>
+    <div class="weakness-label">WEAKNESS — 弱点</div>
+    <div class="weakness-val">${top.weakness}</div>
+    <div class="rona-box">${top.rona.map(r => `<div class="rona-line">${r}</div>`).join('')}</div>
+    <div class="final-msg">モンスターは敵ではない。正体が見えた時、世界観が変わる。</div>
+  `;
+  const secondary = sorted.slice(1, 3);
+  const secEl = document.getElementById('secondary-section');
+  secEl.innerHTML = '';
+  if (secondary.length > 0) {
+    secEl.innerHTML = '<div class="mini-section-label">他に現れているモンスター</div>';
+    secondary.forEach(([name]) => {
+      const m = monsters[name];
+      if (!m) return;
+      secEl.innerHTML += `<div class="mini-card"><div class="mini-name">${name} <span style="font-size:11px;color:#444;margin-left:6px;">${m.type}</span></div><div class="mini-weak">弱点：${m.weakness}</div></div>`;
+    });
+  }
+}
+
+function restart() {
+  scores = {};
+  current = 0;
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('intro-screen').style.display = 'block';
+}
+</script>
+</body>
+</html>
