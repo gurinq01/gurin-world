@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>幻度チェックシート 基礎編 — GURiN World</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+  background: #f8f7f4;
+  color: #1a1a18;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+.wrap { max-width: 480px; margin: 0 auto; }
+.ttl-label { font-size: 12px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem; }
+.ttl { font-size: 22px; font-weight: 500; color: #1a1a18; margin-bottom: 0.25rem; }
+.ttl-sub { font-size: 14px; color: #666; margin-bottom: 1.5rem; }
+
+.card {
+  background: #fff;
+  border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 0.75rem 0;
+  border-bottom: 0.5px solid rgba(0,0,0,0.07);
+  cursor: pointer;
+  user-select: none;
+}
+.item:last-of-type { border-bottom: none; }
+.check {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border: 1.5px solid rgba(0,0,0,0.2);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  background: #f0ede8;
+}
+.check.on { background: #1a1a18; border-color: #1a1a18; }
+.check.on::after {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 9px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+.item-text { font-size: 14px; color: #333; line-height: 1.6; padding-top: 1px; }
+.item.on .item-text { color: #1a1a18; font-weight: 500; }
+
+.bar-wrap { height: 4px; background: rgba(0,0,0,0.08); border-radius: 99px; margin: 1rem 0 0.25rem; overflow: hidden; }
+.bar-fill { height: 100%; background: #1a1a18; border-radius: 99px; transition: width 0.4s ease; width: 0%; }
+
+.counter { text-align: center; padding: 1rem 0 0.5rem; }
+.counter-num { font-size: 36px; font-weight: 500; color: #1a1a18; }
+.counter-label { font-size: 13px; color: #888; margin-top: 0.25rem; }
+
+.result { display: none; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 0.5px solid rgba(0,0,0,0.08); }
+.result-title { font-size: 16px; font-weight: 500; color: #1a1a18; margin-bottom: 0.75rem; }
+.result-body { font-size: 14px; color: #555; line-height: 1.8; white-space: pre-line; }
+
+.btn {
+  width: 100%;
+  background: #fff;
+  border: 0.5px solid rgba(0,0,0,0.15);
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #1a1a18;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.15s;
+}
+.btn:hover { background: #f0ede8; }
+
+.note-link {
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 1.5rem;
+  text-decoration: none;
+}
+.note-link:hover { color: #555; }
+
+.footer { text-align: center; margin-top: 1rem; font-size: 12px; color: #ccc; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <p class="ttl-label">GURiN World</p>
+  <h1 class="ttl">幻度チェックシート</h1>
+  <p class="ttl-sub">基礎編——当てはまるものを選んでください。</p>
+
+  <div class="card">
+    <div id="items"></div>
+    <div class="bar-wrap"><div class="bar-fill" id="bar"></div></div>
+    <div class="counter">
+      <div class="counter-num"><span id="cnt">0</span><span style="font-size:18px;color:#aaa"> / 12</span></div>
+      <div class="counter-label">当てはまった数</div>
+    </div>
+    <div class="result" id="result">
+      <div class="result-title" id="r-title"></div>
+      <div class="result-body" id="r-body"></div>
+      <button class="btn" onclick="reset()">もう一度チェックする</button>
+    </div>
+  </div>
+
+  <a class="note-link" href="https://note.com/gurin_q01" target="_blank">GURiN World → note: gurin_q01</a>
+  <p class="footer">GURiN World © 2026 @GURIN_Q01</p>
+</div>
+
+<script>
+const checks = [
+  "なぜか現実に「手応えがない」と感じることがある",
+  "いろいろ学んできたのに、現実があまり変わっていない",
+  "努力しても報われないとき「何かが違う」と感じる",
+  "現実をもっと軽く扱えたらいいのに、と思うことがある",
+  "頭では理解しているのに、同じパターンでつまずく",
+  "感情に振り回されて、後から「ああ…」となることがある",
+  "うまくいっているのに、どこか演じている感覚がある",
+  "人と比べて疲れてしまうことがある",
+  "現実はもっと違う見方がある気がしている",
+  "どの自分が本当の自分なのか、わからなくなることがある",
+  "同じような別れ方や、やめ方を繰り返している",
+  "もっと自由に生きたいのに、どこかでブレーキがかかる",
+];
+
+const results = [
+  {
+    range: [0,4],
+    title: "幻度：低（0〜4個）",
+    body: "まだ現実を「絶対のもの」として見ている状態で、現実を「固定されたもの」として強く認識している状態です。\n\n一見安定感はありますが、そのぶん変化が重く感じられることがあります。特にうまくいかない時に感情のブレが出てきます。\n\n同時に今のままではもう通用しないことも薄々感じてはいます。"
+  },
+  {
+    range: [5,8],
+    title: "幻度：中（5〜8個）",
+    body: "すでに気づき始めています。現実は、目に見えているものだけではない。\n\nその感覚は持ち始めていますが、まだ古い前提に引っ張られています。気づきはダウンロードできても、それをどう現実に生かしていいか、インストールしきれていない状態です。\n\nだから、頭ではわかっているのに、現実が元に戻ります。"
+  },
+  {
+    range: [9,12],
+    title: "幻度：高（9〜12個）",
+    body: "現実は「固定ではない」と、体感レベルで理解し始めています。\n\nただ、ここで止まる人も多く、ここからは、気づきから進化させ、「使える状態」に変えていく段階です。\n\n感情、人間関係、お金、仕事。現実そのものを、どう観測し、どう扱うか。その「運用」が始まります。"
+  },
+];
+
+var state = new Array(12).fill(false);
+
+function render() {
+  var el = document.getElementById('items');
+  el.innerHTML = checks.map(function(c,i) {
+    return '<div class="item' + (state[i]?' on':'') + '" onclick="toggle(' + i + ')">' +
+      '<div class="check' + (state[i]?' on':'') + '"></div>' +
+      '<span class="item-text">' + c + '</span>' +
+      '</div>';
+  }).join('');
+}
+
+function toggle(i) {
+  state[i] = !state[i];
+  update();
+}
+
+function update() {
+  render();
+  var cnt = state.filter(Boolean).length;
+  document.getElementById('cnt').textContent = cnt;
+  document.getElementById('bar').style.width = Math.round((cnt/12)*100) + '%';
+  var r = document.getElementById('result');
+  if (cnt > 0) {
+    var res = results.find(function(x){ return cnt >= x.range[0] && cnt <= x.range[1]; });
+    document.getElementById('r-title').textContent = res.title;
+    document.getElementById('r-body').textContent = res.body;
+    r.style.display = 'block';
+  } else {
+    r.style.display = 'none';
+  }
+}
+
+function reset() {
+  state = new Array(12).fill(false);
+  update();
+}
+
+render();
+</script>
+</body>
+</html>
+
