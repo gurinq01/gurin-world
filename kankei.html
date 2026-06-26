@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>マボロシの中の人間関係 — GURiN World</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+  background: #f8f7f4;
+  color: #1a1a18;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+.app { max-width: 480px; margin: 0 auto; }
+
+.app-title { font-size: 12px; color: #888; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.25rem; }
+.app-heading { font-size: 22px; font-weight: 500; color: #1a1a18; margin-bottom: 0.25rem; }
+.app-sub { font-size: 14px; color: #666; margin-bottom: 1.75rem; }
+
+.nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 1.75rem; }
+.nav-btn {
+  background: #eeece7;
+  border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 10px 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.nav-btn:hover { background: #fff; }
+.nav-btn.active { background: #fff; border: 1.5px solid rgba(0,0,0,0.25); }
+.nav-btn i { font-size: 20px; display: block; margin-bottom: 4px; color: #888; }
+.nav-btn.active i { color: #1a1a18; }
+.nav-btn span { font-size: 11px; color: #888; }
+.nav-btn.active span { color: #1a1a18; font-weight: 500; }
+
+.section { display: none; }
+.section.active { display: block; }
+
+.card {
+  background: #fff;
+  border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+.card-label { font-size: 12px; color: #888; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.card-body { font-size: 14px; color: #666; line-height: 1.7; }
+
+.q-text { font-size: 15px; color: #1a1a18; margin-bottom: 0.75rem; line-height: 1.6; }
+.q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.q-opt {
+  background: #f0ede8;
+  border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: #1a1a18;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.q-opt:hover { background: #fff; }
+.q-opt.selected { background: #fff; border: 1.5px solid rgba(0,0,0,0.3); font-weight: 500; }
+
+.progress-bar { height: 3px; background: rgba(0,0,0,0.08); border-radius: 99px; margin-bottom: 1.5rem; overflow: hidden; }
+.progress-fill { height: 100%; background: #888; border-radius: 99px; transition: width 0.3s; }
+
+.result-score { font-size: 36px; font-weight: 500; color: #1a1a18; margin: 0.5rem 0; }
+.result-label { font-size: 14px; color: #666; margin-bottom: 1rem; }
+.result-msg { font-size: 14px; color: #1a1a18; line-height: 1.75; }
+
+.today-card { border-left: 3px solid rgba(0,0,0,0.2); padding-left: 1rem; margin-bottom: 1.25rem; }
+.today-word { font-size: 22px; font-weight: 500; color: #1a1a18; margin-bottom: 0.5rem; }
+.today-body { font-size: 14px; color: #555; line-height: 1.75; }
+
+.rf-input {
+  width: 100%;
+  border: 0.5px solid rgba(0,0,0,0.15);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #f8f7f4;
+  color: #1a1a18;
+  resize: none;
+  min-height: 80px;
+  margin-bottom: 0.75rem;
+}
+.rf-result {
+  font-size: 14px;
+  color: #1a1a18;
+  line-height: 1.8;
+  background: #f0ede8;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 0.75rem;
+  display: none;
+  white-space: pre-line;
+}
+
+.btn {
+  background: #fff;
+  border: 0.5px solid rgba(0,0,0,0.15);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #1a1a18;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn:hover { background: #f0ede8; }
+.btn-full { width: 100%; padding: 10px; }
+
+.deep-list { list-style: none; }
+.deep-list li {
+  padding: 0.9rem 0;
+  border-bottom: 0.5px solid rgba(0,0,0,0.08);
+  font-size: 14px;
+  color: #1a1a18;
+  line-height: 1.6;
+  display: flex;
+  gap: 10px;
+}
+.deep-list li:last-child { border-bottom: none; }
+.deep-list .vol { font-size: 11px; color: #999; min-width: 40px; padding-top: 2px; }
+.tag {
+  display: inline-block;
+  background: #f0ede8;
+  border: 0.5px solid rgba(0,0,0,0.1);
+  border-radius: 6px;
+  font-size: 11px;
+  color: #888;
+  padding: 2px 8px;
+  margin-top: 4px;
+}
+
+.footer { text-align: center; margin-top: 2rem; font-size: 12px; color: #bbb; }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <p class="app-title">GURiN World</p>
+  <h1 class="app-heading">マボロシの中の人間関係</h1>
+  <p class="app-sub">すべての関係性は、あなたの意識の中にある。</p>
+
+  <nav class="nav">
+    <div class="nav-btn active" onclick="showSection('shindan',this)">
+      <i class="ti ti-activity-heartbeat"></i>
+      <span>診断</span>
+    </div>
+    <div class="nav-btn" onclick="showSection('card',this)">
+      <i class="ti ti-cards"></i>
+      <span>今日のカード</span>
+    </div>
+    <div class="nav-btn" onclick="showSection('reframe',this)">
+      <i class="ti ti-refresh"></i>
+      <span>読み直す</span>
+    </div>
+    <div class="nav-btn" onclick="showSection('deep',this)">
+      <i class="ti ti-book"></i>
+      <span>深める</span>
+    </div>
+  </nav>
+
+  <div id="shindan" class="section active">
+    <div class="card">
+      <div class="card-label">関係性マボロシ度チェック</div>
+      <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+      <div id="questions-area"></div>
+      <div style="margin-top:1rem;display:flex;justify-content:flex-end;">
+        <button class="btn" onclick="nextQ()" id="next-btn" style="display:none;">次へ →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="card" class="section">
+    <div class="card">
+      <div class="card-label">今日のカード</div>
+      <div id="today-display"></div>
+      <button class="btn btn-full" onclick="drawCard()" style="margin-top:1rem;">別のカードを引く</button>
+    </div>
+  </div>
+
+  <div id="reframe" class="section">
+    <div class="card">
+      <div class="card-label">マボロシ視点で読み直す</div>
+      <div class="card-body" style="margin-bottom:0.75rem;">今、気になっている相手や状況を一言で。</div>
+      <textarea class="rf-input" id="rf-input" placeholder="例：彼が連絡をくれない、母との関係が重い…"></textarea>
+      <button class="btn btn-full" onclick="doReframe()">マボロシで読み直す</button>
+      <div class="rf-result" id="rf-result"></div>
+    </div>
+  </div>
+
+  <div id="deep" class="section">
+    <div class="card">
+      <div class="card-label">シリーズを深める</div>
+      <div class="card-body" style="margin-bottom:1rem;">「マボロシの中の人間関係」5回シリーズ</div>
+      <ul class="deep-list">
+        <li><span class="vol">Vol.1</span><div>相手は幻——人間関係というマボロシの正体<div><span class="tag">西の叡智</span></div></div></li>
+        <li><span class="vol">Vol.2</span><div>恋愛は我ひとりのもの——愛情から愛へのシフト<div><span class="tag">西の叡智</span></div></div></li>
+        <li><span class="vol">Vol.3</span><div>正しさが関係を壊す——正当化というバグを外す<div><span class="tag">西の叡智</span></div></div></li>
+        <li><span class="vol">Vol.4</span><div>「忘れよ」——役割というデータを手放す<div><span class="tag">西の叡智</span></div></div></li>
+        <li><span class="vol">Vol.5</span><div>夢幻も友とせよ——関係性からの解放<div><span class="tag">西の叡智</span></div></div></li>
+      </ul>
+    </div>
+    <a href="https://note.com/gurin_q01" target="_blank" class="btn btn-full" style="display:block;text-align:center;text-decoration:none;margin-top:0.5rem;">noteで読む →</a>
+  </div>
+
+  <div class="footer">GURiN World © 2026 @GURIN_Q01</div>
+</div>
+
+<script>
+const questions = [
+  { q: "気になる相手のことを、1日に何度も考えてしまう", a: ["ほぼ毎日", "たまに", "あまりない", "ほとんどない"] },
+  { q: "「あの人がこうしてくれれば」と思うことがある", a: ["よくある", "ときどき", "あまりない", "ない"] },
+  { q: "相手の言葉や態度が、ずっと頭に残る", a: ["残りやすい", "少し残る", "すぐ忘れる", "気にしない"] },
+  { q: "関係がうまくいかない時、自分か相手のどちらかのせいだと思う", a: ["思う", "少し思う", "あまり思わない", "思わない"] },
+  { q: "「正しい関係のあり方」のイメージが強くある", a: ["かなり強い", "少しある", "あまりない", "ない"] },
+];
+
+const scores = [3,2,1,0];
+let current = 0;
+let total = 0;
+let chosen = [];
+
+function renderQ() {
+  const q = questions[current];
+  const pct = Math.round((current / questions.length) * 100);
+  document.getElementById('progress').style.width = pct + '%';
+  let html = '<p class="q-text">' + (current+1) + ' / ' + questions.length + '　' + q.q + '</p><div class="q-options">';
+  q.a.forEach(function(a,i) {
+    html += '<button class="q-opt" onclick="selectOpt(this,' + i + ')">' + a + '</button>';
+  });
+  html += '</div>';
+  document.getElementById('questions-area').innerHTML = html;
+  document.getElementById('next-btn').style.display = 'none';
+  chosen[current] = -1;
+}
+
+function selectOpt(el, idx) {
+  document.querySelectorAll('.q-opt').forEach(function(o){ o.classList.remove('selected'); });
+  el.classList.add('selected');
+  chosen[current] = idx;
+  document.getElementById('next-btn').style.display = 'block';
+}
+
+function nextQ() {
+  if (chosen[current] < 0) return;
+  total += scores[chosen[current]];
+  current++;
+  if (current < questions.length) {
+    renderQ();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  const pct = Math.round((total / (questions.length * 3)) * 100);
+  let label, msg;
+  if (pct >= 70) {
+    label = "マボロシ度：低め";
+    msg = "相手や関係性への認識がしっかりついています。それだけ「現実」として受け取っている証拠。ここからが、マボロシを知る旅のスタートです。";
+  } else if (pct >= 40) {
+    label = "マボロシ度：中程度";
+    msg = "すでに気づき始めているところがあります。「相手は自分の心の内にある」という感覚が、少し芽生えているかもしれません。";
+  } else {
+    label = "マボロシ度：高め";
+    msg = "関係性を軽やかに受け取れています。相手への執着より、自分の内側に意識が向いているマボロシスト的な状態です。";
+  }
+  document.getElementById('questions-area').innerHTML =
+    '<div class="result-score">' + pct + '</div>' +
+    '<p class="result-label">' + label + '</p>' +
+    '<p class="result-msg">' + msg + '</p>' +
+    '<button class="btn btn-full" onclick="resetQ()" style="margin-top:1rem;">もう一度チェック</button>';
+  document.getElementById('progress').style.width = '100%';
+  document.getElementById('next-btn').style.display = 'none';
+}
+
+function resetQ() { current = 0; total = 0; chosen = []; renderQ(); }
+
+const cards = [
+  { word: "相手は幻", body: "相手への怒り、期待、悲しみ——すべて自分の心が映し出したデータです。相手を変えようとする前に、自分の心の画面を見てみてください。" },
+  { word: "忘れよ", body: "「彼女として」「母として」「部下として」——役割というデータを、今日一日だけ外してみる。そこに残るものが、本当の関係性です。" },
+  { word: "正しさを外す", body: "「こうあるべき」という正しさは、関係性を固める接着剤です。その接着剤を外した時、関係は自由に動き始めます。" },
+  { word: "恋愛は我ひとり", body: "相手への思いは、あなたの中で完結しています。相手がどうかより、あなたの心がどんな状態かが、関係性の現実を決めています。" },
+  { word: "夢幻も友とせよ", body: "うまくいかない関係も、すれ違いも——すべて意識の進化のシナリオです。敵にしなくていい。幻の世界での出来事として、友にしてみてください。" },
+  { word: "手放すとは無視ではない", body: "手放すというのは、相手を無視することではありません。とらわれを外して、そのまま受け止められるところです。" },
+  { word: "如意——思い通り", body: "今の関係性はすべて、あなたの意識が創っています。だとすれば、思い通りでないものはない。意識が変われば、現実が変わります。" },
+  { word: "相手はあなたの鏡", body: "相手があなたのことをどう見ているか——それはあなたが相手をどう見ているかの、大鏡です。" },
+  { word: "信じる旅", body: "恋をするとは、信じる旅。形や言葉にとらわれず、人を強くとらえない心。だからいつも、心が満ちています。" },
+  { word: "出会いも別れも新しき場面", body: "意識のはじまりが出会い、意識の終わりが別れ。どちらも新しい出発です。悲劇にしなくていい。" },
+];
+
+function drawCard() {
+  const c = cards[Math.floor(Math.random() * cards.length)];
+  document.getElementById('today-display').innerHTML =
+    '<div class="today-card"><div class="today-word">' + c.word + '</div><div class="today-body">' + c.body + '</div></div>';
+}
+
+const reframes = [
+  { key: ["連絡", "返事", "既読", "LINE", "メッセージ"], text: "連絡がこないという現実は、あなたの心が「来ないかもしれない」と読んでいるデータです。\n\n相手を追いかけるより、その不安の正体を見てみてください。マボロシ視点では、相手の行動より自分の心の画面が先にあります。\n\n心の画面を変えること。それだけで、現実のデータは読み込み直されていきます。" },
+  { key: ["嫌われ", "嫌われたい", "嫌われる", "好かれたい", "どう思われ"], text: "「嫌われたくない」という気持ちは、相手への執着ではなく、自分の中の「認められたい」というデータの反応です。\n\nマボロシ視点では、相手があなたをどう思うかより、あなたが自分をどう思っているかが先にあります。\n\n自分の心の画面が変わる時、相手からの見え方も変わっていきます。" },
+  { key: ["母", "親", "父", "親子", "家族"], text: "親との関係は、最も古いデータパターンです。\n\n「こうあるべき親子」という認識が、現実をつくっています。その認識を外すだけで、関係性のデータが動き始めます。\n\n親も、あなたの心が映し出した像のひとつです。" },
+  { key: ["嫉妬", "浮気", "不倫", "裏切", "浮気"], text: "嫉妬や不信は、相手への執着ではなく、自分の中の「失うかもしれない」というデータの反応です。\n\n相手を問題にするより、そのデータを見てみてください。\n\n相手はあらず——相手なきを知りて、相手あり。その逆説の中に、本当の関係性があります。" },
+  { key: ["職場", "仕事", "上司", "同僚", "会社"], text: "職場の人間関係も、すべて心の中のデータです。\n\n「あの人が問題」という認識は、あなたの心が映し出している像です。その認識を一度外すと、別の現実が読み込まれてきます。\n\n人間関係あらず——関係性はあなたの意識の中にあります。" },
+  { key: ["別れ", "失恋", "振られ", "終わり"], text: "別れは、意識の終わりであり、新しい場面の誕生です。\n\nマボロシ視点では、出会いも別れも同じ出来事。どちらが良くてどちらが悪いということはありません。\n\n今感じている痛みも、心が進化するためのデータです。" },
+  { key: ["束縛", "自由", "コントロール", "支配"], text: "束縛したい気持ちは、相手への愛情ではなく、失うことへの恐れです。\n\nマボロシ視点では、所有という考え方を外すと、魂のふれあいの感覚がわかり始めます。\n\n「私の彼」「俺の彼女」——その所有のデータを、ゆるやかに解いてみてください。" },
+];
+
+function doReframe() {
+  const input = document.getElementById('rf-input').value.trim();
+  if (!input) return;
+  let result = "入力された関係性をマボロシ視点で読み直すと——\n\n相手への思いも、起きている出来事も、すべてあなたの意識が映し出したデータです。\n\n「相手に問題あらず」——これがGURiN Worldの基本の立ち位置。その前提に立つと、今の状況はどう見えてきますか？\n\n心の画面を変えること。それだけで、現実のデータは読み込み直されていきます。";
+  reframes.forEach(function(r) {
+    r.key.forEach(function(k) {
+      if (input.includes(k)) result = r.text;
+    });
+  });
+  const el = document.getElementById('rf-result');
+  el.style.display = 'block';
+  el.innerText = result;
+}
+
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.nav-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'card') drawCard();
+}
+
+renderQ();
+drawCard();
+</script>
+</body>
+</html>
+
