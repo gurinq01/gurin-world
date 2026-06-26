@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今日のロナメッセージ — GURiN World</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0a0a0f; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic UI', sans-serif; min-height: 100vh; padding: 1.5rem; }
+.wrap { max-width: 480px; margin: 0 auto; }
+
+/* 作法画面 */
+#intro { text-align: center; padding: 1rem 0; }
+.rona-img { width: 100%; max-width: 360px; border-radius: 16px; margin: 0 auto 1.5rem; display: block; }
+.gw-label { font-size: 11px; letter-spacing: 0.15em; color: #00C8C8; text-transform: uppercase; margin-bottom: 0.5rem; }
+.gw-heading { font-size: 22px; font-weight: 500; color: #fff; margin-bottom: 1.5rem; }
+.saho-box { background: #0f0f1a; border: 0.5px solid #1a1a2a; border-radius: 14px; padding: 1.5rem; margin-bottom: 1.5rem; text-align: left; }
+.saho-box p { font-size: 14px; color: #888; line-height: 2; }
+.start-btn { background: transparent; border: 1px solid #00C8C8; border-radius: 10px; padding: 14px 24px; color: #00C8C8; font-size: 15px; cursor: pointer; width: 100%; font-family: inherit; transition: background 0.2s; }
+.start-btn:hover { background: rgba(0,200,200,0.1); }
+
+/* メッセージ画面 */
+#message-screen { display: none; }
+.gw-sub { font-size: 13px; color: #555; margin-bottom: 2rem; }
+.card { background: #0f0f1a; border: 0.5px solid #00C8C8; border-radius: 16px; padding: 2rem; margin-bottom: 1.25rem; text-align: center; }
+.kanji { font-size: 72px; font-weight: 500; color: #00C8C8; margin-bottom: 1rem; line-height: 1; }
+.date-label { font-size: 11px; color: #444; letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+.message { font-size: 16px; color: #ccc; line-height: 1.9; text-align: left; }
+.message::before { content: "🐱  "; }
+.divider { height: 0.5px; background: #1a1a2a; margin: 1.5rem 0; }
+.note { font-size: 12px; color: #333; line-height: 1.7; }
+.btn { background: transparent; border: 0.5px solid #1a1a2a; border-radius: 10px; padding: 12px; color: #555; font-size: 13px; cursor: pointer; width: 100%; margin-bottom: 0.75rem; transition: border-color 0.2s, color 0.2s; font-family: inherit; }
+.btn:hover { border-color: #00C8C8; color: #00C8C8; }
+.back-btn { background: transparent; border: none; color: #333; font-size: 12px; cursor: pointer; width: 100%; padding: 8px; font-family: inherit; }
+.back-btn:hover { color: #555; }
+.footer { text-align: center; font-size: 11px; color: #222; margin-top: 1rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 作法画面 -->
+  <div id="intro">
+    <img src="rona.png" alt="ロナ" class="rona-img">
+    <div class="gw-label">GURiN World</div>
+    <div class="gw-heading">今日のロナメッセージ</div>
+    <div class="saho-box">
+      <p>
+        まず、一呼吸おいて。<br><br>
+        今日の自分に問いかけてみよう。<br><br>
+        「今、何を感じているか？」<br><br>
+        準備ができたら、メッセージを受け取ってください。<br>
+        これが今日のあなたへの言葉です。
+      </p>
+    </div>
+    <button class="start-btn" onclick="showMessage()">メッセージを受け取る</button>
+  </div>
+
+  <!-- メッセージ画面 -->
+  <div id="message-screen">
+    <div class="gw-label">GURiN World</div>
+    <div class="gw-heading">今日のロナメッセージ</div>
+    <div class="gw-sub">日付が変わるたびに、新しい言葉が届く。</div>
+
+    <div class="card">
+      <div class="kanji" id="kanji"></div>
+      <div class="date-label" id="date-label"></div>
+      <div class="message" id="message"></div>
+      <div class="divider"></div>
+      <div class="note">モンスターは敵ではない。世界観が変わると、世界が変わる。</div>
+    </div>
+
+    <button class="btn" onclick="showRandom()">別のメッセージを引く</button>
+    <button class="btn" onclick="showToday()">今日のメッセージに戻る</button>
+    <button class="back-btn" onclick="showIntro()">← 作法画面に戻る</button>
+    <div class="footer">GURiN World © 2026 @GURIN_Q01</div>
+  </div>
+
+</div>
+
+<script>
+const messages = [
+  { kanji: "集", text: "今現れている出来事に意識を集中しよう。そこが今解く進化の鍵" },
+  { kanji: "矛", text: "矛盾があっても突き進もう。宇宙はそれも織り込み済みだよ" },
+  { kanji: "盾", text: "豊かな心を守るシールドは、内なる光に合わせると自然に張られる" },
+  { kanji: "遊", text: "5歳の心と500歳の智恵で遊ぼう。遊ぶとは天と共にあること" },
+  { kanji: "瞬", text: "この瞬間が最高。そう思った瞬間、世界が開かれる" },
+  { kanji: "安", text: "安心すると、意識が広がる。将来も過去も、今日はひとまず安心していよう" },
+  { kanji: "笑", text: "笑うと空間が融ける。まずはわけなく、心に微笑みを" },
+  { kanji: "不", text: "不満・不足・不備は創造力の源泉。不足を面白がると自己が拡張する" },
+  { kanji: "嫌", text: "嫌な人・出来事をよく観察してみよう。あなたが拡張する宝が隠れてる" },
+  { kanji: "責", text: "自分も相手も責めなくていい。ただ、自らの意識を見つめてみよう" },
+  { kanji: "聞", text: "聞かなくていいことは遮断する力を持とう。内なる心に耳を傾けて" },
+  { kanji: "関", text: "人間の関心ごとと宇宙の関心ごとは違う。天に関心を合わせてみよう" },
+  { kanji: "停", text: "時には自ら一時停止してみよう。大きく飛翔するための停止だよ" },
+  { kanji: "東", text: "東門は難問を解く。尋ねてみよう、生命の活力を得るために" },
+  { kanji: "緑", text: "緑は魂が休まる色。すべてひとつと感じる時、生命が輝き風が通る" },
+  { kanji: "過", text: "過去を憂う時、意識が過去に戻る。今に切り替えよう" },
+  { kanji: "希", text: "希望とは黄金の珠を胸に持つこと。その希望の光を他に投げてみよう" },
+  { kanji: "未", text: "未来の記憶を思い出してみよう。ここは追想の世界、心澄まして感じて" },
+  { kanji: "素", text: "直感の質を上げるには素直な心が鍵。透明な心で素直に受け取ろう" },
+  { kanji: "静", text: "静かな心があれば色鮮やかな世界を創造できる" },
+  { kanji: "望", text: "望みと願いは任せよう。急がず、望みのまま安心していよう" },
+  { kanji: "夢", text: "夢まぼろしを友にしよう。世界の果てまで同じ幻だから" },
+  { kanji: "叶", text: "見失ってはならないもの——夢を叶えると決めた心" },
+  { kanji: "全", text: "全天候型の思考でいこう。雨も曇りも晴れも全てよし" },
+  { kanji: "事", text: "事を始めれば時（意識）を得る。まず始めてみよう" },
+  { kanji: "愛", text: "愛とはつゆほどもなく信じること。それだけでいい" },
+  { kanji: "救", text: "救うは魂のめざめ。我が心を救うことが、すべてにつながる" },
+  { kanji: "悩", text: "悩まなくていい。感じて、思考を変えてみよう" },
+  { kanji: "風", text: "春風・突風・向かい風、全ての風を使えるその心を持とう" },
+  { kanji: "幸", text: "心が感じるままに進もう。それが幸福な心となる" },
+  { kanji: "誓", text: "ありがとうと言える時、それが一番深い誓いになる" },
+];
+
+function showToday() {
+  const day = new Date().getDate();
+  const idx = (day - 1) % 31;
+  const m = messages[idx];
+  document.getElementById('kanji').textContent = m.kanji;
+  document.getElementById('message').textContent = m.text;
+  const now = new Date();
+  document.getElementById('date-label').textContent =
+    now.getFullYear() + '年' + (now.getMonth()+1) + '月' + now.getDate() + '日のメッセージ';
+}
+
+function showRandom() {
+  const idx = Math.floor(Math.random() * 31);
+  const m = messages[idx];
+  document.getElementById('kanji').textContent = m.kanji;
+  document.getElementById('message').textContent = m.text;
+  document.getElementById('date-label').textContent = 'No.' + (idx+1) + '　' + m.kanji;
+}
+
+function showMessage() {
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('message-screen').style.display = 'block';
+  showToday();
+}
+
+function showIntro() {
+  document.getElementById('intro').style.display = 'block';
+  document.getElementById('message-screen').style.display = 'none';
+}
+</script>
+</body>
+</html>
