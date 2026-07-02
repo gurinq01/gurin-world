@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -5,44 +6,741 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>モンスター図鑑 — GURiN World</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: #0a0a0f; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic UI', sans-serif; min-height: 100vh; padding: 1.5rem; }
-.wrap { max-width: 640px; margin: 0 auto; }
-.gw-label { font-size: 11px; letter-spacing: 0.15em; color: #00C8C8; text-transform: uppercase; margin-bottom: 0.5rem; }
-.gw-heading { font-size: 22px; font-weight: 500; color: #fff; margin-bottom: 0.25rem; }
-.gw-sub { font-size: 13px; color: #555; margin-bottom: 1.5rem; }
-.monster-img { width: 100%; border-radius: 16px; margin-bottom: 1.5rem; display: block; }
-.note-box { background: #0f0f1a; border: 0.5px solid #1a1a2a; border-radius: 14px; padding: 1.25rem; margin-bottom: 1rem; }
-.note-box p { font-size: 14px; color: #777; line-height: 1.9; }
-.note-box strong { color: #00C8C8; font-weight: 500; }
-.btn { display: block; background: transparent; border: 0.5px solid #00C8C8; border-radius: 10px; padding: 12px; color: #00C8C8; font-size: 14px; cursor: pointer; width: 100%; text-align: center; text-decoration: none; margin-bottom: 0.75rem; transition: background 0.2s; font-family: inherit; }
-.btn:hover { background: rgba(0,200,200,0.1); }
-.footer { text-align: center; font-size: 11px; color: #222; margin-top: 1.5rem; }
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Cinzel:wght@400;700&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #12121a;
+    --bg3: #1a1a26;
+    --teal: #00C8C8;
+    --coral: #FF6B6B;
+    --gold: #F5A623;
+    --dim: #888;
+    --text: #e8e8f0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ヘッダー */
+  .header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    border-bottom: 1px solid rgba(0,200,200,0.2);
+  }
+
+  .header-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--teal);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .header h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--teal), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header-sub {
+    font-size: 13px;
+    color: var(--dim);
+    margin-bottom: 24px;
+  }
+
+  .header-rule {
+    font-size: 13px;
+    color: var(--text);
+    background: var(--bg3);
+    border: 1px solid rgba(0,200,200,0.3);
+    border-radius: 8px;
+    padding: 12px 24px;
+    display: inline-block;
+    max-width: 500px;
+    line-height: 1.8;
+  }
+
+  /* ナビ */
+  .nav {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 24px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .nav-btn {
+    background: var(--bg3);
+    border: 1px solid rgba(0,200,200,0.3);
+    color: var(--teal);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: inherit;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .nav-btn:hover {
+    background: var(--teal);
+    color: var(--bg);
+  }
+
+  /* モンスター一覧 */
+  .monsters {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  /* モンスターカード */
+  .card {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .card:hover {
+    border-color: rgba(0,200,200,0.3);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .card-num {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    color: var(--dim);
+    min-width: 40px;
+  }
+
+  .card-img-thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(0,200,200,0.3);
+    flex-shrink: 0;
+  }
+
+  .card-title-group {
+    flex: 1;
+  }
+
+  .card-name {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .card-nickname {
+    font-size: 11px;
+    color: var(--dim);
+  }
+
+  .card-tag {
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    border: 1px solid;
+    flex-shrink: 0;
+  }
+
+  .card-arrow {
+    color: var(--dim);
+    font-size: 12px;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .card.open .card-arrow {
+    transform: rotate(180deg);
+  }
+
+  /* カード詳細 */
+  .card-body {
+    display: none;
+    padding: 0 24px 28px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .card.open .card-body {
+    display: block;
+  }
+
+  .card-main {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 32px;
+    padding-top: 24px;
+  }
+
+  @media (max-width: 600px) {
+    .card-main {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .card-image-full {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .info-section h4 {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .info-section p,
+  .info-section li {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .info-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .info-section li::before {
+    content: '・';
+    color: var(--dim);
+  }
+
+  .word-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .word-chip {
+    background: var(--bg3);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: var(--gold);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 16px;
+    font-size: 12px;
+  }
+
+  .stat-label {
+    color: var(--dim);
+    white-space: nowrap;
+  }
+
+  .stat-value {
+    color: var(--text);
+  }
+
+  .rona-memo {
+    margin-top: 20px;
+    background: var(--bg3);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+  }
+
+  .rona-memo-label {
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+
+  .rona-memo p {
+    font-size: 13px;
+    line-height: 2;
+    color: var(--text);
+  }
+
+  /* 色分け */
+  .c-teal { color: var(--teal); border-color: var(--teal); }
+  .c-coral { color: var(--coral); border-color: var(--coral); }
+  .c-gold { color: var(--gold); border-color: var(--gold); }
+
+  /* リンクセクション */
+  .links {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .link-btn {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid var(--teal);
+    color: var(--teal);
+    padding: 12px 28px;
+    border-radius: 24px;
+    text-decoration: none;
+    font-size: 13px;
+    margin: 6px;
+    transition: all 0.2s;
+  }
+
+  .link-btn:hover {
+    background: var(--teal);
+    color: var(--bg);
+  }
+
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 11px;
+    color: var(--dim);
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="gw-label">GURiN World</div>
-  <div class="gw-heading">モンスター図鑑</div>
-  <div class="gw-sub">人間界脱出をジャマする8体のモンスターたち</div>
 
-  <img src="monsters..png" alt="GURiN World モンスター図鑑" class="monster-img">
+<!-- ヘッダー -->
+<div class="header">
+  <div class="header-eyebrow">GURiN World — Monster Encyclopedia</div>
+  <h1>モンスター図鑑</h1>
+  <p class="header-sub">認識OSが映し出す6体のモンスターたち</p>
+  <div class="header-rule">
+    モンスターは倒す相手ではない。<br>
+    モンスターは思考パターンが映し出された存在である。<br>
+    気づくことで、認識OSが動き始める。
+  </div>
+</div>
 
-  <div class="note-box">
-    <p>
-      <strong>モンスターは敵ではない。</strong><br><br>
-      気づく対象である。<br><br>
-      モンスターが現れたら、「敵が来た」ではなく、<br>
-      「世界の見え方を教えに来た」と思ってみよう。<br><br>
-      気づいて、ゆるして、味方にしていくのが<br>
-      人間界脱出のカギだよ。🐱
-    </p>
+<!-- ナビ -->
+<div class="nav">
+  <a href="#m001" class="nav-btn">① ネバナラヌ</a>
+  <a href="#m002" class="nav-btn">② クラベル</a>
+  <a href="#m003" class="nav-btn">③ ソントク</a>
+  <a href="#m004" class="nav-btn">④ モシモ</a>
+  <a href="#m005" class="nav-btn">⑤ フノレツ</a>
+  <a href="#m006" class="nav-btn">⑥ ノニ</a>
+</div>
+
+<!-- モンスター一覧 -->
+<div class="monsters">
+
+  <!-- 001 ネバナラヌ -->
+  <div class="card" id="m001" onclick="toggleCard(this)">
+    <div class="card-header">
+      <span class="card-num">No.001</span>
+      <img src="001_nebanaranu_ng.png" alt="ネバナラヌ" class="card-img-thumb">
+      <div class="card-title-group">
+        <div class="card-name">ネバナラヌ</div>
+        <div class="card-nickname">〜ねばならない</div>
+      </div>
+      <span class="card-tag c-coral">Stage 1</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-main">
+        <img src="001_nebanaranu_ng.png" alt="ネバナラヌ" class="card-image-full">
+        <div class="card-info">
+          <div class="info-section">
+            <h4>分類</h4>
+            <div class="stats">
+              <span class="stat-label">種族</span><span class="stat-value">固定観念種</span>
+              <span class="stat-label">二つ名</span><span class="stat-value">完璧の番人</span>
+              <span class="stat-label">生息地</span><span class="stat-value">完璧の迷宮</span>
+              <span class="stat-label">マボロシ度</span><span class="stat-value">低</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>性格</h4>
+            <p>とても真面目。責任感が強い。頼まれてもいないのに、「ちゃんとしなきゃ」を増やしてしまう。むしろ、プレイヤーを守っているつもり。</p>
+          </div>
+          <div class="info-section">
+            <h4>よく使う言葉</h4>
+            <div class="word-chips">
+              <span class="word-chip">「ちゃんと」</span>
+              <span class="word-chip">「普通は」</span>
+              <span class="word-chip">「まだ足りない」</span>
+              <span class="word-chip">「もっと頑張らなきゃ」</span>
+              <span class="word-chip">「それじゃダメ」</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>好物 / 苦手</h4>
+            <div class="stats">
+              <span class="stat-label">好物</span><span class="stat-value">義務感・責任感・完璧主義・理想</span>
+              <span class="stat-label">苦手</span><span class="stat-value">余白・遊び心・「まぁいいか」</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>付き合い方</h4>
+            <p>戦わない。追い払わない。まず「あ、ネバナラヌが来た」と気づく。余白が生まれるほど、ネバ度が減りグレーを楽しめるようになる。</p>
+          </div>
+        </div>
+      </div>
+      <div class="rona-memo">
+        <div class="rona-memo-label">🐱 ロナのOSメモ</div>
+        <p>「ねぇ。『こうしなきゃ』って思ったら、その声を、少しだけ聞いてみて。ネバナラヌは、認識が積み重なって、少しずつ形になったんだ。だから、『あ、いたんだ。』その一言だけで、認識OSは、静かに動き始めるよ。」</p>
+      </div>
+    </div>
   </div>
 
-  <a href="index.html" class="btn">今日のモンスターを診断する →</a>
-  <a href="rona.html" class="btn">今日のロナメッセージを受け取る →</a>
+  <!-- 002 クラベル -->
+  <div class="card" id="m002" onclick="toggleCard(this)">
+    <div class="card-header">
+      <span class="card-num">No.002</span>
+      <img src="002_kuraberu.png" alt="クラベル" class="card-img-thumb">
+      <div class="card-title-group">
+        <div class="card-name">クラベル</div>
+        <div class="card-nickname">〜比べる</div>
+      </div>
+      <span class="card-tag c-teal">Stage 2</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-main">
+        <img src="002_kuraberu.png" alt="クラベル" class="card-image-full">
+        <div class="card-info">
+          <div class="info-section">
+            <h4>分類</h4>
+            <div class="stats">
+              <span class="stat-label">種族</span><span class="stat-value">差分認識種</span>
+              <span class="stat-label">二つ名</span><span class="stat-value">鏡の番人</span>
+              <span class="stat-label">生息地</span><span class="stat-value">比較の鏡湖</span>
+              <span class="stat-label">マボロシ度</span><span class="stat-value">低</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>性格</h4>
+            <p>とても敏感。細かいところまでよく見ている。すぐに「違い」を見つけることが得意。プレイヤーには、正確な地図を渡そうとしているつもり。</p>
+          </div>
+          <div class="info-section">
+            <h4>よく使う言葉</h4>
+            <div class="word-chips">
+              <span class="word-chip">「あの人は」</span>
+              <span class="word-chip">「自分なんて」</span>
+              <span class="word-chip">「なんで私だけ」</span>
+              <span class="word-chip">「まだ足りない気がする」</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>好物 / 苦手</h4>
+            <div class="stats">
+              <span class="stat-label">好物</span><span class="stat-value">他者の成功・評価の差・順位・ランキング</span>
+              <span class="stat-label">苦手</span><span class="stat-value">自分のリズム・「これでいい」という感覚</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>付き合い方</h4>
+            <p>「あ、クラベルが来た」と気づくのは少し難しい。でも映しているのが「差」ではなく「自分の見え方」だと知ると、水面の意味がだんだん変わり始める。</p>
+          </div>
+        </div>
+      </div>
+      <div class="rona-memo">
+        <div class="rona-memo-label">🐱 ロナのOSメモ</div>
+        <p>「差を見つけ出すのが得意すぎるだけ。クラベルが出た時、誰かのせいや環境のせいにしたくなるね。水面に映っているの、本当は誰だと思う？ 気づくと、鏡じゃなくて窓になるよ。」</p>
+      </div>
+    </div>
+  </div>
 
-  <div class="footer">GURiN World © 2026 @GURIN_Q01</div>
+  <!-- 003 ソントク -->
+  <div class="card" id="m003" onclick="toggleCard(this)">
+    <div class="card-header">
+      <span class="card-num">No.003</span>
+      <img src="003_sontoku.png" alt="ソントク" class="card-img-thumb">
+      <div class="card-title-group">
+        <div class="card-name">ソントク</div>
+        <div class="card-nickname">〜損得</div>
+      </div>
+      <span class="card-tag c-gold">Stage 3</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-main">
+        <img src="003_sontoku.png" alt="ソントク" class="card-image-full">
+        <div class="card-info">
+          <div class="info-section">
+            <h4>分類</h4>
+            <div class="stats">
+              <span class="stat-label">種族</span><span class="stat-value">計算種</span>
+              <span class="stat-label">二つ名</span><span class="stat-value">天秤の番人</span>
+              <span class="stat-label">生息地</span><span class="stat-value">損得の回廊</span>
+              <span class="stat-label">マボロシ度</span><span class="stat-value">低</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>性格</h4>
+            <p>とても合理的。無駄が苦手。「どちらが得か」をすぐに計算してしまう。プレイヤーが損をしないよう守っている。</p>
+          </div>
+          <div class="info-section">
+            <h4>よく使う言葉</h4>
+            <div class="word-chips">
+              <span class="word-chip">「それ、得？」</span>
+              <span class="word-chip">「意味ある？」</span>
+              <span class="word-chip">「効率は？」</span>
+              <span class="word-chip">「時間の無駄じゃない？」</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>好物 / 苦手</h4>
+            <div class="stats">
+              <span class="stat-label">好物</span><span class="stat-value">効率・成果・コスト・評価・勝敗</span>
+              <span class="stat-label">苦手</span><span class="stat-value">寄り道・遊び心・「なんとなく面白そう」</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>付き合い方</h4>
+            <p>ソントクが動き出したら、人生には計算できない豊かさもあると一度立ち止まる。いつもと逆のことをしたり、インスピレーションを取りにいく。すると、天秤は静かに揺れ始める。</p>
+          </div>
+        </div>
+      </div>
+      <div class="rona-memo">
+        <div class="rona-memo-label">🐱 ロナのOSメモ</div>
+        <p>「ちょっと計算が好きすぎるだけ。損をした時も実は深いところでは思い通りだったな。人生には、計算できない豊かさもあるんだ。時にはボーダーラインを緩やかにしておくんだ。」</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 004 モシモ -->
+  <div class="card" id="m004" onclick="toggleCard(this)">
+    <div class="card-header">
+      <span class="card-num">No.004</span>
+      <img src="004_moshimo.png" alt="モシモ" class="card-img-thumb">
+      <div class="card-title-group">
+        <div class="card-name">モシモ</div>
+        <div class="card-nickname">もし〜なら</div>
+      </div>
+      <span class="card-tag c-coral">Stage 4</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-main">
+        <img src="004_moshimo.png" alt="モシモ" class="card-image-full">
+        <div class="card-info">
+          <div class="info-section">
+            <h4>分類</h4>
+            <div class="stats">
+              <span class="stat-label">種族</span><span class="stat-value">時間分岐種</span>
+              <span class="stat-label">二つ名</span><span class="stat-value">分岐の番人</span>
+              <span class="stat-label">生息地</span><span class="stat-value">時の分岐路</span>
+              <span class="stat-label">マボロシ度</span><span class="stat-value">低</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>性格</h4>
+            <p>とても想像力が豊か。可能性を見つけるのが得意。「もしも」を増やし、プレイヤーが備えられるよう守っているつもり。</p>
+          </div>
+          <div class="info-section">
+            <h4>よく使う言葉</h4>
+            <div class="word-chips">
+              <span class="word-chip">「もしあの時」</span>
+              <span class="word-chip">「もし今」</span>
+              <span class="word-chip">「もし失敗したら？」</span>
+              <span class="word-chip">「もしああなったら」</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>好物 / 苦手</h4>
+            <div class="stats">
+              <span class="stat-label">好物</span><span class="stat-value">未来への不安・過去への後悔・迷い・分岐</span>
+              <span class="stat-label">苦手</span><span class="stat-value">今ここ・決める勇気・「まず歩いてみよう」</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>付き合い方</h4>
+            <p>「モシモが、まだ起きていないことを考えさせている」と気づく。今この瞬間に意識を合わせると、無数の分岐は静かな可能性へと変わっていく。</p>
+          </div>
+        </div>
+      </div>
+      <div class="rona-memo">
+        <div class="rona-memo-label">🐱 ロナのOSメモ</div>
+        <p>「まだ起きていないことを、考えるのが大好きなんだ。今出ていないことを引っ張り込まなくていいんだよ。今の心が次の心をつくっているんだよ。毎瞬、毎瞬が宝だよ。」</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 005 フノレツ -->
+  <div class="card" id="m005" onclick="toggleCard(this)">
+    <div class="card-header">
+      <span class="card-num">No.005</span>
+      <img src="005_funoretsu.png" alt="フノレツ" class="card-img-thumb">
+      <div class="card-title-group">
+        <div class="card-name">フノレツ</div>
+        <div class="card-nickname">不の列</div>
+      </div>
+      <span class="card-tag c-teal">Stage 5</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-main">
+        <img src="005_funoretsu.png" alt="フノレツ" class="card-image-full">
+        <div class="card-info">
+          <div class="info-section">
+            <h4>分類</h4>
+            <div class="stats">
+              <span class="stat-label">種族</span><span class="stat-value">欠乏種</span>
+              <span class="stat-label">二つ名</span><span class="stat-value">幻影の番人</span>
+              <span class="stat-label">生息地</span><span class="stat-value">マボロシ世界</span>
+              <span class="stat-label">マボロシ度</span><span class="stat-value">低</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>性格</h4>
+            <p>「不」を見つけ「不」を増殖させるのが得意。一つ見つけると、次の「不」も止まらない。むしろ、全部足りないところを見つければ安心できると信じている。</p>
+          </div>
+          <div class="info-section">
+            <h4>よく使う言葉</h4>
+            <div class="word-chips">
+              <span class="word-chip">「まだ足りない」</span>
+              <span class="word-chip">「もっと必要だよ」</span>
+              <span class="word-chip">「本当に大丈夫？」</span>
+              <span class="word-chip">「何か忘れてない？」</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>好物 / 苦手</h4>
+            <div class="stats">
+              <span class="stat-label">好物</span><span class="stat-value">欠乏感・不安・不満・「まだ」「もっと」</span>
+              <span class="stat-label">苦手</span><span class="stat-value">満ちている感覚・ありがとう・「もうある」</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>付き合い方</h4>
+            <p>「不」は創造の入口だったことを思い出す。ただ一時的に埋めてもフノレツは消えない。全ては心を映す世界。</p>
+          </div>
+        </div>
+      </div>
+      <div class="rona-memo">
+        <div class="rona-memo-label">🐱 ロナのOSメモ</div>
+        <p>「一つ『不』を見つけるとね、仲間をどんどん呼んじゃうんだ。最初の『不』に気づくと、列は長くならないよ。創造力の翼を全開にするチャンスだね。『不』の列は最高におもしろい！だってここから生み出るんだから。」</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 006 ノニ -->
+  <div class="card" id="m006" onclick="toggleCard(this)">
+    <div class="card-header">
+      <span class="card-num">No.006</span>
+      <img src="006_noni_pngpng.png" alt="ノニ" class="card-img-thumb">
+      <div class="card-title-group">
+        <div class="card-name">ノニ</div>
+        <div class="card-nickname">〜のに</div>
+      </div>
+      <span class="card-tag c-gold">Stage 6</span>
+      <span class="card-arrow">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="card-main">
+        <img src="006_noni_pngpng.png" alt="ノニ" class="card-image-full">
+        <div class="card-info">
+          <div class="info-section">
+            <h4>分類</h4>
+            <div class="stats">
+              <span class="stat-label">種族</span><span class="stat-value">期待種</span>
+              <span class="stat-label">二つ名</span><span class="stat-value">期待の番人</span>
+              <span class="stat-label">生息地</span><span class="stat-value">世界のアルゴリズム</span>
+              <span class="stat-label">マボロシ度</span><span class="stat-value">低</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>性格</h4>
+            <p>とてもまじめ。頑張った人のそばに、そっと現れる。「これだけ頑張ったんだから」「報われてほしい」そう願っている。だから、期待が大きくなるほど、小さく「……のに」とつぶやく。</p>
+          </div>
+          <div class="info-section">
+            <h4>よく使う言葉</h4>
+            <div class="word-chips">
+              <span class="word-chip">「こんなに頑張ったのに」</span>
+              <span class="word-chip">「わかってくれると思ったのに」</span>
+              <span class="word-chip">「こうなるはずだったのに」</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>好物 / 苦手</h4>
+            <div class="stats">
+              <span class="stat-label">好物</span><span class="stat-value">期待・見返り・「こうなるはず」・理不尽</span>
+              <span class="stat-label">苦手</span><span class="stat-value">今ここ・委ねること・結果を手放すこと</span>
+            </div>
+          </div>
+          <div class="info-section">
+            <h4>付き合い方</h4>
+            <p>「のに」は、頑張った証でもある。期待を少しずつ手放し、それは行かなくていい道だったと知るとノニは少しずつ小さくなる。たまに姿を現すが、透明度を増していく。</p>
+          </div>
+        </div>
+      </div>
+      <div class="rona-memo">
+        <div class="rona-memo-label">🐱 ロナのOSメモ</div>
+        <p>「一生懸命だったから、『のに』って言いたくなる日もある。『のに』は、頑張った証なんだ。映す世、聞こえてくる世界にとらわれずいこう。時に矛盾があっても突き進むことがカギなんだ。」</p>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+<!-- リンク -->
+<div class="links">
+  <a href="index.html" class="link-btn">🎮 モンスター診断へ</a>
+  <a href="maboroshi.html" class="link-btn">📊 幻度チェックシート</a>
+  <a href="rona.html" class="link-btn">🐱 今日のロナメッセージ</a>
+</div>
+
+<div class="footer">
+  GURiN World © 2026 @GURIN_Q01 ✦ 幻を、共に。
+</div>
+
+<script>
+function toggleCard(card) {
+  card.classList.toggle('open');
+}
+
+// URLハッシュで自動オープン
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash;
+  if (hash) {
+    const target = document.querySelector(hash);
+    if (target) {
+      target.classList.add('open');
+      setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    }
+  }
+});
+</script>
+
 </body>
 </html>
