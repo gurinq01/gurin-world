@@ -127,8 +127,33 @@ function showToday() {
     now.getFullYear() + '年' + (now.getMonth()+1) + '月' + now.getDate() + '日のメッセージ';
 }
 
+/* 山札方式：一巡の中では同じメッセージが重複しない。
+   32個すべて出たら再シャッフル。山札はブラウザに保存され、日をまたいでも続く */
+function loadBag() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('ronaBag'));
+    if (Array.isArray(saved) && saved.length > 0 &&
+        saved.every(n => Number.isInteger(n) && n >= 0 && n < messages.length)) {
+      return saved;
+    }
+  } catch (e) {}
+  return newBag();
+}
+
+function newBag() {
+  const bag = [...Array(messages.length).keys()];
+  for (let i = bag.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [bag[i], bag[j]] = [bag[j], bag[i]];
+  }
+  return bag;
+}
+
 function showRandom() {
-  const idx = Math.floor(Math.random() * messages.length);
+  let bag = loadBag();
+  const idx = bag.pop();
+  if (bag.length === 0) bag = newBag();
+  try { localStorage.setItem('ronaBag', JSON.stringify(bag)); } catch (e) {}
   const m = messages[idx];
   document.getElementById('kanji').textContent = m.kanji;
   document.getElementById('message').textContent = m.text;
