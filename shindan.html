@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>モンスター診断 — GURiN World</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Cinzel:wght@400;700&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #12121a;
+    --bg3: #1a1a26;
+    --teal: #00C8C8;
+    --coral: #FF6B6B;
+    --gold: #F5A623;
+    --dim: #666;
+    --text: #e8e8f0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 20px 80px;
+  }
+
+  .eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--teal);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: 900;
+    text-align: center;
+    background: linear-gradient(135deg, var(--teal), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--dim);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  /* スタート画面 */
+  #start-screen {
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .start-desc {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text);
+    background: var(--bg2);
+    border: 1px solid rgba(0,200,200,0.2);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 32px;
+  }
+
+  .start-desc strong {
+    color: var(--teal);
+  }
+
+  .btn-start {
+    background: linear-gradient(135deg, var(--teal), #009999);
+    color: var(--bg);
+    border: none;
+    padding: 16px 48px;
+    border-radius: 32px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .btn-start:hover { opacity: 0.85; }
+
+  /* 診断画面 */
+  #quiz-screen {
+    display: none;
+    max-width: 560px;
+    width: 100%;
+  }
+
+  .progress-wrap {
+    margin-bottom: 28px;
+  }
+
+  .progress-label {
+    font-size: 11px;
+    color: var(--dim);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .progress-bar {
+    height: 3px;
+    background: var(--bg3);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  .question-card {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 32px 28px;
+  }
+
+  .q-number {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--teal);
+    margin-bottom: 16px;
+  }
+
+  .q-text {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .choices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .choice-btn {
+    background: var(--bg3);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text);
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1.6;
+  }
+
+  .choice-btn:hover {
+    border-color: var(--teal);
+    background: rgba(0,200,200,0.08);
+  }
+
+  .choice-btn.selected {
+    border-color: var(--teal);
+    background: rgba(0,200,200,0.15);
+    color: var(--teal);
+  }
+
+  /* 結果画面 */
+  #result-screen {
+    display: none;
+    max-width: 560px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .result-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--teal);
+    margin-bottom: 16px;
+  }
+
+  .result-name {
+    font-size: clamp(32px, 7vw, 56px);
+    font-weight: 900;
+    margin-bottom: 4px;
+  }
+
+  .result-nickname {
+    font-size: 13px;
+    color: var(--dim);
+    margin-bottom: 28px;
+  }
+
+  .result-img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 2px solid rgba(0,200,200,0.3);
+    margin: 0 auto 28px;
+    display: block;
+  }
+
+  .result-card {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  .result-card h3 {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+
+  .result-card p {
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--text);
+  }
+
+  .rona-card {
+    background: var(--bg2);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    text-align: left;
+    margin-bottom: 28px;
+  }
+
+  .rona-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+
+  .rona-card p {
+    font-size: 13px;
+    line-height: 2;
+    color: var(--text);
+  }
+
+  .result-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .btn-link {
+    display: inline-block;
+    border: 1px solid var(--teal);
+    color: var(--teal);
+    padding: 12px 32px;
+    border-radius: 24px;
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.2s;
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+  }
+
+  .btn-link:hover {
+    background: var(--teal);
+    color: var(--bg);
+  }
+
+  .btn-retry {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--dim);
+    padding: 12px 32px;
+    border-radius: 24px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .btn-retry:hover {
+    border-color: var(--text);
+    color: var(--text);
+  }
+
+  .footer {
+    margin-top: 60px;
+    font-size: 11px;
+    color: var(--dim);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="eyebrow">GURiN World — Monster Diagnosis</div>
+<h1>モンスター診断</h1>
+<p class="subtitle">今、あなたの中にいるモンスターを知る</p>
+
+<!-- スタート画面 -->
+<div id="start-screen">
+  <div class="start-desc">
+    <strong>モンスターは敵ではない。</strong><br>
+    認識OSが映し出した、あなたの思考パターン。<br><br>
+    12の質問に答えて、今あなたの中に<br>
+    どのモンスターがいるかを確かめよう。<br><br>
+    🐱「気づくだけで、旅は変わるよ。」
+  </div>
+  <button class="btn-start" onclick="startQuiz()">診断スタート</button>
+</div>
+
+<!-- 診断画面 -->
+<div id="quiz-screen">
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span id="q-count">質問 1 / 12</span>
+      <span id="q-pct">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+  <div class="question-card">
+    <div class="q-number" id="q-number">Q01</div>
+    <div class="q-text" id="q-text"></div>
+    <div class="choices" id="choices"></div>
+  </div>
+</div>
+
+<!-- 結果画面 -->
+<div id="result-screen">
+  <div class="result-eyebrow">あなたの中にいるモンスター</div>
+  <div class="result-name" id="result-name"></div>
+  <div class="result-nickname" id="result-nickname"></div>
+  <img id="result-img" class="result-img" src="" alt="">
+  <div class="result-card">
+    <h3>今のあなたに起きていること</h3>
+    <p id="result-desc"></p>
+  </div>
+  <div class="rona-card">
+    <div class="rona-label">🐱 ロナのOSメモ</div>
+    <p id="result-rona"></p>
+  </div>
+  <div class="result-actions">
+    <a href="monsters.html" class="btn-link">📖 モンスター図鑑で詳しく知る</a>
+    <a href="maboroshi.html" class="btn-link">📊 幻度チェックシートを試す</a>
+    <button class="btn-retry" onclick="resetQuiz()">もう一度診断する</button>
+  </div>
+</div>
+
+<div class="footer">GURiN World © 2026 @GURIN_Q01 ✦ 幻を、共に。</div>
+
+<script>
+const questions = [
+  // ネバナラヌ
+  { monster: 'nebanaranu', text: '何かをする前に「これで合ってるかな」「ちゃんとできてるかな」と確認したくなることがある', yes: 'よくある', no: 'あまりない' },
+  { monster: 'nebanaranu', text: '「普通はこうする」「みんなそうしてる」という言葉が頭に浮かびやすい', yes: 'よくある', no: 'あまりない' },
+  // クラベル
+  { monster: 'kuraberu', text: 'SNSを見ていると、自然と他の人と自分を比べてしまう', yes: 'よくある', no: 'あまりない' },
+  { monster: 'kuraberu', text: '「あの人はできているのに」「自分なんて」という気持ちになることがある', yes: 'よくある', no: 'あまりない' },
+  // ソントク
+  { monster: 'sontoku', text: '何かを決める時「これって得なのか、損なのか」を考えてしまう', yes: 'よくある', no: 'あまりない' },
+  { monster: 'sontoku', text: '「時間の無駄かも」「意味あるのかな」と考えて行動を止めてしまうことがある', yes: 'よくある', no: 'あまりない' },
+  // モシモ
+  { monster: 'moshimo', text: '「あの時こうしていたら」「もし失敗したら」と、過去や未来のことを考えてしまう', yes: 'よくある', no: 'あまりない' },
+  { monster: 'moshimo', text: '選択肢が増えるほど、かえって決められなくなることがある', yes: 'よくある', no: 'あまりない' },
+  // フノレツ
+  { monster: 'funoretsu', text: '「まだ足りない」「もっと必要だ」という気持ちがなかなか消えない', yes: 'よくある', no: 'あまりない' },
+  { monster: 'funoretsu', text: '一つ不安を解消しても、また別の不安が出てくることがある', yes: 'よくある', no: 'あまりない' },
+  // ノニ
+  { monster: 'noni', text: '頑張ったのに結果が出ないと「なんで私だけ」という気持ちになる', yes: 'よくある', no: 'あまりない' },
+  { monster: 'noni', text: '「こうなるはずだったのに」「わかってくれると思ったのに」と感じることがある', yes: 'よくある', no: 'あまりない' },
+];
+
+const monsters = {
+  nebanaranu: {
+    name: 'ネバナラヌ', nickname: '〜完璧の番人〜',
+    img: '001_nebanaranu_ng.png',
+    desc: '「正しくなければ」「ちゃんとしなきゃ」という認識が、今のあなたの世界を少し重くしています。その声は外から来たのではなく、認識OSが積み重ねて形にしたもの。岩のように見えても、触れるとほんの少し軋む音がします。',
+    rona: '「ねぇ。『こうしなきゃ』って思ったら、その声を、少しだけ聞いてみて。『あ、いたんだ。』その一言だけで、認識OSは静かに動き始めるよ。」'
+  },
+  kuraberu: {
+    name: 'クラベル', nickname: '〜鏡の番人〜',
+    img: '002_kuraberu.png',
+    desc: '今のあなたは、水面に映るものに引っ張られています。見ているのは他の人ではなく、「差」という見え方。比較は言葉になる前に始まっていて、気づいた時にはもう差がある。でも、映しているのは世界ではなく、認識OSの景色です。',
+    rona: '「差を見つけ出すのが得意すぎるだけ。水面に映っているの、本当は誰だと思う？ 気づくと、鏡じゃなくて窓になるよ。」'
+  },
+  sontoku: {
+    name: 'ソントク', nickname: '〜天秤の番人〜',
+    img: '003_sontoku.png',
+    desc: '今のあなたは、天秤が動き続けています。得か損か、意味があるかないか。選んでいると思っていたら、計算していただけだった——そんな瞬間に来ています。バランスは5：5じゃなくていい。1：9でも、ちゃんと流れていきます。',
+    rona: '「それ、本当に選んでる？　それとも計算してる？ 損をした時も実は深いところでは思い通りだったな。人生には、計算できない豊かさもあるんだ。」'
+  },
+  moshimo: {
+    name: 'モシモ', nickname: '〜分岐の番人〜',
+    img: '004_moshimo.png',
+    desc: '今のあなたの心は、まだ起きていない場所を旅しています。過去の分岐、今の迷い、将来の不安——道標が増えるほど、足が重くなる。でも動いていたのは時間ではなく、心でした。今の心が次の心をつくっています。',
+    rona: '「まだ起きていないことを、考えるのが大好きなんだ。今出ていないことを引っ張り込まなくていいんだよ。毎瞬、毎瞬が宝だよ。」'
+  },
+  funoretsu: {
+    name: 'フノレツ', nickname: '〜幻影の番人〜',
+    img: '005_funoretsu.png',
+    desc: '今のあなたの中で、「不」が列になっています。不安、不足、不満——一つ見つけると、次を呼ぶ。でも世界は変わっていない。「不の列」だけが長く見えているだけです。「不」は創造の入口。ここから生み出すことができます。',
+    rona: '「一つ「不」を見つけるとね、仲間をどんどん呼んじゃうんだ。最初の「不」に気づくと、列は長くならないよ。創造力の翼を全開にするチャンスだね。」'
+  },
+  noni: {
+    name: 'ノニ', nickname: '〜期待の番人〜',
+    img: '006_noni_pngpng.png',
+    desc: '今のあなたの中で「……のに」という声が聞こえています。こんなに頑張ったのに。わかってくれると思ったのに。その「のに」は、本気で向き合ってきた証でもあります。期待を少し手放すと、ノニは静かに小さくなっていきます。',
+    rona: '「一生懸命だったから、「のに」って言いたくなる日もある。「のに」は、頑張った証なんだ。映す世、聞こえてくる世界にとらわれずいこう。」'
+  }
+};
+
+let scores = { nebanaranu: 0, kuraberu: 0, sontoku: 0, moshimo: 0, funoretsu: 0, noni: 0 };
+let current = 0;
+const shuffled = [...questions].sort(() => Math.random() - 0.5);
+
+function startQuiz() {
+  document.getElementById('start-screen').style.display = 'none';
+  document.getElementById('quiz-screen').style.display = 'block';
+  showQuestion();
+}
+
+function showQuestion() {
+  const q = shuffled[current];
+  const total = shuffled.length;
+  const pct = Math.round((current / total) * 100);
+  document.getElementById('q-count').textContent = `質問 ${current + 1} / ${total}`;
+  document.getElementById('q-pct').textContent = `${pct}%`;
+  document.getElementById('progress-fill').style.width = `${pct}%`;
+  document.getElementById('q-number').textContent = `Q${String(current + 1).padStart(2, '0')}`;
+  document.getElementById('q-text').textContent = q.text;
+
+  const choices = document.getElementById('choices');
+  choices.innerHTML = '';
+
+  [{ label: q.yes, yes: true }, { label: q.no, yes: false }].forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.textContent = opt.label;
+    btn.onclick = () => answer(opt.yes, q.monster);
+    choices.appendChild(btn);
+  });
+}
+
+function answer(yes, monster) {
+  if (yes) scores[monster]++;
+  current++;
+  if (current >= shuffled.length) {
+    showResult();
+  } else {
+    showQuestion();
+  }
+}
+
+function showResult() {
+  document.getElementById('quiz-screen').style.display = 'none';
+  const result = document.getElementById('result-screen');
+  result.style.display = 'block';
+
+  const top = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
+  const m = monsters[top];
+
+  document.getElementById('result-name').textContent = m.name;
+  document.getElementById('result-nickname').textContent = m.nickname;
+  document.getElementById('result-img').src = m.img;
+  document.getElementById('result-img').alt = m.name;
+  document.getElementById('result-desc').textContent = m.desc;
+  document.getElementById('result-rona').textContent = m.rona;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetQuiz() {
+  scores = { nebanaranu: 0, kuraberu: 0, sontoku: 0, moshimo: 0, funoretsu: 0, noni: 0 };
+  current = 0;
+  shuffled.sort(() => Math.random() - 0.5);
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('quiz-screen').style.display = 'block';
+  showQuestion();
+}
+</script>
+
+</body>
+</html>
