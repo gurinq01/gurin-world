@@ -40,6 +40,8 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 a{color:inherit;text-decoration:none;}
+/* スマホ専用改行：デスクトップでは無効。端末任せの自動改行を意図した位置で固定する */
+.br-sp{display:none;}
 #stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
 
 /* ---------- ナビ ---------- */
@@ -353,6 +355,8 @@ h2{font-family:'Shippori Mincho',serif;font-weight:500;text-align:center;font-si
 /* ---------- GURiNについて ---------- */
 .about-me{text-align:center;max-width:680px;margin:0 auto;}
 .about-me p{font-size:15px;letter-spacing:.08em;line-height:2.2;color:var(--text);}
+/* 本文のみ左寄せ（ブロックは中央のまま）。締めの一行とタグは中央を維持 */
+.about-me p:not(.maboroshist-line){text-align:left;}
 .tags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px;margin-top:34px;}
 .tags span{font-size:11px;letter-spacing:.14em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 16px;}
 .about-me .maboroshist-line{margin-top:28px;font-size:13px;letter-spacing:.14em;line-height:1.9;color:var(--platinum);}
@@ -383,7 +387,12 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
   .nav-links a{display:block;padding:14px 30px;font-size:13.5px;}
   nav.menu-open .nav-links{display:flex;}
   .hamburger{display:flex;}
-  .hero-inner{flex-direction:column;align-items:flex-start;}
+  .br-sp{display:inline;}
+  .hero-inner{flex-direction:column;align-items:flex-start;padding-top:104px;}
+  /* Hello, World. はスマホでは一行固定（ナビロゴとの間隔はpadding-topで確保） */
+  .hello{font-size:min(9.6vw,42px);white-space:nowrap;}
+  /* 問いかけ：スマホのみ視認性をもう一段（色・サイズは不変） */
+  .q{text-shadow:0 1px 9px rgba(5,12,32,.7),0 0 16px rgba(95,212,208,.4);}
   .hero-rona{align-self:center;}.hero-rona img{width:56vw;}
   .entrances,.routes{grid-template-columns:1fr;}
   .rona-sec{flex-direction:column;}.rona-txt h2{text-align:center;}
@@ -414,7 +423,7 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
     <div class="hero-copy">
       <div class="hello">Hello, World.</div>
       <div class="subhero">仮想現実は、始まりである。</div>
-      <div class="q">今のマボロシ世界、どう映していますか？</div>
+      <div class="q">今のマボロシ世界、<br class="br-sp">どう映していますか？</div>
       <a href="#rona" class="cta">観測をはじめる</a>
     </div>
     <div class="hero-rona"><img src="site_assets/rona_a.webp" alt="案内役ロナ"></div>
@@ -538,7 +547,7 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
 <!-- NEXT：3つのフィールド -->
 <section id="next">
   <div class="eyebrow reveal">NEXT</div>
-  <h2 class="reveal">次にひらく、3つのフィールド。</h2>
+  <h2 class="reveal">次にひらく、<br class="br-sp">3つのフィールド。</h2>
   <p class="lead reveal">ここから先、GURiN Worldは、<br>試す・記憶をひらく・深める、<br>3つのフィールドへ広がっていきます。</p>
   <div class="routes">
     <div class="route reveal">
@@ -585,7 +594,7 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
 
 <!-- FOOTER -->
 <footer>
-  <div class="f-creed">世界観が変わると、世界が変わる。</div>
+  <div class="f-creed">世界観が変わると、<br class="br-sp">世界が変わる。</div>
   <div class="f-friend">今日も、幻を友に。🐱</div>
   <div class="f-links">
     <a href="#map">WORLD MAP</a><a href="#whatis">GURiN Worldとは</a><a href="#about">GURiNについて</a>
