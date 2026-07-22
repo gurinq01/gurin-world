@@ -94,27 +94,29 @@ nav.menu-open .hamburger span:nth-child(3){transform:translateY(-6.5px) rotate(-
   text-shadow:0 0 22px rgba(255,255,255,.42),0 0 70px rgba(255,255,255,.15);
   opacity:0;animation:rise 2.2s ease .3s forwards;
 }
-/* サブ：淡いローズピンクの単色。発光はごく控えめ */
+/* サブ：深みのある発光ローズ（2026-07-22 視認性UP #D987A8→#E79AB8）。発光はごく控えめ */
 .subhero{
-  font-family:'Shippori Mincho',serif;
+  font-family:'Shippori Mincho',serif;font-weight:600;
   font-size:clamp(17px,2.6vw,24px);letter-spacing:.16em;
-  color:#D987A8;
-  -webkit-text-fill-color:#D987A8;
-  text-shadow:0 1px 8px rgba(7,15,38,.55);
+  color:#E79AB8;
+  -webkit-text-fill-color:#E79AB8;
+  text-shadow:0 1px 12px rgba(7,15,38,.72),0 0 30px rgba(231,154,184,.42),0 0 12px rgba(237,237,242,.22);
   margin-top:14px;
   opacity:0;animation:rise 2.4s ease 1.4s forwards;
 }
-.q{margin-top:22px;font-size:clamp(13px,2vw,17px);letter-spacing:.22em;color:var(--turquoise);text-shadow:0 1px 6px rgba(5,12,32,.40);opacity:0;animation:rise 2.6s ease 2.4s forwards;}
+.q{margin-top:22px;font-size:clamp(13px,2vw,17px);font-weight:500;letter-spacing:.22em;color:var(--turquoise);text-shadow:0 1px 8px rgba(5,12,32,.55),0 0 14px rgba(95,212,208,.28);opacity:0;animation:rise 2.6s ease 2.4s forwards;}
 /* CTA：白文字／ターコイズ枠を少し太く（ボタン認識性UP）／ごく薄いネイビー背景。ホバーで薄ターコイズ背景＋白文字 */
 .cta{
   display:inline-block;margin-top:40px;padding:15px 40px;
   font-size:13px;letter-spacing:.28em;color:#ffffff;
-  border:1.5px solid rgba(95,212,208,.7);border-radius:2px;
-  background:rgba(10,29,66,.4);
+  border:1.5px solid rgba(95,212,208,.85);border-radius:2px;
+  background:rgba(16,38,80,.5);
+  box-shadow:0 0 18px rgba(95,212,208,.18);
+  text-shadow:0 1px 6px rgba(5,12,32,.5);
   opacity:0;animation:rise 2.6s ease 3.2s forwards;
   transition:background .5s,box-shadow .5s,letter-spacing .5s,border-color .5s;
 }
-.cta:hover{background:rgba(95,212,208,.2);color:#ffffff;border-color:rgba(95,212,208,.9);box-shadow:0 0 28px rgba(95,212,208,.22);letter-spacing:.34em;}
+.cta:hover{background:rgba(95,212,208,.2);color:#ffffff;border-color:rgba(95,212,208,1);box-shadow:0 0 32px rgba(95,212,208,.32);letter-spacing:.34em;}
 .hero-rona{align-self:flex-end;flex-shrink:0;}
 .hero-rona img{
   width:min(30vw,380px);display:block;
