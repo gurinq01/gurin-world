@@ -391,8 +391,17 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
   .hero-inner{flex-direction:column;align-items:flex-start;padding-top:104px;}
   /* Hello, World. はスマホでは一行固定（ナビロゴとの間隔はpadding-topで確保） */
   .hello{font-size:min(9.6vw,42px);white-space:nowrap;}
-  /* 問いかけ：スマホのみ視認性をもう一段（色・サイズは不変） */
-  .q{text-shadow:0 1px 9px rgba(5,12,32,.7),0 0 16px rgba(95,212,208,.4);}
+  /* 問いかけ：スマホのみ視認性をもう一段（色・サイズは不変）。
+     金の水脈との重なり対策に、文字の周囲だけ静かに暗くする薄い深紺の透過背景を敷く */
+  .q{
+    text-shadow:0 1px 9px rgba(5,12,32,.7),0 0 16px rgba(95,212,208,.4);
+    display:inline-block;
+    background:rgba(7,15,38,.44);
+    padding:8px 14px;border-radius:5px;
+    margin-left:-14px;
+  }
+  /* WHAT IS：本文のみ左寄せ（ブロックは中央のまま）。見出しと起動の一行は中央を維持 */
+  .about-world p{text-align:left;}
   .hero-rona{align-self:center;}.hero-rona img{width:56vw;}
   .entrances,.routes{grid-template-columns:1fr;}
   .rona-sec{flex-direction:column;}.rona-txt h2{text-align:center;}
@@ -449,7 +458,7 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
 <!-- 世界地図 -->
 <section id="map">
   <div class="eyebrow reveal">WORLD MAP ｜ PHASE 1</div>
-  <h2 class="reveal">新しい世界の、はじめ方。</h2>
+  <h2 class="reveal">新しい世界の、<br class="br-sp">はじめ方。</h2>
   <p class="lead reveal">世界地図は、まだ育っている。光る珠に触れてみてください。</p>
   <div class="map-wrap reveal">
     <img class="mapimg" src="site_assets/world_full.webp" alt="GURiN World 全景">
@@ -536,7 +545,7 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
 <section id="whatis">
   <div class="about-world reveal">
     <div class="eyebrow">WHAT IS GURiN WORLD</div>
-    <h2>世界は、あなたの内側にある。</h2>
+    <h2>世界は、<br class="br-sp">あなたの内側にある。</h2>
     <p>この世界は、<br>意識を通して映し出される、マボロシ世界。</p>
     <p>見つめるたび、見え方が変わり、<br>ほどけるたび、新しい道が現れる。</p>
     <p>GURiN Worldは、<br>その世界を歩き、創造していくための入口です。</p>
