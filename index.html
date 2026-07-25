@@ -362,6 +362,34 @@ h2{font-family:'Shippori Mincho',serif;font-weight:500;text-align:center;font-si
 .about-me .maboroshist-line{margin-top:28px;font-size:13px;letter-spacing:.14em;line-height:1.9;color:var(--platinum);}
 .about-me .more{display:inline-block;margin-top:28px;font-size:12.5px;letter-spacing:.2em;color:var(--turquoise);border-bottom:1px solid rgba(95,212,208,.35);padding-bottom:4px;}
 
+/* ---------- 出口動画「ロナと、次の世界へ」（2026-07-25 追加） ---------- */
+#exit-video{position:relative;z-index:1;padding:40px 40px 20px;max-width:1180px;margin:0 auto;text-align:center;}
+.exit-frame{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);background:#070d1b;line-height:0;}
+.exit-frame video{width:100%;height:auto;display:block;}
+/* 音ありボタン */
+.exit-sound{position:absolute;right:16px;bottom:16px;z-index:3;
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(7,13,27,.7);backdrop-filter:blur(6px);
+  border:1px solid rgba(95,212,208,.6);border-radius:999px;
+  padding:9px 18px;color:var(--platinum);font-family:inherit;font-size:12px;letter-spacing:.12em;
+  cursor:pointer;transition:background .3s,border-color .3s,color .3s;}
+.exit-sound:hover{background:rgba(95,212,208,.18);border-color:var(--turquoise);color:var(--turquoise);}
+.exit-sound svg{width:14px;height:14px;fill:currentColor;}
+/* 動画下のコピーとボタン */
+.exit-copy{margin-top:26px;font-family:'Shippori Mincho',serif;font-size:clamp(15px,2.4vw,19px);letter-spacing:.14em;color:var(--platinum);text-shadow:0 0 16px rgba(237,237,242,.22);}
+.exit-cta{display:inline-block;margin-top:22px;padding:14px 42px;
+  font-size:13px;letter-spacing:.28em;color:#fff;
+  border:1.5px solid rgba(95,212,208,.85);border-radius:2px;background:rgba(16,38,80,.5);
+  box-shadow:0 0 18px rgba(95,212,208,.18);text-shadow:0 1px 6px rgba(5,12,32,.5);
+  transition:background .5s,box-shadow .5s,letter-spacing .5s,border-color .5s;}
+.exit-cta:hover{background:rgba(95,212,208,.2);border-color:rgba(95,212,208,1);box-shadow:0 0 32px rgba(95,212,208,.32);letter-spacing:.34em;}
+@media (max-width:860px){
+  #exit-video{padding:20px 18px 10px;}
+  /* スマホ：中央のロナと道を優先。左右がわずかに切れても成立 */
+  .exit-frame video{width:118%;margin-left:-9%;}
+}
+
 /* ---------- フッター ---------- */
 /* フッターへ向かう深紺〜青紫、奥にマゼンタの気配 */
 footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
@@ -591,14 +619,32 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
   <div class="about-me reveal">
     <div class="eyebrow">ABOUT GURiN</div>
     <h2>「この世界は幻」を、<br>リアルに生きる。</h2>
-    <p style="margin-top:30px">35年前、未来意識®メッセージを受け取り、<br>マスコミ勤務時代から個人セッションをスタート。<br><br>意識が現実を映し出すしくみを、<br>言葉と実践を通して発信。<br><br>独立・起業後、講座・書籍・事業へと世界を広げる。<br><br>今、AIとともに、<br>その叡智を、彩り豊かなGURiN Worldとしてひらく。</p>
+    <!-- 2026-07-23 本文差し替え：呼吸と意識のクラブ／会員制・実績を追記。構成・デザインは既存維持。段落は<br><br>、行は<br>で既存パターンを踏襲 -->
+    <p style="margin-top:30px">35年前、未来意識®メッセージを受け取り、<br>マスコミ勤務時代から個人セッションを開始。<br>社内では、呼吸と意識を整えるクラブを立ち上げ、<br>週1回・3年間運営。<br><br>意識が現実を映し出すしくみを、<br>言葉と実践を通して発信。<br><br>独立・起業後、<br>会員制の講座・書籍・事業を展開。<br>8,000人を超える個人セッション、<br>5,000回を超える講座を重ねる。<br><br>今、AIとともに、<br>その叡智を、彩り豊かなGURiN Worldとしてひらく。</p>
+    <!-- 2026-07-23 タグを立ち位置3つに集約（実績は本文へ移行済み）。初見でジャンルが伝わるよう芯だけ残す。今後追加可 -->
     <div class="tags">
-      <span>未来意識®提唱 / 35年</span><span>意識と現実</span><span>意識 × テクノロジー</span>
-      <span>個人セッション 8,000名超</span><span>講座 5,000回超</span><span>GURiN World創設者</span><span>マボロシスト</span>
+      <span>意識と現実</span><span>意識 × テクノロジー</span><span>マボロシスト</span>
     </div>
     <p class="maboroshist-line">マボロシストは、超リアリスト。</p>
     <a class="more" href="https://note.com/gurin_q01/n/n5650a46ddccd" target="_blank" rel="noopener noreferrer">GURiNについて ↗</a>
   </div>
+</section>
+
+<!-- 出口動画「ロナと、次の世界へ」（2026-07-25 追加）：入口は静止画で世界を見せ、出口でロナが次の世界へ誘う -->
+<section id="exit-video" class="reveal">
+  <div class="exit-frame">
+    <video id="rona-exit"
+           poster="site_assets/video/rona-next-world/rona-next-world-poster.webp"
+           muted playsinline preload="none" aria-label="ロナと、次の世界へ">
+      <!-- 遅延読み込み：near表示でsrcを注入するためsrcは空。data-属性に保持 -->
+    </video>
+    <button class="exit-sound" id="exit-sound-btn" type="button" aria-label="動画を音ありで最初から再生する">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 00-2.5-4.03v8.05A4.5 4.5 0 0016.5 12z"/></svg>
+      <span id="exit-sound-label">音ありで再生</span>
+    </button>
+  </div>
+  <div class="exit-copy">この先の世界を、ロナと歩く。</div>
+  <a class="exit-cta" href="#map">世界を歩く</a>
 </section>
 
 <!-- FOOTER -->
@@ -637,6 +683,41 @@ addEventListener('scroll',()=>{document.getElementById('nav').style.background=s
 const navEl=document.getElementById('nav');
 navEl.querySelector('.hamburger').addEventListener('click',()=>navEl.classList.toggle('menu-open'));
 navEl.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>navEl.classList.remove('menu-open')));
+
+/* 出口動画「ロナと、次の世界へ」：遅延読み込み・自動再生ミュート・音ありボタン・reduced-motion対応 */
+(function(){
+  const v=document.getElementById('rona-exit');
+  if(!v) return;
+  const base='site_assets/video/rona-next-world/rona-next-world';
+  const btn=document.getElementById('exit-sound-btn');
+  const label=document.getElementById('exit-sound-label');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let loaded=false;
+  /* WebM優先・MP4フォールバックのsourceを注入 */
+  function loadSources(){
+    if(loaded) return; loaded=true;
+    const webm=document.createElement('source');webm.src=base+'.webm';webm.type='video/webm';
+    const mp4=document.createElement('source');mp4.src=base+'.mp4';mp4.type='video/mp4';
+    v.appendChild(webm);v.appendChild(mp4);v.load();
+  }
+  /* 近づいたら読み込み。reduce時は自動再生しない（posterのまま） */
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){
+      loadSources();
+      if(!reduce){ v.muted=true; v.play().catch(()=>{}); }
+      io.disconnect();
+    }
+  }),{threshold:.35});
+  io.observe(v);
+  /* 音ありボタン：先頭へ戻す→ミュート解除→音付きで再生。終了後は「もう一度見る」 */
+  btn.addEventListener('click',()=>{
+    loadSources();
+    v.currentTime=0; v.muted=false; v.volume=1;
+    v.play().catch(()=>{});
+    label.textContent='もう一度見る';
+  });
+  v.addEventListener('ended',()=>{ if(!v.muted) label.textContent='もう一度見る'; });
+})();
 </script>
 </body>
 </html>
