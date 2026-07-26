@@ -701,10 +701,18 @@ navEl.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=
     v.appendChild(webm);v.appendChild(mp4);v.load();
   }
   /* 近づいたら読み込み。reduce時は自動再生しない（posterのまま） */
+  /* スマホ対策：読み込み直後の即再生は失敗しやすいため、再生可能になってから再生する */
+  function tryAutoplay(){
+    if(reduce) return;
+    v.muted=true;
+    const start=()=>{ v.play().catch(()=>{}); };
+    if(v.readyState>=3){ start(); }        /* 既に再生可能ならすぐ */
+    else{ v.addEventListener('canplay',start,{once:true}); }  /* まだなら準備完了を待つ */
+  }
   const io=new IntersectionObserver(es=>es.forEach(e=>{
     if(e.isIntersecting){
       loadSources();
-      if(!reduce){ v.muted=true; v.play().catch(()=>{}); }
+      tryAutoplay();
       io.disconnect();
     }
   }),{threshold:.35});
