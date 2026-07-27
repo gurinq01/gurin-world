@@ -362,6 +362,18 @@ h2{font-family:'Shippori Mincho',serif;font-weight:500;text-align:center;font-si
 .about-me .maboroshist-line{margin-top:28px;font-size:13px;letter-spacing:.14em;line-height:1.9;color:var(--platinum);}
 .about-me .more{display:inline-block;margin-top:28px;font-size:12.5px;letter-spacing:.2em;color:var(--turquoise);border-bottom:1px solid rgba(95,212,208,.35);padding-bottom:4px;}
 
+/* ---------- GURiN BOOKS：書物の入口（2026-07-27 追加） ---------- */
+/* 静かな書庫に一冊。左＝縦長表紙（大）、右＝書名・副題・概要・状態。既存の色・角丸・余白を継承 */
+.book-feature{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:60px;align-items:center;margin-top:72px;}
+.book-cover img{width:100%;height:auto;display:block;border-radius:10px;box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 0 1px var(--line);}
+.book-title{font-family:'Shippori Mincho',serif;font-weight:500;font-size:clamp(24px,3.4vw,32px);letter-spacing:.1em;color:var(--platinum);text-shadow:0 0 18px rgba(237,237,242,.22);line-height:1.5;}
+.book-sub{margin-top:14px;font-size:13.5px;letter-spacing:.08em;color:var(--gold);line-height:1.85;}
+.book-desc{margin-top:22px;font-size:14px;letter-spacing:.06em;line-height:2.05;color:var(--text);}
+/* 近日公開予定：ボタンに見えない静かなステータス表示（リンクなし） */
+.book-status{display:inline-block;margin-top:30px;font-size:11px;letter-spacing:.22em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 18px;}
+/* 購入ページ完成後、この位置で有効化するボタン（現状は未使用）
+.book-cta{display:inline-block;margin-top:24px;font-size:12.5px;letter-spacing:.2em;color:var(--turquoise);border-bottom:1px solid rgba(95,212,208,.35);padding-bottom:4px;} */
+
 /* ---------- 出口動画「ロナと、次の世界へ」（2026-07-25 追加） ---------- */
 #exit-video{position:relative;z-index:1;padding:40px 40px 20px;max-width:1180px;margin:0 auto;text-align:center;}
 .exit-frame{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);
@@ -432,6 +444,11 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
   .about-world p{text-align:left;}
   .hero-rona{align-self:center;}.hero-rona img{width:56vw;}
   .entrances,.routes{grid-template-columns:1fr;}
+  /* GURiN BOOKS：スマホは1カラム（表紙→書名→副題→概要→状態）。表紙は幅いっぱいにせず左右余白を残す */
+  .book-feature{grid-template-columns:1fr;gap:32px;margin-top:48px;justify-items:center;}
+  .book-cover{width:64%;max-width:300px;margin:0 auto;}
+  .book-detail{text-align:center;}
+  .book-desc{text-align:left;}
   .rona-sec{flex-direction:column;}.rona-txt h2{text-align:center;}
   section{padding:90px 24px;}
 }
@@ -610,6 +627,27 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
         <h4>GURiN Academy</h4>
         <p>世界観を、学びと実践へつなげる場所。<br><br>宇宙のしくみ、未来のシナリオ、意識とテクノロジー、<br>インスピレーション、お金、仕事、人間関係、生老病死……<br><br>人類のあらゆる謎を、紐解いていきます。</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- GURiN BOOKS：書物の入口（2026-07-27 追加）。#next と #about の間。今回は一冊のみ大きく表示。将来 複数冊を .book-feature を増やして拡張可 -->
+<section id="books">
+  <div class="eyebrow reveal">GURiN BOOKS</div>
+  <h2 class="reveal">書物の入口</h2>
+  <p class="lead reveal">世界の奥に流れる言葉を、<br>いまを生きるための書物へ。</p>
+  <div class="book-feature reveal">
+    <div class="book-cover">
+      <img src="site_assets/books/book_uchu-no-cloud_cover_portrait.webp" alt="宇宙のクラウド ——35年、3000篇の対話から選んだ26のメッセージ" loading="lazy">
+    </div>
+    <div class="book-detail">
+      <h3 class="book-title">宇宙のクラウド</h3>
+      <p class="book-sub">——35年、3000篇の対話から選んだ26のメッセージ</p>
+      <p class="book-desc">人間とは何か。世界とは何か。<br>人間、意識、男女、仕事、経営、お金、生と死、宇宙。<br>異なる問いの奥に流れる、一つの源泉を再観測する書物です。</p>
+      <p class="book-desc">35年にわたる宇宙との対話から、最初の26篇を選び、<br>解説、Q&amp;A、図解、観測画像、アプリとともに編集中です。</p>
+      <div class="book-status">近日公開予定</div>
+      <!-- 購入ページ完成後、この位置にボタンを追加：
+      <a class="book-cta" href="購入ページURL">この書物を見る</a> -->
     </div>
   </div>
 </section>
