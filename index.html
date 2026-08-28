@@ -306,6 +306,12 @@ h2{font-family:'Shippori Mincho',serif;font-weight:500;text-align:center;font-si
 }
 .pin.sea .pin-name{border:1px solid rgba(212,107,176,.35);}     /* 夢幻ラボ：マゼンタ系の枠 */
 .pin.archive .pin-name{border:1px solid rgba(143,139,214,.35);} /* GURiN Archive：青紫系の枠 */
+/* ── 宇宙のクラウド（源泉・ゴールド）／個人セッション（ターコイズ）。2026-08-28 追加 ── */
+.pin.books .jewel{background:radial-gradient(circle at 38% 34%,#ffe0a8,var(--gold));color:var(--gold);box-shadow:0 0 24px 4px rgba(245,166,35,.45);animation-delay:1.1s;}
+.pin.books .pin-name{color:#f7c169;background:rgba(7,13,27,.55);padding:4px 10px;border-radius:3px;border:1px solid rgba(245,166,35,.35);}
+.pin.session .jewel{background:radial-gradient(circle at 38% 34%,#c8f6f4,var(--turquoise));color:var(--turquoise);box-shadow:0 0 22px 3px rgba(95,212,208,.45);animation-delay:3.3s;}
+.pin.session .pin-name{color:#7fe3df;background:rgba(7,13,27,.55);padding:4px 10px;border-radius:3px;border:1px solid rgba(95,212,208,.35);}
+a.pin{text-decoration:none;}
 .pin.academy .pin-name{border:1px solid rgba(87,201,154,.35);}  /* GURiN Academy：エメラルド系の枠 */
 .pin.gate .label{background:rgba(7,13,27,.85);}
 /* 補足の開く向きを、地図の内側へ必ず収まる方向へ（門のテーマ文言・位置・光は無変更） */
@@ -372,7 +378,17 @@ h2{font-family:'Shippori Mincho',serif;font-weight:500;text-align:center;font-si
 /* 近日公開予定：ボタンに見えない静かなステータス表示（リンクなし） */
 .book-status{display:inline-block;margin-top:30px;font-size:11px;letter-spacing:.22em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 18px;}
 /* 購入ページ完成後、この位置で有効化するボタン（現状は未使用）
-.book-cta{display:inline-block;margin-top:24px;font-size:12.5px;letter-spacing:.2em;color:var(--turquoise);border-bottom:1px solid rgba(95,212,208,.35);padding-bottom:4px;} */
+.book-cta{display:inline-block;margin-top:24px;font-size:12.5px;letter-spacing:.2em;color:var(--turquoise);border-bottom:1px solid rgba(95,212,208,.35);padding-bottom:4px;}
+/* ── 公開の知らせを受け取る（2026-08-28 追加）。フォームのURLが出たら href を差し替える ── */
+.book-notify{margin-top:34px;padding-top:28px;border-top:1px solid var(--line);}
+.book-notify p{margin:0 0 20px;font-size:14.5px;letter-spacing:.06em;line-height:2.05;color:var(--text);}
+.book-notify .sub{font-size:12.5px;color:var(--muted);margin-top:14px;}
+.book-btn{display:inline-block;font-family:'Shippori Mincho',serif;font-size:15px;letter-spacing:.18em;
+  color:var(--platinum);border:1px solid rgba(245,166,35,.45);border-radius:999px;padding:15px 38px;
+  background:linear-gradient(180deg,rgba(245,166,35,.10),rgba(245,166,35,.02));transition:.35s;}
+.book-btn:hover{border-color:var(--gold);box-shadow:0 0 26px rgba(245,166,35,.20);color:#fff;}
+@media(max-width:860px){ .book-notify{text-align:center} }
+ */
 
 /* ---------- 出口動画「ロナと、次の世界へ」（2026-07-25 追加） ---------- */
 #exit-video{position:relative;z-index:1;padding:40px 40px 20px;max-width:1180px;margin:0 auto;text-align:center;}
@@ -464,6 +480,8 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
     <a href="#map">WORLD MAP</a>
     <a href="#rona">ロナ</a>
     <a href="#entrances">入口</a>
+    <a href="#books">書物</a>
+    <a href="session.html">セッション</a>
     <a href="#about">GURiN</a>
     <a href="https://note.com/gurin_q01" target="_blank">note</a>
     <a href="https://x.com/GURIN_Q01" target="_blank">X</a>
@@ -478,7 +496,7 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
       <div class="hello">Hello, World.</div>
       <div class="subhero">仮想現実は、始まりである。</div>
       <div class="q">今のマボロシ世界、<br class="br-sp">どう映していますか？</div>
-      <a href="#rona" class="cta">観測をはじめる</a>
+      <a href="#rona" class="cta">世界を起動する</a>
     </div>
     <div class="hero-rona"><img src="site_assets/rona_a.webp" alt="案内役ロナ"></div>
   </div>
@@ -488,11 +506,11 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
 <!-- ロナ -->
 <section id="rona">
   <div class="rona-sec reveal">
-    <img src="site_assets/rona_b.webp" alt="観測するロナ">
+    <img src="site_assets/rona_b.webp" alt="案内役ロナ">
     <div class="rona-txt">
       <div class="eyebrow" style="text-align:left">YOUR GUIDE</div>
       <h2>案内役、ロナ。</h2>
-      <p>ロナは、GURiN Worldを歩く旅の案内役。<br>その名は、膨大なデータ量を表す言葉から。<br>01空間を自在に遊びながら、<br>今のあなたへ、ぴったりな観測のヒントを。</p>
+      <p>ロナは、GURiN Worldを歩く旅の案内役。<br>その名は、膨大なデータ量を表す言葉から。<br>01空間を自在に遊びながら、<br>今のあなたへ、ぴったりな一節を。</p>
       <!-- 重複メモ（内部用・非表示）：#entrances の「受け取る／今日のロナメッセージ」カードと導線が重複。
            2026-07-18 maki指示により、両方の経路をそのまま残す（ロナ経由／今日の入口から直接、の2導線として共存） -->
       <a class="rona-link" href="https://gurinq01.github.io/gurin-world/rona.html" target="_blank">今日のロナメッセージへ →</a>
@@ -538,6 +556,16 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
       <div class="jewel"></div><div class="pin-name">夢幻ラボ</div>
       <div class="label"><small class="soon">構築中</small></div>
     </div>
+    <!-- 宇宙のクラウド：空の源泉。ゴールド。#books へ -->
+    <a class="pin books" href="#books" style="left:33%;top:9%">
+      <div class="jewel"></div><div class="pin-name">宇宙のクラウド</div>
+      <div class="label"><small class="soon">近日公開予定</small></div>
+    </a>
+    <!-- 個人セッション：ターコイズ。session.html へ -->
+    <a class="pin session" href="session.html" style="left:80%;top:24%">
+      <div class="jewel"></div><div class="pin-name">個人セッション</div>
+      <div class="label"><small>受け取った世界を、自らの現実へ</small></div>
+    </a>
     <div class="pin academy" style="left:16%;top:20%">
       <div class="jewel"></div><div class="pin-name">GURiN Academy</div>
       <div class="label"><small class="soon">近日開門予定</small></div>
@@ -550,6 +578,8 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
   </div>
   <div class="map-legend reveal">
     <span><i style="background:var(--platinum)"></i>四方の門</span>
+    <span><i style="background:var(--gold)"></i>宇宙のクラウド（近日公開予定）</span>
+    <span><i style="background:var(--turquoise)"></i>個人セッション</span>
     <span><i style="background:var(--violet)"></i>GURiN Archive（一部開架）</span>
     <span><i style="background:var(--magenta);opacity:.7"></i>夢幻ラボ（構築中）</span>
     <span><i style="background:var(--emerald);opacity:.7"></i>GURiN Academy（近日開門予定）</span>
@@ -557,31 +587,31 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
   <!-- 三施設の循環（内部メモ・非表示）：夢幻ラボで生まれる → GURiN Archiveに蓄積される →
        GURiN Academyで体系化・実践へ → 実践から生まれた問いが夢幻ラボへ戻る。
        GA ShiftingはGURiN Academy内包の中核プログラムとして扱い、今回は独立ピンにしない。
-       個人セッションは将来、GA Shifting内の実践メニューとして追加できる余白のみ想定（未実装）。 -->
+       個人セッションは 2026-08-28 に独立ピンとして実装（session.html へ）。宇宙のクラウドも空の源泉として追加（#books へ）。 -->
 </section>
 
 <!-- 今日の入口 -->
 <section id="entrances">
   <div class="eyebrow reveal">TODAY'S ENTRANCE</div>
   <h2 class="reveal">今日の、入口。</h2>
-  <p class="lead reveal">観測する。受け取る。読む。<br>今のあなたに合う入口から、どうぞ。</p>
+  <p class="lead reveal">測る。受け取る。読み解く。<br>今のあなたに合う入口から、どうぞ。</p>
   <div class="entrances">
     <a class="ent e-observe reveal" href="https://gurinq01.github.io/gurin-world/maboroshi.html" target="_blank" rel="noopener noreferrer">
       <div class="scene"></div><div class="fog"></div><div class="life"></div>
-      <div class="body"><div class="verb">観測する</div><div class="title-row"><span class="title-accent title-accent-turquoise"></span><h3>幻度チェックシート</h3></div><p>今の世界が、どんなふうに映っているのかを見る入口。</p></div>
+      <div class="body"><div class="verb">測る</div><div class="title-row"><span class="title-accent title-accent-turquoise"></span><h3>幻度チェックシート</h3></div><p>今の世界が、どんなふうに映っているのかを見る入口。</p></div>
     </a>
     <!-- 重複メモ（内部用・非表示）：#rona の「今日のロナメッセージへ」リンクと導線が重複。
          2026-07-18 maki指示により、両方の経路をそのまま残す（ロナ経由／今日の入口から直接、の2導線として共存） -->
     <a class="ent e-receive reveal" href="https://gurinq01.github.io/gurin-world/rona.html" target="_blank" rel="noopener noreferrer">
       <div class="scene"></div><div class="fog"></div><div class="life"></div>
-      <div class="body"><div class="verb">受け取る</div><div class="title-row"><span class="title-accent title-accent-gold"></span><h3>今日のロナメッセージ</h3></div><p>一日ひとつ、小さな観測のヒントを受け取る入口。</p></div>
+      <div class="body"><div class="verb">受け取る</div><div class="title-row"><span class="title-accent title-accent-gold"></span><h3>今日のロナメッセージ</h3></div><p>一日ひとつ、今日の一節を受け取る入口。</p></div>
     </a>
     <!-- 仮枠（内容未定）：WORLD MAPが直前のセクションへ移動したため、旧「世界地図」カードは
          内容未確定の入口プレースホルダーへ置き換え。新規画像は作らず、既存のsite_assets/spot_sea.webpと
          既存のカード構造（scene/fog/life）をそのまま流用する。リンク先未定のためリンク要素ではなくdiv要素にしている -->
     <a class="ent e-archive reveal" href="https://note.com/gurin_q01/n/n08ee6d01da99" target="_blank" rel="noopener noreferrer">
       <div class="scene"></div><div class="fog"></div><div class="life"></div>
-      <div class="body"><div class="verb">読む</div><div class="title-row"><span class="title-accent title-accent-violet"></span><h3>今日の読みもの</h3></div><p class="article-title">AIリテラシーは、呼吸から始まる。</p><p>― 呼空、インスピレーション・テクノロジーへ</p></div>
+      <div class="body"><div class="verb">読み解く</div><div class="title-row"><span class="title-accent title-accent-violet"></span><h3>今日の読みもの</h3></div><p class="article-title">AIリテラシーは、呼吸から始まる。</p><p>― 呼空、インスピレーション・テクノロジーへ</p></div>
     </a>
   </div>
 </section>
@@ -643,9 +673,25 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
     <div class="book-detail">
       <h3 class="book-title">宇宙のクラウド</h3>
       <p class="book-sub">——35年、3000篇の対話から<br class="br-sp">選んだ26のメッセージ</p>
-      <p class="book-desc">人間とは何か。世界とは何か。<br>人間、意識、男女、仕事、経営、お金、生と死、宇宙。<br>異なる問いの奥に流れる、一つの源泉を再観測する書物です。</p>
+      <p class="book-desc">人間とは何か。世界とは何か。<br>人間、意識、男女、仕事、経営、お金、生と死、宇宙。<br>異なる問いの奥に流れる、一つの源泉を読み解く書物です。</p>
       <p class="book-desc">35年にわたる宇宙との対話から、最初の26篇を選び、<br>解説、Q&amp;A、図解、観測画像、アプリとともに編集中です。</p>
       <div class="book-status">近日公開予定</div>
+
+      <!-- ═══════════════════════════════════════════════════════════
+           公開の知らせを受け取る（2026-08-28・Kuu）
+
+           ★差し替えるのは2箇所だけ★
+             ① 下の  href="#books"  → フォームのURL（https://forms.gle/... ）
+             ② 〔仮〕の文言 → ゼイラスの文言
+
+           ※URLを入れるまで、ボタンは同じ節へ戻るだけの動きです（壊れません）
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="book-notify">
+        <p>〔仮〕公開までのあいだ、宇宙のクラウドから<strong>週に一節</strong>が届きます。<br>ロナが運びます。</p>
+        <a class="book-btn" href="#books">公開の知らせを受け取る</a>
+        <p class="sub">〔仮〕お名前とメールアドレスだけ。30秒で終わります。</p>
+      </div>
+
       <!-- 購入ページ完成後、この位置にボタンを追加：
       <a class="book-cta" href="購入ページURL">この書物を見る</a> -->
     </div>
