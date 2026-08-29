@@ -411,9 +411,12 @@ a.pin{text-decoration:none;}
 /* ── 個人セッションのセクション（2026-08-29 新設・GURiN指示） ── */
 .session-panel{display:grid;grid-template-columns:1.02fr .98fr;gap:46px;max-width:1000px;margin:46px auto 0;
   padding:42px 46px;border:1px solid var(--line);border-radius:18px;background:rgba(10,29,66,.30);}
-.sp-core{font-family:'Shippori Mincho',serif;font-size:19.5px;line-height:2;color:var(--gold);
-  letter-spacing:.07em;margin:0 0 22px;}
+.sp-core{font-family:'Shippori Mincho',serif;font-size:29px;line-height:1.7;color:var(--gold);
+  letter-spacing:.1em;margin:0 0 26px;}
+.sp-lede{font-family:'Shippori Mincho',serif;font-size:18px;line-height:2.05;letter-spacing:.1em;
+  color:var(--platinum);margin:0 0 26px;}
 .sp-text{font-size:14.5px;line-height:2.1;letter-spacing:.07em;color:var(--text);margin:0;}
+@media(max-width:860px){ .sp-core{font-size:24px} .sp-lede{font-size:16.5px} }
 .sp-facts{margin:0 0 30px;padding:0;}
 .sp-facts>div{display:flex;gap:20px;padding:13px 0;border-bottom:1px solid var(--line);}
 .sp-facts>div:first-child{padding-top:0;}
@@ -744,8 +747,9 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
 
   <div class="session-panel reveal">
     <div class="sp-left">
-      <p class="sp-core">世界の映り方そのものを、動かす時間です。</p>
-      <p class="sp-text">気づき、ほどきながら、同時につくっていく。<br>解放と創造が、同時に動き出します。<br><br>点で起きていることを、面から、そして空から見る。<br>心の立つ位置が変われば、見える世界が変わります。</p>
+      <p class="sp-core">人間界を、脱出する。</p>
+      <p class="sp-lede">幻を知った、その先へ。<br>世界観が変わると、現実が変わる。</p>
+      <p class="sp-text">これまでの価値観や常識から、<br>新たな水平線へ渡っていきます。</p>
     </div>
     <div class="sp-right">
       <dl class="sp-facts">
