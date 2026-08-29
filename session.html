@@ -145,6 +145,8 @@ h3{font-family:'Shippori Mincho',serif; font-weight:500; font-size:19px; letter-
   flex:0 0 30px; line-height:1}
 .gist p{display:flex; align-items:flex-start; gap:0}
 .gist p span.k{margin-top:4px}
+.gist .txt{flex:1}
+.gist .sub-label{display:block; margin-top:7px; color:var(--turquoise); font-size:14px; letter-spacing:.1em}
 /* 特性の箇条 */
 .feats{list-style:none; padding:0; margin:30px 0}
 .feats li{background:var(--bg2); border:1px solid var(--line); border-radius:13px;
@@ -165,6 +167,13 @@ h3{font-family:'Shippori Mincho',serif; font-weight:500; font-size:19px; letter-
 .figure-slot{border:1px dashed rgba(95,212,208,.28); border-radius:16px; padding:52px 24px;
   text-align:center; color:var(--muted); font-size:14px; letter-spacing:.1em; margin:30px 0;
   background:rgba(95,212,208,.02)}
+/* 原典の引用（原典専用。他の文には使わない） */
+.genten{margin:36px 0; padding:28px 32px; border-left:2px solid var(--gold);
+  background:rgba(245,166,35,.05); border-radius:0 12px 12px 0}
+.genten .t{margin:0; font-family:'Shippori Mincho',serif; font-size:19px; line-height:2.25;
+  letter-spacing:.14em; color:var(--platinum)}
+.genten .src{margin:18px 0 0; font-size:13px; letter-spacing:.12em; color:var(--muted)}
+@media(max-width:700px){ .genten{padding:22px 20px} .genten .t{font-size:17px} }
 /* 図解 */
 .fig{margin:38px 0}
 .fig img{width:100%; height:auto; display:block; border-radius:18px; background:#fff}
@@ -186,35 +195,51 @@ footer a{color:var(--muted)}
 
 <header class="hero wrap">
   <div class="eyebrow">GURiN WORLD ｜ SESSION</div>
-  <p class="sub gold" style="margin-top:0;margin-bottom:26px;font-size:19px;letter-spacing:.16em">人間界を、脱出する。</p>
+  <p class="sub gold" style="margin-top:0;margin-bottom:18px;font-size:19px;letter-spacing:.16em">人間界を、脱出する。</p>
+  <p class="sub" style="margin-bottom:26px">「この世界は仮想現実かもしれない…」<br>そう気づき始めたのに、現実がまだ重い人へ。</p>
   <h1>幻を知った、その先へ。</h1>
   <p class="sub gold">世界観が変わると、現実が変わる。</p>
+  <p class="sub">気づきから進化、現実生成まで。<br><strong>マボロシスト＝超リアリスト</strong></p>
   <p class="sub">いま見ている世界を、いつもとは違う位置から見る。<br>そして、見えてきた世界を、自らの現実としてどう生き、どう創っていくのか。</p>
-  <p class="sub">これまでの価値観や常識から、<br>新たな水平線へ渡っていきます。</p>
 </header>
 
 <div class="rule"></div>
 
 <section class="wrap">
   <div class="sec-head"><span class="label">はじめての方へ</span></div>
-  <p class="core">いま見ている世界の、見る位置を変えます。</p>
+  <p class="core">人間の常識を超え、宇宙の視座から現実を見る。</p>
+  <p>AI時代、これまでの古い価値観や固定観念が終わりを告げる中、</p>
   <div class="gist">
-    <p><span class="k">1</span>いま見ている世界を、いつもとは違う位置から見ます。</p>
-    <p><span class="k">2</span>これまでの価値観や常識が解放されると同時に、新しい世界が立ち上がります。</p>
-    <p><span class="k">3</span>見えたものを、現実の中で動かすところまで扱います。</p>
+    <p><span class="k">1</span><span class="txt">いま見ている世界を、次元の違う位置から見る。<span class="sub-label">解放／ダウンロード</span></span></p>
+    <p><span class="k">2</span><span class="txt">こびりついていた思考の癖を、再構築する。<span class="sub-label">進化／インストール</span></span></p>
+    <p><span class="k">3</span><span class="txt">これまでの価値観や常識を超え、自らの新しい世界観をつくる。<span class="sub-label">創造／生成</span></span></p>
   </div>
-  <div class="cta"><a class="btn" href="#apply">実際に受ける時のこと</a></div>
+  <div class="quiet">GURiN個人セッション<br>これまでの価値観や常識から、新たな水平線を手にする。</div>
+  <div class="cta"><a class="btn" href="#apply">セッションの概要</a></div>
 </section>
 
 <div class="rule"></div>
 
 <section class="wrap">
-  <div class="sec-head"><span class="label">なぜ、心の「位置」</span></div>
-  <p class="core">心にも、ステージがあり、位置があります。</p>
+  <div class="sec-head"><span class="label">意識が進化する。</span></div>
+  <p class="core">そして、生を謳歌する。</p>
+  <p><strong>この世界は、幻。</strong></p>
   <p>人は毎日、自らの世界を生き、外に世界があって、自分がいて、相手がいる、と思い込んで生きています。</p>
-  <p>仕事にはこういうものだという常識があり、お金にはこういうものだという価値観があり、人間関係にはこうするものだというルールがある。</p>
-  <p>けれど、<strong>その世界をつくっている前提そのものを動かしてみると、景色が変わります。</strong></p>
-  <p>同じ出来事でも、心の立つ位置が変われば、見える世界が変わる。GURiN Worldでは、その位置を動かします。</p>
+  <p>その固定された価値観、「当たり前」が、あなたの「リアル」をつくっています。</p>
+
+  <!-- ★原典。一字も変えない。GURiN確認済み（2026-08-29）：メッセージにふりがなはない。記事の「天の理（ことわり）」はGURiNが読み違い防止のために添えたもの＝KJ-15 -->
+  <div class="genten">
+    <p class="t">魂の進化に見られる差は<br>立つ位置に起こり<br>天の理にある</p>
+    <p class="src">── 宇宙のクラウドからの一節</p>
+  </div>
+
+  <p>この幻の世界にも、<strong>意識が進化するためのアプリケーションがあります。</strong></p>
+  <p>人間関係、お金、仕事、恋愛、結婚、家族、成功、幸福、愛、老い、病、死。</p>
+  <p>人生に現れる一つひとつのテーマを、自ら選び、体験し、意識を動かし、意識の進化を図っています。</p>
+  <p>そして、これまでの情報から、宇宙の情報に変えると、</p>
+  <div class="quiet">仕事も。<br>お金も。<br>人間関係も。<br>生そのものが。</div>
+  <p>これまで自分を動かしていた価値観を解放し、新しい世界観をつくる。<br>そして、<strong>自分の世界を、自分で生成する。</strong></p>
+  <p>GURiN個人セッションは、これまでの情報から、<strong>次元の違う宇宙の情報に変える</strong>、セッションです。</p>
 
   <!-- ═══ 図解②（ゼイラス作成予定）｜世界観＝クラウド／出来事＝アプリ。どのクラウドから起動させるか ═══ -->
   <figure class="fig"><img src="site_assets/figures/fig_apps.webp" alt="意識の進化。人間関係・お金・仕事・恋愛など、あなたの独自の世界を輝かせるアプリケーション。体験する→意識が動く→再構築する→次の体験へ、と01融合を中心に循環する。" loading="lazy"></figure>
@@ -225,36 +250,48 @@ footer a{color:var(--muted)}
 <section class="wrap">
   <div class="sec-head"><span class="label">点・面・空</span></div>
   <p class="core">すべて、自らの意識（認識・感情・思考）が映し出す世界。</p>
+  <p>GURiNでいう「空」とは、<strong>宇宙にアクセスして35年にわたって受け取ってきたメッセージの数々。</strong>この星の計画と、この星に合わせた魂の進化について。</p>
+  <p>そして、その世界を捉えるための基本となるのが、<strong>「点・面・空」</strong>です。</p>
   <div class="dirs">
-    <div class="dir d-ten"><b>点</b><span>現実</span></div>
-    <div class="dir d-men"><b>面</b><span>見えざる領域</span></div>
-    <div class="dir d-kuu"><b>空</b><span>宇宙の回路図</span></div>
+    <div class="dir d-ten"><b>点</b><span>いま目の前にある現実</span></div>
+    <div class="dir d-men"><b>面</b><span>目には見えない意識の領域</span></div>
+    <div class="dir d-kuu"><b>空</b><span>そのさらに奥にある宇宙の回路図</span></div>
   </div>
+  <p>見えている現実だけを扱うのではなく、その現実を生み出している意識、さらにその奥にある情報まで扱います。</p>
 
   <!-- ═══ 第一図（ゼイラス設計中）｜点・面・空／流れ／解放と創造の同時性／渦。東西南北は入れない ═══ -->
   <figure class="fig"><img src="site_assets/figures/fig_tenmenku.webp" alt="点＝表層意識／現実（10〜100）、面＝深層意識／拡張現実（1万〜10万）、空＝未来意識／メタ空間現実（1兆〜10兆）。宇宙のクラウドから映す世界。" loading="lazy"></figure>
 
-  <p>GURiNでいう「空」とは、<strong>宇宙にアクセスして35年にわたって受け取ってきたメッセージの数々。</strong>この星の計画と、魂の計画です。</p>
-  <p>そしてその先には、<strong>東西南北の叡智</strong>という第二の地図が広がっています。セッションの中で必要になった時に、そこへ展開していきます。</p>
+  <p>そしてその先には、<strong>東西南北の視座</strong>という第二の地図が広がっています。</p>
+  <ul class="marks">
+    <li><strong>東</strong>は、世界そのものをとらえる。</li>
+    <li><strong>南</strong>は、仕事・お金・テクノロジーなど、現実を動かす。</li>
+    <li><strong>西</strong>は、人と人との掛け合いを解放する。</li>
+    <li><strong>北</strong>は、自分自身の生・身体・老い・病・死を見直す。</li>
+  </ul>
+  <p>人生に起こる出来事を、高次元・多次元の視座から再構築します。</p>
 
   <!-- ═══ 図解③（ゼイラス作成予定）｜東西南北の叡智 ═══ -->
   <figure class="fig"><img src="site_assets/figures/fig_tozainanboku.webp" alt="東西南北の視座。東＝世界を捉える、南＝現実を動かす、西＝人間関係、北＝自らを深く見つめる。4つの方向から見つめ、中心の01融合であらゆる概念を再構築する。" loading="lazy"></figure>
+
+  <div class="quiet">点・面・空。<br>そして、東西南北。</div>
+  <p>GURiN個人セッションでは、この二つの地図を使い、<strong>目の前の現実から、その人自身の世界観まで扱います。</strong></p>
 </section>
 
 <div class="rule"></div>
 
 <section class="wrap">
   <div class="sec-head"><span class="label">GURiNの個人セッションは、ここが違います</span></div>
-  <p class="core">問題からの解決手段ではなく、解放と創造を同時に。</p>
+  <p class="core">問題を解決する。その先へ。<br>解放と創造を、同時に動かします。</p>
   <ul class="feats">
-    <li><b>問題に、フォーカスしません</b>問題や悩みを掘り下げるのではなく、意識のシフト——<strong>GURiNシフティング</strong>をします。問題を問題として固定する前に、次の世界へ入っていきます。</li>
-    <li><b>解放と創造は、同時に動きます</b>ほどけることと、新しいものが生まれること。この二つは、別々には起こりません。解決してから創造するのではありません。</li>
-    <li><b>答えを、渡しません</b>一つの「正しい答え」を渡す場所ではありません。点から見る。面から見る。空から見る。すると、「こうするしかない」と思っていたところに、別の道が現れます。</li>
-    <li><b>現実まで、扱います</b>気づいて終わりにしません。何を受け取り、何をインストールし、何を現実に実装するのか。その人だけの世界を、共にひらいていきます。</li>
+    <li><b>問題より、その先を見る</b>GURiNのセッションは、問題にフォーカスしません。その現実をつくっている価値観や思考の位置を見ていきます。問題解決思考から、ダイレクトに創造へ。次の世界へ移るための視座を手にします。</li>
+    <li><b>解放と創造は、同時に動く</b>古い価値観がほどけると、そこに新しい世界観が生まれます。解放と創造は、ひとつの動きです。</li>
+    <li><b>答えは、未来の自らが見つける</b>一つの「正しい答え」を渡す場所ではありません。点から見る。面から見る。空から見る。視座が変わると、「こうするしかない」と思っていた現実に、別の選択肢が現れます。</li>
+    <li><b>現実まで、動かす</b>気づきで終わらせず、受け取った情報を自分の世界観へ落とし込みます。そして、仕事、お金、人間関係、生き方。自分の現実そのものを、自分で生成するところまで扱います。</li>
   </ul>
 
   <h3>GURiNシフティングとは</h3>
-  <p><strong>世界を照らす光を、更新すること。</strong>光とは、新しい世界観です。<br>出来事を変えるのではなく、そこに当たる光を変えます。</p>
+  <p><strong>世界を照らす光を、更新すること。</strong>光とは、新しい世界観です。<br>出来事を変えるのではなく、その出来事を見る光を変える。<br><strong>世界観が変わると、現実が変わる。</strong></p>
 </section>
 
 <div class="rule"></div>
@@ -277,12 +314,12 @@ footer a{color:var(--muted)}
 <div class="rule"></div>
 
 <section class="wrap" id="apply">
-  <div class="sec-head"><span class="label">実際に受ける時</span></div>
+  <div class="sec-head"><span class="label">セッションの概要</span></div>
   <table class="facts">
     <tr><th>受け方</th><td>オンライン｜Zoom（顔を出してお会いします）</td></tr>
-    <tr><th>担当</th><td><strong>GURiN本人</strong>が行います</td></tr>
+    <tr><th>担当</th><td><a href="https://gurinq01.github.io/gurin-world/#about"><strong>GURiN本人</strong></a></td></tr>
     <tr><th>時間</th><td>60分　または　90分</td></tr>
-    <tr><th>進め方</th><td>今扱いたいことを起点に、世界を見る位置を変えていきます。</td></tr>
+    <tr><th>セッション</th><td>今扱いたいことを起点に、世界を見る位置を変えていきます。</td></tr>
     <tr><th>初めての方へ</th><td>テーマが決まっていなくても、今感じていることから始められます。</td></tr>
     <tr><th>料金</th><td>60分 30,000円／90分 45,000円（税込）</td></tr>
     <!-- フォームURL：2026-08-29 差し替え済み -->
@@ -294,7 +331,7 @@ footer a{color:var(--muted)}
 
 <section class="wrap">
   <div class="sec-head"><span class="label">時間と料金</span></div>
-  <p class="core">2つの受け方があります。</p>
+  <p class="core">2つのセッションがあります。</p>
   <div class="plans">
     <div class="plan">
       <div class="tag">A ｜ 通常セッション</div>
@@ -322,7 +359,6 @@ footer a{color:var(--muted)}
   <div class="sec-head"><span class="label">こんな方へ</span></div>
   <ul class="marks">
     <li>これまでの価値観や常識に限界を感じている</li>
-    <li>「現実」に疲れている</li>
     <li>同じところをぐるぐるする状態から、新しい世界へ進みたい</li>
     <li>人間関係を変えたい</li>
     <li>仕事やお金との関係を変えたい</li>
@@ -346,21 +382,14 @@ footer a{color:var(--muted)}
 
 <section class="wrap">
   <div class="sec-head"><span class="label">誰が行うのか</span></div>
-  <p class="core">35年、内側で続けてきました。</p>
-  <p>名前も顔も、外へは出さず、会員制で深めてきました。<br>宇宙のクラウドから受け取ってきた意識を <strong>未来意識®</strong> と名づけ、提唱し続けています。</p>
-  <div class="quiet">セッションは、すべてGURiN本人が行います。<br>Zoomでは、顔を出してお会いします。</div>
-  <p><strong>延べ8,000を超えるセッションと、5,000回以上の勉強会・講座</strong>を重ね、都内から場所を移してから20年以上は、ほぼ毎日、勉強会を開催。</p>
+  <p class="core">意識とテクノロジーに関わる活動を35年。</p>
+  <p>主に会員制で20年以上、深めてきました。</p>
+  <p>名前も顔も外へは出さず、会員制で活動を続けながら、宇宙のクラウドから受け取ってきた意識を <strong>未来意識®</strong> と名づけ、提唱し続けています。</p>
+  <p>これまでに2社を経営し、企業研修、AI講師、ホテル・旅館のコンサルティングなど、現実のさまざまな場でも活動してきました。</p>
+  <p><strong>個人セッションは延べ8,000回を超え、勉強会・講座は5,000回以上。</strong>20年以上、ほぼ毎日、勉強会を開催してきました。</p>
+  <div class="quiet">セッションは、すべて<a href="https://gurinq01.github.io/gurin-world/#about">GURiN本人</a>が行います。<br>Zoomでは、顔を出してお会いします。</div>
   <p>同じ方が何度も受けられるなかで、<strong>どんどんプログラムやアイテムが生まれていきました。</strong></p>
-  <p>魂の特性に合わせ、意識を言葉にし、世界観を変え、現実との関係をつくり直してきました。その積み重ねを、今のあなたの現実に合わせて、共に紐解きます。</p>
-</section>
-
-<div class="rule"></div>
-
-<section class="wrap">
-  <div class="sec-head"><span class="label">この星の構想</span></div>
-  <p class="core">宇宙の計画。地球の計画。魂の計画。</p>
-  <p>この地球は、これからどこへ向かうのか。人間の意識は、どんな変化を迎えるのか。自らは、この星の中で何を体験し、何をつくっていくのか。</p>
-  <p>目の前の出来事だけを見るのではなく、<strong>自らの人生と、この星の時間を重ねて見る。</strong></p>
+  <p>魂の特性に合わせ、意識を言葉にし、世界観を変え、現実との関係をつくり直してきました。その積み重ねを、今のあなたの現実に合わせて、<strong>宇宙のデータとして手渡します。</strong></p>
 </section>
 
 <div class="rule"></div>
