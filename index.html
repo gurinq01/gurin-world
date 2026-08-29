@@ -401,6 +401,33 @@ a.pin{text-decoration:none;}
   background:linear-gradient(180deg,rgba(245,166,35,.10),rgba(245,166,35,.02));transition:.35s;}
 .book-btn:hover{border-color:var(--gold);box-shadow:0 0 26px rgba(245,166,35,.20);color:#fff;}
 @media(max-width:860px){ .book-notify{text-align:center} }
+
+/* ── 個人セッションの入口カード（2026-08-29 新設） ── */
+.ent.e-session .life{background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(95,212,208,.14),transparent 70%);}
+.ent.e-session:hover{border-color:rgba(95,212,208,.5);box-shadow:0 12px 50px rgba(0,0,0,.5),0 0 46px rgba(95,212,208,.14);}
+.ent.e-session .scene{background-image:url('site_assets/entrance_session_city.webp');background-position:center 40%;}
+.ent.e-session:hover .scene{filter:brightness(1.1);}
+
+/* ── 個人セッションのセクション（2026-08-29 新設・GURiN指示） ── */
+.session-panel{display:grid;grid-template-columns:1.02fr .98fr;gap:46px;max-width:1000px;margin:46px auto 0;
+  padding:42px 46px;border:1px solid var(--line);border-radius:18px;background:rgba(10,29,66,.30);}
+.sp-core{font-family:'Shippori Mincho',serif;font-size:19.5px;line-height:2;color:var(--gold);
+  letter-spacing:.07em;margin:0 0 22px;}
+.sp-text{font-size:14.5px;line-height:2.1;letter-spacing:.07em;color:var(--text);margin:0;}
+.sp-facts{margin:0 0 30px;padding:0;}
+.sp-facts>div{display:flex;gap:20px;padding:13px 0;border-bottom:1px solid var(--line);}
+.sp-facts>div:first-child{padding-top:0;}
+.sp-facts dt{width:4.6em;flex:none;color:var(--muted);font-size:13px;letter-spacing:.1em;line-height:1.9;}
+.sp-facts dd{margin:0;font-size:14.5px;letter-spacing:.06em;line-height:1.9;color:var(--text);}
+.sp-facts dd span{color:var(--muted);font-size:12.5px;letter-spacing:.08em;}
+.sp-btn{display:inline-block;font-family:'Shippori Mincho',serif;font-size:15px;letter-spacing:.18em;
+  padding:15px 36px;border:1px solid rgba(95,212,208,.5);border-radius:999px;color:var(--platinum);
+  background:rgba(95,212,208,.06);transition:background .3s ease,border-color .3s ease;}
+.sp-btn:hover{background:rgba(95,212,208,.14);border-color:rgba(95,212,208,.85);}
+@media(max-width:860px){
+  .session-panel{grid-template-columns:1fr;padding:30px 22px;gap:26px;}
+  .sp-facts>div{padding:11px 0}
+}
  */
 
 /* ---------- 出口動画「ロナと、次の世界へ」（2026-07-25 追加） ---------- */
@@ -607,7 +634,7 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
 <section id="entrances">
   <div class="eyebrow reveal">TODAY'S ENTRANCE</div>
   <h2 class="reveal">今日の、入口。</h2>
-  <p class="lead reveal">測る。受け取る。読み解く。<br>今のあなたに合う入口から、どうぞ。</p>
+  <p class="lead reveal">測る。受け取る。ひらく。<br>今のあなたに合う入口から、どうぞ。</p>
   <div class="entrances">
     <a class="ent e-observe reveal" href="https://gurinq01.github.io/gurin-world/maboroshi.html" target="_blank" rel="noopener noreferrer">
       <div class="scene"></div><div class="fog"></div><div class="life"></div>
@@ -622,9 +649,9 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
     <!-- 仮枠（内容未定）：WORLD MAPが直前のセクションへ移動したため、旧「世界地図」カードは
          内容未確定の入口プレースホルダーへ置き換え。新規画像は作らず、既存のsite_assets/spot_sea.webpと
          既存のカード構造（scene/fog/life）をそのまま流用する。リンク先未定のためリンク要素ではなくdiv要素にしている -->
-    <a class="ent e-archive reveal" href="https://note.com/gurin_q01/n/n08ee6d01da99" target="_blank" rel="noopener noreferrer">
+    <a class="ent e-session reveal" href="session.html">
       <div class="scene"></div><div class="fog"></div><div class="life"></div>
-      <div class="body"><div class="verb">読み解く</div><div class="title-row"><span class="title-accent title-accent-violet"></span><h3>今日の読みもの</h3></div><p class="article-title">AIリテラシーは、呼吸から始まる。</p><p>― 呼空、インスピレーション・テクノロジーへ</p></div>
+      <div class="body"><div class="verb">受ける</div><div class="title-row"><span class="title-accent title-accent-turquoise"></span><h3>GURiN個人セッション</h3></div><p>あなた自身の世界を、直接ひらく時間。</p></div>
     </a>
   </div>
 </section>
@@ -709,13 +736,35 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
   </div>
 </section>
 
+<!-- ═══ 個人セッション（2026-08-29 新設・GURiN指示）｜宇宙のクラウド → ここ → GURiN紹介 ═══ -->
+<section id="session">
+  <div class="eyebrow reveal">GURiN SESSION</div>
+  <h2 class="reveal">GURiN個人セッション</h2>
+  <p class="lead reveal">35年の探究と、延べ8,000を超えるセッション。<br>GURiNと直接対話し、自らの世界をひらいていく空間創造です。</p>
+
+  <div class="session-panel reveal">
+    <div class="sp-left">
+      <p class="sp-core">世界の映り方そのものを、動かす時間です。</p>
+      <p class="sp-text">気づき、ほどきながら、同時につくっていく。<br>解放と創造が、同時に動き出します。<br><br>点で起きていることを、面から、そして空から見る。<br>心の立つ位置が変われば、見える世界が変わります。</p>
+    </div>
+    <div class="sp-right">
+      <dl class="sp-facts">
+        <div><dt>受け方</dt><dd>オンライン｜Zoom<br><span>顔を出してお会いします</span></dd></div>
+        <div><dt>担当</dt><dd>GURiN本人</dd></div>
+        <div><dt>料金</dt><dd>60分　30,000円<br>90分　45,000円　<span>（税込）</span></dd></div>
+      </dl>
+      <a class="sp-btn" href="session.html">個人セッションを見る</a>
+    </div>
+  </div>
+</section>
+
 <!-- GURiNについて -->
 <section id="about">
   <div class="about-me reveal">
     <div class="eyebrow">ABOUT GURiN</div>
     <h2>「この世界は幻」を、<br>リアルに生きる。</h2>
     <!-- 2026-07-23 本文差し替え：呼吸と意識のクラブ／会員制・実績を追記。構成・デザインは既存維持。段落は<br><br>、行は<br>で既存パターンを踏襲 -->
-    <p style="margin-top:30px">35年前、未来意識®メッセージを受け取り、<br>マスコミ勤務時代から個人セッションを開始。<br>社内では、呼吸と意識を整えるクラブを立ち上げ、<br>週1回・3年間運営。<br><br>意識が現実を映し出すしくみを、<br>言葉と実践を通して発信。<br><br>独立・起業後、<br>会員制の講座・書籍・事業を展開。<br>8,000人を超える個人セッション、<br>5,000回を超える講座を重ねる。<br><br>今、AIとともに、<br>その叡智を、彩り豊かなGURiN Worldとしてひらく。</p>
+    <p style="margin-top:30px">35年前、未来意識®メッセージを受け取り、<br>マスコミ勤務時代から個人セッションを開始。<br>社内では、呼吸と意識を整えるクラブを立ち上げ、<br>週1回・3年間運営。<br><br>意識が現実を映し出すしくみを、<br>言葉と実践を通して発信。<br><br>独立・起業後、<br>会員制の講座・書籍・事業を展開。<br>延べ8,000を超える個人セッション、<br>5,000回を超える講座を重ねる。<br><br>今、AIとともに、<br>その叡智を、彩り豊かなGURiN Worldとしてひらく。</p>
     <!-- 2026-07-23 タグを立ち位置3つに集約（実績は本文へ移行済み）。初見でジャンルが伝わるよう芯だけ残す。今後追加可 -->
     <div class="tags">
       <span>意識と現実</span><span>意識 × テクノロジー</span><span>マボロシスト</span>
