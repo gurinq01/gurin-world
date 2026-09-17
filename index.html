@@ -19,8 +19,862 @@
 <meta name="theme-color" content="#071632">
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-/* Original index content is preserved in Git history; this placeholder must not be published. */
+:root{
+  --bg:#071632;          /* 基本背景：ロナのマントに近い、青みの紺 */
+  --bg-darkest:#070d1b;  /* 最も暗い部分（黒に近い深紺） */
+  --bg-lit:#0a1d42;      /* 光を含む面（下限） */
+  --bg-lit2:#102956;     /* 光を含む面（上限・活性時） */
+  --bg-violet:#171638;   /* 青紫の気配 */
+  --bg-vivid:#00008b;    /* マント基準の鮮やかな青｜局所的な起動光・環境光としてのみ使用（5〜10%） */
+  --bg2:#0c1e33;         /* カード：紺の中の一段深い面 */
+  --platinum:#EDEDF2;
+  --turquoise:#5FD4D0;
+  --gold:#F5A623;
+  --violet:#8f8bd6;
+  --emerald:#57C99A;
+  --magenta:#D46BB0;
+  --cyan:#6FE9E4;
+  --text:#cfd2df;
+  --muted:#8b90a6;
+  --dim:#6b7089;
+  --line:rgba(255,255,255,.07);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:
+    radial-gradient(ellipse 90% 40% at 50% 0%,var(--bg-darkest),transparent 60%),
+    radial-gradient(ellipse 60% 45% at 24% 55%,rgba(0,0,139,.08),transparent 72%),
+    radial-gradient(ellipse 70% 50% at 80% 100%,var(--bg-violet),transparent 70%),
+    var(--bg);
+  background-attachment:fixed;
+  color:var(--text);
+  font-family:'Noto Serif JP',serif;line-height:1.95;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+/* スマホ専用改行：デスクトップでは無効。端末任せの自動改行を意図した位置で固定する */
+.br-sp{display:none;}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* ---------- ナビ ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 30px;
+  background:linear-gradient(to bottom,rgba(7,13,27,.9),rgba(7,13,27,0));
+  transition:background .5s;
+}
+.brand{font-family:'Shippori Mincho',serif;letter-spacing:.2em;font-size:15px;color:var(--platinum);text-shadow:0 0 14px rgba(237,237,242,.3);}
+.nav-links{display:flex;gap:24px;}
+.nav-links a{color:var(--muted);font-size:12.5px;letter-spacing:.14em;transition:color .4s,text-shadow .4s;}
+.nav-links a:hover{color:var(--turquoise);text-shadow:0 0 10px rgba(95,212,208,.6);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;}
+.hamburger span{width:22px;height:1.5px;background:var(--platinum);transition:transform .35s,opacity .35s;}
+nav.menu-open .hamburger span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+nav.menu-open .hamburger span:nth-child(2){opacity:0;}
+nav.menu-open .hamburger span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* ---------- ヒーロー ---------- */
+.hero{
+  position:relative;z-index:1;min-height:100svh;
+  display:flex;align-items:center;
+  background:
+    linear-gradient(to bottom,rgba(7,13,27,.22),rgba(7,13,27,.08) 42%,rgba(7,13,27,.74)),
+    url('site_assets/hero_bg_life.webp') center/cover no-repeat;
+}
+/* 生命の群れ（画像に描き込み済み）の周囲を、呼吸するハローで包む */
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  mix-blend-mode:screen;
+  background:
+    /* 左：森の奥 */
+    radial-gradient(ellipse 15% 7% at 13% 44%,rgba(232,110,190,.13),transparent 72%),
+    radial-gradient(ellipse 11% 5% at 20% 48%,rgba(160,140,224,.10),transparent 74%),
+    /* 中央：金の水脈の上流 */
+    radial-gradient(ellipse 16% 5% at 45% 33%,rgba(232,110,190,.11),transparent 74%),
+    radial-gradient(ellipse 10% 4% at 52% 37%,rgba(140,220,226,.09),transparent 76%),
+    /* 右：都市・森（ロナの肩の高さより奥） */
+    radial-gradient(ellipse 13% 6% at 79% 40%,rgba(232,110,190,.12),transparent 72%),
+    radial-gradient(ellipse 10% 5% at 86% 36%,rgba(206,120,214,.10),transparent 74%);
+  animation:lifebreath 15s ease-in-out infinite;
+}
+@keyframes lifebreath{0%,100%{opacity:.82}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.hero::before{animation:none;}}
+.hero-inner{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 40px;width:100%;display:flex;align-items:flex-end;justify-content:space-between;gap:30px;}
+.hero-copy{padding-bottom:8vh;max-width:640px;}
+.hello{
+  font-family:'Shippori Mincho',serif;font-weight:600;
+  font-size:clamp(44px,7vw,86px);letter-spacing:.06em;color:#ffffff;
+  text-shadow:0 0 22px rgba(255,255,255,.42),0 0 70px rgba(255,255,255,.15);
+  opacity:0;animation:rise 2.2s ease .3s forwards;
+}
+/* サブ：深みのある発光ローズ（2026-07-22 視認性UP #D987A8→#E79AB8）。発光はごく控えめ */
+.subhero{
+  font-family:'Shippori Mincho',serif;font-weight:600;
+  font-size:clamp(17px,2.6vw,24px);letter-spacing:.16em;
+  color:#E79AB8;
+  -webkit-text-fill-color:#E79AB8;
+  text-shadow:0 1px 12px rgba(7,15,38,.72),0 0 30px rgba(231,154,184,.42),0 0 12px rgba(237,237,242,.22);
+  margin-top:14px;
+  opacity:0;animation:rise 2.4s ease 1.4s forwards;
+}
+.q{margin-top:22px;font-size:clamp(13px,2vw,17px);font-weight:500;letter-spacing:.22em;color:var(--turquoise);text-shadow:0 1px 8px rgba(5,12,32,.55),0 0 14px rgba(95,212,208,.28);opacity:0;animation:rise 2.6s ease 2.4s forwards;}
+/* CTA：白文字／ターコイズ枠を少し太く（ボタン認識性UP）／ごく薄いネイビー背景。ホバーで薄ターコイズ背景＋白文字 */
+.cta{
+  display:inline-block;margin-top:40px;padding:15px 40px;
+  font-size:13px;letter-spacing:.28em;color:#ffffff;
+  border:1.5px solid rgba(95,212,208,.85);border-radius:2px;
+  background:rgba(16,38,80,.5);
+  box-shadow:0 0 18px rgba(95,212,208,.18);
+  text-shadow:0 1px 6px rgba(5,12,32,.5);
+  opacity:0;animation:rise 2.6s ease 3.2s forwards;
+  transition:background .5s,box-shadow .5s,letter-spacing .5s,border-color .5s;
+}
+.cta:hover{background:rgba(95,212,208,.2);color:#ffffff;border-color:rgba(95,212,208,1);box-shadow:0 0 32px rgba(95,212,208,.32);letter-spacing:.34em;}
+.hero-rona{align-self:flex-end;flex-shrink:0;}
+.hero-rona img{
+  width:min(30vw,380px);display:block;
+  filter:drop-shadow(0 0 40px rgba(95,212,208,.18));
+  opacity:0;animation:rise 2.8s ease 1s forwards;
+}
+@keyframes rise{from{opacity:0;transform:translateY(30px);filter:blur(7px);}to{opacity:1;transform:none;filter:blur(0);}}
+.scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.4em;color:var(--dim);opacity:0;animation:rise 2s ease 4s forwards;}
+.scrollcue::after{content:"";display:block;width:1px;height:40px;margin:8px auto 0;background:linear-gradient(to bottom,rgba(95,212,208,.7),transparent);animation:drip 2.6s ease-in-out infinite;}
+@keyframes drip{0%,100%{opacity:.25}50%{opacity:1}}
+
+/* ---------- 共通セクション ---------- */
+section{position:relative;z-index:1;padding:120px 40px;max-width:1180px;margin:0 auto;}
+/* セクション背後のごく淡い環境光（面として薄く広がる／円やスポットにしない） */
+section::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:100vw;height:100%;z-index:-1;pointer-events:none;
+  background:var(--glowbg,none),var(--depth,none);}
+/* セクションごとに海の深さを変える（紺一色にしない） */
+#entrances{--depth:linear-gradient(to bottom,var(--bg-lit),var(--bg));}
+#whatis{--depth:linear-gradient(to bottom,var(--bg),var(--bg-darkest));}
+#map{--depth:linear-gradient(to bottom,var(--bg-darkest),var(--bg-lit2) 55%,var(--bg));}
+#rona{--depth:linear-gradient(to bottom,var(--bg),var(--bg-lit));}
+#next{--depth:linear-gradient(to bottom,var(--bg-lit),var(--bg-violet));}
+#about{--depth:linear-gradient(to bottom,var(--bg-violet),var(--bg-darkest));}
+/* 環境光を一段強化：ターコイズ・青紫7〜9%／マゼンタ5〜7%。旅の途中でピンクの生命光と出会う配置 */
+#entrances{--glowbg:
+  radial-gradient(ellipse 76% 60% at 32% 38%,rgba(95,212,208,.08),transparent 70%),
+  radial-gradient(ellipse 50% 48% at 82% 72%,rgba(212,107,176,.06),transparent 72%);}
+#whatis{--glowbg:
+  radial-gradient(ellipse 70% 54% at 50% 44%,rgba(237,237,242,.055),transparent 72%),
+  radial-gradient(ellipse 46% 46% at 18% 80%,rgba(143,139,214,.05),transparent 74%);}
+#map{--glowbg:
+  radial-gradient(ellipse 80% 58% at 46% 34%,rgba(95,212,208,.085),transparent 66%),
+  radial-gradient(ellipse 58% 52% at 74% 82%,rgba(212,107,176,.075),transparent 70%),
+  radial-gradient(ellipse 54% 50% at 20% 74%,rgba(143,139,214,.07),transparent 74%),
+  radial-gradient(ellipse 50% 42% at 50% 20%,rgba(0,0,139,.09),transparent 70%);}
+#rona{--glowbg:
+  radial-gradient(ellipse 70% 54% at 40% 46%,rgba(95,212,208,.075),transparent 72%),
+  radial-gradient(ellipse 44% 46% at 84% 30%,rgba(143,139,214,.055),transparent 74%);}
+#next{--glowbg:
+  radial-gradient(ellipse 74% 58% at 56% 46%,rgba(245,166,35,.06),transparent 72%),
+  radial-gradient(ellipse 46% 48% at 14% 76%,rgba(212,107,176,.06),transparent 74%);}
+#about{--glowbg:
+  radial-gradient(ellipse 68% 56% at 50% 50%,rgba(143,139,214,.06),transparent 74%),
+  radial-gradient(ellipse 42% 44% at 82% 78%,rgba(212,107,176,.05),transparent 74%);}
+.eyebrow{text-align:center;font-size:11px;letter-spacing:.4em;color:var(--dim);margin-bottom:20px;}
+h2{font-family:'Shippori Mincho',serif;font-weight:500;text-align:center;font-size:clamp(24px,4vw,38px);letter-spacing:.12em;color:var(--platinum);text-shadow:0 0 20px rgba(237,237,242,.25);line-height:1.6;}
+.lead{text-align:center;color:var(--muted);font-size:14px;letter-spacing:.14em;margin-top:20px;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1.5s ease,transform 1.5s ease;}
+.reveal.on{opacity:1;transform:none;}
+
+/* ---------- 今日の入口 ---------- */
+.entrances{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:70px;}
+.ent{
+  position:relative;border-radius:14px;overflow:hidden;
+  border:1px solid var(--line);background:var(--bg2);
+  min-height:290px;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:30px 26px;transition:transform .6s ease,border-color .6s ease,box-shadow .6s ease;
+}
+.ent .scene{position:absolute;inset:0;z-index:0;opacity:.88;transition:opacity .6s ease,transform 1.2s ease;background-size:cover;background-position:center;}
+.ent .fog{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(5,10,20,.78) 0%,rgba(5,10,20,.48) 38%,rgba(5,10,20,.08) 72%,transparent 100%);}
+.ent .body{position:relative;z-index:2;}
+.ent .verb{font-size:11px;letter-spacing:.3em;color:var(--turquoise);margin-bottom:12px;}
+.ent h3{font-family:'Shippori Mincho',serif;font-weight:500;font-size:19px;letter-spacing:.1em;color:var(--platinum);margin-bottom:10px;}
+.ent p{font-size:12.5px;color:var(--muted);letter-spacing:.04em;line-height:1.85;}
+.ent .body p{color:rgba(240,244,250,.82);}
+.ent .article-title{color:var(--platinum);font-size:15px;line-height:1.7;margin-bottom:4px;}
+.ent .verb{font-size:15px;font-weight:500;letter-spacing:.22em;opacity:1;text-shadow:0 1px 3px rgba(0,0,0,.35);}
+.ent h3{font-size:20px;}
+.ent .title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ent .title-row h3 {
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.35;
+}
+.ent .title-accent {
+  width: 3px;
+  height: 1.1em;
+  border-radius: 2px;
+  flex: 0 0 3px;
+}
+.ent .title-accent-turquoise {
+  background: var(--turquoise);
+}
+.ent .title-accent-gold {
+  background: var(--gold);
+}
+.ent .title-accent-violet {
+  background: var(--violet);
+}
+/* 起動時：生命光が一段前へ出る（局所10〜14%） */
+.ent:hover{transform:translateY(-7px);border-color:rgba(95,212,208,.5);box-shadow:0 12px 50px rgba(0,0,0,.5),0 0 46px rgba(95,212,208,.13);}
+.ent:hover .scene{opacity:.92;transform:scale(1.05);filter:brightness(1.12);}
+.ent:hover .fog{background:linear-gradient(to top,rgba(7,13,27,.45),rgba(7,13,27,.08) 55%,rgba(7,13,27,.15));}
+.ent .life{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity 1s ease;}
+.ent:hover .life{opacity:1;}
+.ent.e-city .life{background:radial-gradient(ellipse 60% 50% at 70% 26%,rgba(95,212,208,.14),transparent 70%);}
+.ent.e-rona .life{background:radial-gradient(ellipse 60% 50% at 30% 30%,rgba(245,166,35,.12),transparent 70%);}
+.ent.e-soon .life{background:radial-gradient(ellipse 60% 52% at 62% 74%,rgba(212,107,176,.14),transparent 70%),radial-gradient(ellipse 50% 46% at 26% 30%,rgba(143,139,214,.11),transparent 72%);}
+.ent.e-observe .scene {
+  background-image: url('site_assets/entrance_observe_city.webp');
+  background-position: center 35%;
+}
+.ent.e-receive .scene {
+  background-image: url('site_assets/entrance_receive_river.webp');
+  background-position: center 40%;
+}
+.ent.e-receive:hover{border-color:rgba(245,166,35,.45);box-shadow:0 12px 50px rgba(0,0,0,.5),0 0 46px rgba(245,166,35,.11);}
+.ent.e-receive:hover .scene{filter:brightness(1.1);}
+.ent.e-archive .life{background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(143,139,214,.13),transparent 70%);}
+.ent.e-archive:hover{border-color:rgba(143,139,214,.5);box-shadow:0 12px 50px rgba(0,0,0,.5),0 0 46px rgba(143,139,214,.13);}
+.ent.e-read .scene,
+.ent.e-archive .scene {
+  background-image: url('site_assets/entrance_read_archive.webp');
+  background-position: center 38%;
+}
+.ent.e-archive:hover .scene{filter:brightness(1.1);}
+/* 仮枠（内容未定）の静かな表示：既存のカード面・霧・生命光はそのまま流用する */
+.pending-tag{display:inline-block;font-size:10px;letter-spacing:.22em;color:var(--magenta);opacity:.85;}
+
+/* ---------- GURiN Worldとは ---------- */
+.about-world{text-align:center;max-width:760px;margin:0 auto;}
+.about-world p{font-size:15.5px;letter-spacing:.08em;line-height:2.2;color:var(--text);margin-top:8px;}
+.about-world .creed{margin-top:38px;font-family:'Shippori Mincho',serif;font-size:clamp(18px,3vw,24px);letter-spacing:.16em;color:var(--platinum);text-shadow:0 0 18px rgba(237,237,242,.3);}
+.core-line{margin-top:20px;font-size:13px;letter-spacing:.24em;color:var(--turquoise);}
+
+/* ---------- 世界地図 ---------- */
+.map-wrap{
+  position:relative;margin-top:60px;border-radius:22px;overflow:hidden;border:1px solid var(--line);
+}
+.map-wrap img.mapimg{width:100%;display:block;filter:brightness(.9) saturate(1.14);}
+/* 地図の下部＝海・霧に、マゼンタと青紫の生命光（夢幻ラボ周辺） */
+.map-wrap::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:
+    radial-gradient(ellipse 42% 40% at 74% 84%,rgba(212,107,176,.13),transparent 70%),
+    radial-gradient(ellipse 50% 34% at 40% 92%,rgba(143,139,214,.10),transparent 72%),
+    radial-gradient(ellipse 34% 30% at 16% 22%,rgba(87,201,154,.07),transparent 72%);
+  mix-blend-mode:screen;}
+.pin{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:3;}
+.pin .jewel{
+  width:20px;height:20px;border-radius:50%;position:relative;
+  animation:breathe 5s ease-in-out infinite;
+}
+.pin .jewel::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid currentColor;opacity:.3;animation:ring 5s ease-in-out infinite;}
+.pin.archive .jewel{background:radial-gradient(circle at 38% 34%,#c9c6f2,var(--violet));color:var(--violet);box-shadow:0 0 22px 3px rgba(143,139,214,.5);animation-delay:2.2s;}
+.pin.sea .jewel{background:radial-gradient(circle at 38% 34%,#f2c4de,var(--magenta));color:var(--magenta);box-shadow:0 0 18px 2px rgba(212,107,176,.45);animation-delay:3s;opacity:.75;}
+/* Academyの珠のみ：エメラルドの色味・大きさは維持し、中心光/box-shadow/呼吸時の最大輝度を15〜20%抑える
+   （珠の光より先にGURiN Academyの名称が読めることを目標に、明るさのみ調整） */
+.pin.academy .jewel{background:radial-gradient(circle at 38% 34%,#9dbfad,var(--emerald));color:var(--emerald);box-shadow:0 0 18px 2px rgba(87,201,154,.37);animation:breatheAcademy 5s ease-in-out infinite;animation-delay:3.6s;opacity:.75;}
+@keyframes breathe{0%,100%{transform:scale(1);filter:brightness(1);}50%{transform:scale(1.18);filter:brightness(1.35);}}
+@keyframes breatheAcademy{0%,100%{transform:scale(1);filter:brightness(1);}50%{transform:scale(1.18);filter:brightness(1.29);}}
+@keyframes ring{0%,100%{transform:scale(1);opacity:.15;}50%{transform:scale(1.5);opacity:.4;}}
+.pin .label{
+  position:absolute;left:50%;top:26px;transform:translateX(-50%);
+  white-space:nowrap;font-family:'Shippori Mincho',serif;font-size:13px;letter-spacing:.14em;
+  color:var(--platinum);background:rgba(7,13,27,.78);padding:5px 14px;border-radius:3px;
+  border:1px solid var(--line);
+  opacity:0;pointer-events:none;transition:opacity .45s ease,top .45s ease;
+}
+.pin .label small{display:block;font-size:9.5px;letter-spacing:.1em;color:var(--muted);margin-top:2px;}
+.pin:hover .label{opacity:1;top:32px;}
+/* 四方の門：大きな建造物・詳細図解にはせず、方角名だけを静かに常時表示。
+   詳細テーマは既存の.labelホバー機構を流用し、触れた時だけ短い補足として出す */
+.pin.gate .jewel{width:9px;height:9px;background:radial-gradient(circle at 38% 34%,#fff,var(--platinum));color:var(--platinum);box-shadow:0 0 12px 2px rgba(237,237,242,.35);opacity:.8;}
+/* ピンの常時表示名（門・施設で共有）：位置・文字サイズは変更しない。ウェイトのみ一段読みやすく（太字にはしない） */
+.pin-name{
+  position:absolute;left:50%;top:20px;transform:translateX(-50%);
+  white-space:nowrap;font-size:13px;font-weight:500;letter-spacing:.16em;color:var(--muted);
+  pointer-events:none;
+}
+.pin:hover .pin-name{color:var(--platinum);}
+/* 三施設の名称：文字サイズ・text-shadowは維持。色のみ各ピンの色彩系統へ（同じ色相のまま文字用にやや明るく調整） */
+.pin.sea .pin-name,.pin.academy .pin-name,.pin.archive .pin-name{
+  font-size:14px;text-shadow:0 1px 4px rgba(7,13,27,.6);
+}
+.pin.sea .pin-name{color:#dc86be;}      /* 夢幻ラボ：マゼンタ系（--magentaを文字用に明るく） */
+.pin.archive .pin-name{color:#a3a0dd;}  /* GURiN Archive：青紫系（--violetを文字用に明るく） */
+.pin.academy .pin-name{color:#75d3ac;}  /* GURiN Academy：エメラルド系（--emeraldを文字用に明るく） */
+/* 三施設のみ、地図上の静かな標識枠。四方の門には付けない。文字色・サイズ・ウェイト・letter-spacing・text-shadowは無変更 */
+.pin.sea .pin-name,.pin.academy .pin-name,.pin.archive .pin-name{
+  background:rgba(7,13,27,.55);padding:4px 10px;border-radius:3px;
+}
+.pin.sea .pin-name{border:1px solid rgba(212,107,176,.35);}     /* 夢幻ラボ：マゼンタ系の枠 */
+.pin.archive .pin-name{border:1px solid rgba(143,139,214,.35);} /* GURiN Archive：青紫系の枠 */
+/* ── 宇宙のクラウド（源泉・ゴールド）／個人セッション（ターコイズ）。2026-08-28 追加 ── */
+.pin.books .jewel{background:radial-gradient(circle at 38% 34%,#ffe0a8,var(--gold));color:var(--gold);box-shadow:0 0 24px 4px rgba(245,166,35,.45);animation-delay:1.1s;}
+.pin.books .pin-name{color:#f7c169;background:rgba(7,13,27,.55);padding:4px 10px;border-radius:3px;border:1px solid rgba(245,166,35,.35);}
+.pin.session .jewel{background:radial-gradient(circle at 38% 34%,#c8f6f4,var(--turquoise));color:var(--turquoise);box-shadow:0 0 22px 3px rgba(95,212,208,.45);animation-delay:3.3s;}
+.pin.session .pin-name{color:#7fe3df;background:rgba(7,13,27,.55);padding:4px 10px;border-radius:3px;border:1px solid rgba(95,212,208,.35);}
+a.pin{text-decoration:none;}
+.pin.academy .pin-name{border:1px solid rgba(87,201,154,.35);}  /* GURiN Academy：エメラルド系の枠 */
+.pin.gate .label{background:rgba(7,13,27,.85);}
+/* 補足の開く向きを、地図の内側へ必ず収まる方向へ（門のテーマ文言・位置・光は無変更） */
+.pin.gate-east:hover .label{top:44px;}
+.pin.gate-south .label{left:auto;right:26px;top:50%;transform:translateY(-50%);}
+.pin.gate-south:hover .label{opacity:1;right:32px;}
+.pin.gate-west .label{top:-46px;left:50%;transform:translateX(-50%);}
+.pin.gate-west:hover .label{opacity:1;top:-52px;}
+.pin.gate-north .label{left:26px;top:50%;transform:translateY(-50%);}
+.pin.gate-north:hover .label{opacity:1;left:32px;}
+/* 外部へ続く経路：地図直下・凡例より先。通常の静かなテキストリンク（強いボタンにはしない） */
+.map-external{margin-top:28px;text-align:center;font-size:13px;letter-spacing:.12em;color:var(--text);}
+.map-external a{margin-left:14px;color:var(--turquoise);transition:color .4s;}
+.map-external a:hover{color:var(--platinum);}
+.pin .soon{color:var(--magenta);font-size:9px;letter-spacing:.2em;}
+.map-legend{display:flex;flex-wrap:wrap;gap:20px 30px;justify-content:center;margin-top:36px;font-size:11.5px;letter-spacing:.1em;color:var(--muted);}
+.map-legend span{display:inline-flex;align-items:center;gap:8px;}
+.map-legend i{width:9px;height:9px;border-radius:50%;display:inline-block;}
+
+/* ---------- ロナ ---------- */
+.rona-sec{display:flex;align-items:center;gap:60px;flex-wrap:wrap;justify-content:center;}
+.rona-sec img{width:min(34vw,340px);filter:drop-shadow(0 0 36px rgba(95,212,208,.16));}
+.rona-txt{max-width:440px;}
+.rona-txt h2{text-align:left;}
+.rona-txt p{font-size:14px;color:var(--muted);letter-spacing:.06em;margin-top:22px;line-height:2.1;}
+.rona-link{display:inline-block;margin-top:26px;font-size:12.5px;letter-spacing:.2em;color:var(--turquoise);border-bottom:1px solid rgba(95,212,208,.35);padding-bottom:4px;transition:color .4s,border-color .4s;}
+.rona-link:hover{color:var(--platinum);border-color:var(--platinum);}
+
+/* ---------- 水路（記事） ---------- */
+.routes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px;}
+.route{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--bg2);transition:transform .5s,border-color .5s,box-shadow .5s;cursor:pointer;}
+.route a{position:absolute;inset:0;z-index:5;}
+.route:hover{transform:translateY(-6px);border-color:rgba(245,166,35,.4);box-shadow:0 10px 44px rgba(0,0,0,.45),0 0 40px rgba(245,166,35,.10);}
+.route:nth-child(1):hover{border-color:rgba(95,212,208,.4);box-shadow:0 10px 44px rgba(0,0,0,.45),0 0 40px rgba(95,212,208,.10);}
+.route:nth-child(3):hover{border-color:rgba(212,107,176,.45);box-shadow:0 10px 44px rgba(0,0,0,.45),0 0 42px rgba(212,107,176,.12);}
+.route:nth-child(3) .thumb::after{background:linear-gradient(to top,rgba(7,22,50,.48),transparent 62%),radial-gradient(ellipse 70% 60% at 60% 30%,rgba(212,107,176,.12),transparent 72%);}
+.route .thumb{height:150px;background-size:cover;background-position:center;position:relative;opacity:.92;transition:opacity .5s ease;}
+.route:hover .thumb{opacity:1;}
+.route .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(7,22,50,.48),transparent 62%);transition:background .5s ease;}
+.route:hover .thumb::after{background:linear-gradient(to top,rgba(7,22,50,.35),transparent 62%);}
+.route .rbody{padding:20px 20px 24px;}
+.route .series{font-size:10.5px;letter-spacing:.24em;color:var(--turquoise);}
+.route h4{font-family:'Shippori Mincho',serif;font-weight:500;font-size:15px;letter-spacing:.04em;color:var(--platinum);margin:10px 0 8px;line-height:1.55;}
+.route p{font-size:12px;color:var(--muted);line-height:1.8;}
+.route .go{margin-top:14px;font-size:11px;letter-spacing:.2em;color:var(--gold);}
+
+/* ---------- GURiNについて ---------- */
+.about-me{text-align:center;max-width:680px;margin:0 auto;}
+.about-me p{font-size:15px;letter-spacing:.08em;line-height:2.2;color:var(--text);}
+/* 本文のみ左寄せ（ブロックは中央のまま）。締めの一行とタグは中央を維持 */
+.about-me p:not(.maboroshist-line){text-align:left;}
+.tags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px;margin-top:34px;}
+.tags span{font-size:11px;letter-spacing:.14em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 16px;}
+.about-me .maboroshist-line{margin-top:28px;font-size:13px;letter-spacing:.14em;line-height:1.9;color:var(--platinum);}
+.about-me .more{display:inline-block;margin-top:28px;font-size:12.5px;letter-spacing:.2em;color:var(--turquoise);border-bottom:1px solid rgba(95,212,208,.35);padding-bottom:4px;}
+
+/* ---------- GURiN BOOKS：書物の入口（2026-07-27 追加） ---------- */
+/* 静かな書庫に一冊。左＝縦長表紙（大）、右＝書名・副題・概要・状態。既存の色・角丸・余白を継承 */
+.book-feature{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:60px;align-items:center;margin-top:72px;}
+.book-cover img{width:100%;height:auto;display:block;border-radius:10px;box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 0 1px var(--line);}
+.book-title{font-family:'Shippori Mincho',serif;font-weight:500;font-size:clamp(24px,3.4vw,32px);letter-spacing:.1em;color:var(--platinum);text-shadow:0 0 18px rgba(237,237,242,.22);line-height:1.5;}
+.book-sub{margin-top:14px;font-size:13.5px;letter-spacing:.08em;color:var(--gold);line-height:1.85;}
+.book-desc{margin-top:22px;font-size:14px;letter-spacing:.06em;line-height:2.05;color:var(--text);}
+/* 近日公開予定：ボタンに見えない静かなステータス表示（リンクなし） */
+.book-status{display:inline-block;margin-top:30px;font-size:11px;letter-spacing:.22em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:7px 18px;}
+/* 購入ページ完成後、この位置で有効化するボタン（現状は未使用）
+.book-cta{display:inline-block;margin-top:24px;font-size:12.5px;letter-spacing:.2em;color:var(--turquoise);border-bottom:1px solid rgba(95,212,208,.35);padding-bottom:4px;}
+/* ── 公開の知らせを受け取る（2026-08-28 追加）。フォームのURLが出たら href を差し替える ── */
+.book-notify{margin-top:34px;padding-top:28px;border-top:1px solid var(--line);}
+.book-notify p{margin:0 0 20px;font-size:14.5px;letter-spacing:.06em;line-height:2.05;color:var(--text);}
+.book-notify .sub{font-size:12.5px;color:var(--muted);margin-top:14px;}
+.book-btn{display:inline-block;font-family:'Shippori Mincho',serif;font-size:15px;letter-spacing:.18em;
+  color:var(--platinum);border:1px solid rgba(245,166,35,.45);border-radius:999px;padding:15px 38px;
+  background:linear-gradient(180deg,rgba(245,166,35,.10),rgba(245,166,35,.02));transition:.35s;}
+.book-btn:hover{border-color:var(--gold);box-shadow:0 0 26px rgba(245,166,35,.20);color:#fff;}
+@media(max-width:860px){ .book-notify{text-align:center} }
+
+/* ── 個人セッションの入口カード（2026-08-29 新設） ── */
+.ent.e-session .life{background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(95,212,208,.14),transparent 70%);}
+.ent.e-session:hover{border-color:rgba(95,212,208,.5);box-shadow:0 12px 50px rgba(0,0,0,.5),0 0 46px rgba(95,212,208,.14);}
+.ent.e-session .scene{background-image:url('site_assets/entrance_session_city.webp');background-position:center 40%;}
+.ent.e-session:hover .scene{filter:brightness(1.1);}
+
+/* ── 個人セッションのセクション（2026-08-29 新設・GURiN指示） ── */
+.session-panel{display:grid;grid-template-columns:1.02fr .98fr;gap:46px;max-width:1000px;margin:46px auto 0;
+  padding:42px 46px;border:1px solid var(--line);border-radius:18px;background:rgba(10,29,66,.30);}
+.sp-core{font-family:'Shippori Mincho',serif;font-size:29px;line-height:1.7;color:var(--gold);
+  letter-spacing:.1em;margin:0 0 26px;}
+.sp-lede{font-family:'Shippori Mincho',serif;font-size:18px;line-height:2.05;letter-spacing:.1em;
+  color:var(--platinum);margin:0 0 26px;}
+.sp-text{font-size:14.5px;line-height:2.1;letter-spacing:.07em;color:var(--text);margin:0;}
+@media(max-width:860px){ .sp-core{font-size:24px} .sp-lede{font-size:16.5px} }
+.sp-facts{margin:0 0 30px;padding:0;}
+.sp-facts>div{display:flex;gap:20px;padding:13px 0;border-bottom:1px solid var(--line);}
+.sp-facts>div:first-child{padding-top:0;}
+.sp-facts dt{width:4.6em;flex:none;color:var(--muted);font-size:13px;letter-spacing:.1em;line-height:1.9;}
+.sp-facts dd{margin:0;font-size:14.5px;letter-spacing:.06em;line-height:1.9;color:var(--text);}
+.sp-facts dd span{color:var(--muted);font-size:12.5px;letter-spacing:.08em;}
+.sp-btn{display:inline-block;font-family:'Shippori Mincho',serif;font-size:15px;letter-spacing:.18em;
+  padding:15px 36px;border:1px solid rgba(95,212,208,.5);border-radius:999px;color:var(--platinum);
+  background:rgba(95,212,208,.06);transition:background .3s ease,border-color .3s ease;}
+.sp-btn:hover{background:rgba(95,212,208,.14);border-color:rgba(95,212,208,.85);}
+@media(max-width:860px){
+  .session-panel{grid-template-columns:1fr;padding:30px 22px;gap:26px;}
+  .sp-facts>div{padding:11px 0}
+}
+ */
+
+/* ---------- 出口動画「ロナと、次の世界へ」（2026-07-25 追加） ---------- */
+#exit-video{position:relative;z-index:1;padding:40px 40px 20px;max-width:1180px;margin:0 auto;text-align:center;}
+.exit-frame{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);background:#070d1b;line-height:0;}
+.exit-frame video{width:100%;height:auto;display:block;}
+/* 音ありボタン */
+.exit-sound{position:absolute;right:16px;bottom:16px;z-index:3;
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(7,13,27,.7);backdrop-filter:blur(6px);
+  border:1px solid rgba(95,212,208,.6);border-radius:999px;
+  padding:9px 18px;color:var(--platinum);font-family:inherit;font-size:12px;letter-spacing:.12em;
+  cursor:pointer;transition:background .3s,border-color .3s,color .3s;}
+.exit-sound:hover{background:rgba(95,212,208,.18);border-color:var(--turquoise);color:var(--turquoise);}
+.exit-sound svg{width:14px;height:14px;fill:currentColor;}
+/* 動画下のコピーとボタン */
+.exit-copy{margin-top:26px;font-family:'Shippori Mincho',serif;font-size:clamp(15px,2.4vw,19px);letter-spacing:.14em;color:var(--platinum);text-shadow:0 0 16px rgba(237,237,242,.22);}
+.exit-cta{display:inline-block;margin-top:22px;padding:14px 42px;
+  font-size:13px;letter-spacing:.28em;color:#fff;
+  border:1.5px solid rgba(95,212,208,.85);border-radius:2px;background:rgba(16,38,80,.5);
+  box-shadow:0 0 18px rgba(95,212,208,.18);text-shadow:0 1px 6px rgba(5,12,32,.5);
+  transition:background .5s,box-shadow .5s,letter-spacing .5s,border-color .5s;}
+.exit-cta:hover{background:rgba(95,212,208,.2);border-color:rgba(95,212,208,1);box-shadow:0 0 32px rgba(95,212,208,.32);letter-spacing:.34em;}
+@media (max-width:860px){
+  #exit-video{padding:20px 18px 10px;}
+  /* スマホ：中央のロナと道を優先。左右がわずかに切れても成立 */
+  .exit-frame video{width:118%;margin-left:-9%;}
+}
+
+/* ---------- フッター ---------- */
+/* フッターへ向かう深紺〜青紫、奥にマゼンタの気配 */
+footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
+  background:
+    radial-gradient(ellipse 60% 70% at 76% 88%,rgba(212,107,176,.07),transparent 72%),
+    radial-gradient(ellipse 70% 80% at 24% 90%,rgba(143,139,214,.08),transparent 74%),
+    linear-gradient(to top,var(--bg-violet),rgba(23,22,56,0));}
+.f-creed{font-family:'Shippori Mincho',serif;font-size:clamp(18px,3vw,24px);letter-spacing:.2em;color:var(--platinum);text-shadow:0 0 18px rgba(237,237,242,.3);}
+.f-friend{margin-top:16px;font-size:13px;letter-spacing:.24em;color:var(--gold);text-shadow:0 0 12px rgba(245,166,35,.4);}
+.f-links{display:flex;flex-wrap:wrap;gap:14px 26px;justify-content:center;margin:44px 0 30px;}
+.f-links a{font-size:12px;letter-spacing:.14em;color:rgba(207,210,223,.72);transition:color .4s;}
+.f-links a:hover{color:var(--turquoise);}
+.copyright{font-size:10px;letter-spacing:.3em;color:#4a4f63;}
+
+@media (max-width:860px){
+  .nav-links{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;gap:0;
+    background:rgba(7,13,27,.96);backdrop-filter:blur(8px);
+    border-bottom:0.5px solid rgba(95,212,208,.25);
+    padding:8px 0 16px;
+  }
+  .nav-links a{display:block;padding:14px 30px;font-size:13.5px;}
+  nav.menu-open .nav-links{display:flex;}
+  .hamburger{display:flex;}
+  .br-sp{display:inline;}
+  .hero-inner{flex-direction:column;align-items:flex-start;padding-top:104px;}
+  /* Hello, World. はスマホでは一行固定（ナビロゴとの間隔はpadding-topで確保） */
+  .hello{font-size:min(9.6vw,42px);white-space:nowrap;}
+  /* 問いかけ：スマホのみ視認性をもう一段（色・サイズは不変）。
+     金の水脈との重なり対策に、文字の周囲だけ静かに暗くする薄い深紺の透過背景を敷く */
+  .q{
+    text-shadow:0 1px 9px rgba(5,12,32,.7),0 0 16px rgba(95,212,208,.4);
+    display:inline-block;
+    background:rgba(7,15,38,.44);
+    padding:8px 14px;border-radius:5px;
+    margin-left:-14px;
+  }
+  /* WHAT IS：本文のみ左寄せ（ブロックは中央のまま）。見出しと起動の一行は中央を維持 */
+  .about-world p{text-align:left;}
+  .hero-rona{align-self:center;}.hero-rona img{width:56vw;}
+  .entrances,.routes{grid-template-columns:1fr;}
+  /* GURiN BOOKS：スマホは1カラム（表紙→書名→副題→概要→状態）。表紙は幅いっぱいにせず左右余白を残す */
+  .book-feature{grid-template-columns:1fr;gap:32px;margin-top:48px;justify-items:center;}
+  .book-cover{width:64%;max-width:300px;margin:0 auto;}
+  .book-detail{text-align:center;}
+  .book-desc{text-align:left;}
+  .rona-sec{flex-direction:column;}.rona-txt h2{text-align:center;}
+  section{padding:90px 24px;}
+}
 </style>
 </head>
-<body></body>
+<body>
+<canvas id="stars"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="brand">GURiN World</div>
+  <div class="nav-links">
+    <a href="#map">WORLD MAP</a>
+    <a href="#rona">ロナ</a>
+    <a href="#entrances">入口</a>
+    <a href="#books">書物</a>
+    <a href="session.html">セッション</a>
+    <a href="#about">GURiN</a>
+    <a href="https://note.com/gurin_q01" target="_blank">note</a>
+    <a href="https://x.com/GURIN_Q01" target="_blank">X</a>
+  </div>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="hello">Hello, World.</div>
+      <div class="subhero">仮想現実は、始まりである。</div>
+      <div class="q">今のマボロシ世界、<br class="br-sp">どう映していますか？</div>
+      <a href="#rona" class="cta">世界を起動する</a>
+    </div>
+    <div class="hero-rona"><img src="site_assets/rona_a.webp" alt="案内役ロナ"></div>
+  </div>
+  <div class="scrollcue">SCROLL</div>
+</div>
+
+<!-- ロナ -->
+<section id="rona">
+  <div class="rona-sec reveal">
+    <img src="site_assets/rona_b.webp" alt="案内役ロナ">
+    <div class="rona-txt">
+      <div class="eyebrow" style="text-align:left">YOUR GUIDE</div>
+      <h2>案内役、ロナ。</h2>
+      <p>ロナは、GURiN Worldを歩く旅の案内役。<br>その名は、膨大なデータ量を表す言葉から。<br>01空間を自在に遊びながら、<br>今のあなたへ、ぴったりな一節を。</p>
+      <!-- 重複メモ（内部用・非表示）：#entrances の「受け取る／今日のロナメッセージ」カードと導線が重複。
+           2026-07-18 maki指示により、両方の経路をそのまま残す（ロナ経由／今日の入口から直接、の2導線として共存） -->
+      <a class="rona-link" href="https://gurinq01.github.io/gurin-world/rona.html" target="_blank">今日のロナメッセージへ →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 世界地図 -->
+<section id="map">
+  <div class="eyebrow reveal">WORLD MAP ｜ PHASE 1</div>
+  <h2 class="reveal">新しい世界の、<br class="br-sp">はじめ方。</h2>
+  <p class="lead reveal">WORLD MAPは、まだ育っている。<br>光る珠に触れてみてください。</p>
+  <div class="map-wrap reveal">
+    <img class="mapimg" src="site_assets/world_full.webp" alt="GURiN World 全景">
+    <!-- 夜の都市／金水河／マボロシ世界の3ピンは、STEP2の決定により「土地」表示から一旦外しました。
+         これらは作品・シリーズ・記事として、後日 適切な門・施設・経路へ再接続します（今回は未着手）。 -->
+    <!-- 四方の門：世界の羅針盤。方角名だけを常時静かに表示し、テーマ一覧はホバー時の短い補足に留める。
+         補足の開く向きのみ、地図の内側へ収まるよう方向クラスを追加（位置・大きさ・色・テーマ文言は無変更） -->
+    <div class="pin gate gate-east" style="left:50%;top:6%">
+      <div class="jewel"></div><div class="pin-name">東の門</div>
+      <div class="label"><small>世界観・宇宙・文明・哲学・思想・教育</small></div>
+    </div>
+    <div class="pin gate gate-south" style="left:93%;top:50%">
+      <div class="jewel"></div><div class="pin-name">南の門</div>
+      <div class="label"><small>お金・仕事・事業・AI・テクノロジー</small></div>
+    </div>
+    <div class="pin gate gate-west" style="left:50%;top:94%">
+      <div class="jewel"></div><div class="pin-name">西の門</div>
+      <div class="label"><small>人間関係・親子・夫婦・友人・恋愛</small></div>
+    </div>
+    <div class="pin gate gate-north" style="left:7%;top:50%">
+      <div class="jewel"></div><div class="pin-name">北の門</div>
+      <div class="label"><small>身体・呼吸・食・健康・老い・病・死</small></div>
+    </div>
+    <!-- GURiN Archive｜世界の書庫：旧「マボロシ世界」ピンの位置・色（--violet）をそのまま流用。
+         施設名を門と同じ常時表示スタイルへ。状態表示はホバーのまま -->
+    <div class="pin archive" style="left:60%;top:56%">
+      <div class="jewel"></div><div class="pin-name">GURiN Archive</div>
+      <div class="label"><small>世界の書庫・一部開架</small></div>
+    </div>
+    <!-- 構築中／準備中の施設：施設名を門と同じ常時表示スタイルへ。状態表示はホバーのまま -->
+    <div class="pin sea" style="left:74%;top:82%">
+      <div class="jewel"></div><div class="pin-name">夢幻ラボ</div>
+      <div class="label"><small class="soon">構築中</small></div>
+    </div>
+    <!-- 宇宙のクラウド：空の源泉。ゴールド。#books へ -->
+    <a class="pin books" href="#books" style="left:33%;top:9%">
+      <div class="jewel"></div><div class="pin-name">宇宙のクラウド</div>
+      <div class="label"><small class="soon">近日公開予定</small></div>
+    </a>
+    <!-- 個人セッション：ターコイズ。session.html へ -->
+    <a class="pin session" href="session.html" style="left:80%;top:24%">
+      <div class="jewel"></div><div class="pin-name">個人セッション</div>
+      <div class="label"><small>受け取った世界を、自らの現実へ</small></div>
+    </a>
+    <div class="pin academy" style="left:16%;top:20%">
+      <div class="jewel"></div><div class="pin-name">GURiN Academy</div>
+      <div class="label"><small class="soon">近日開門予定</small></div>
+    </div>
+  </div>
+  <!-- 世界の外へ続く経路：地図直下・凡例より先に表示。第一フェーズはnote・Xのみ。
+       将来、音声・動画などの経路も増設予定 -->
+  <div class="map-external reveal">
+    <span>世界の外へ続く経路</span><a href="https://note.com/gurin_q01" target="_blank">note ↗</a><a href="https://x.com/GURIN_Q01" target="_blank">X ↗</a>
+  </div>
+  <div class="map-legend reveal">
+    <span><i style="background:var(--platinum)"></i>四方の門</span>
+    <span><i style="background:var(--gold)"></i>宇宙のクラウド（近日公開予定）</span>
+    <span><i style="background:var(--turquoise)"></i>個人セッション</span>
+    <span><i style="background:var(--violet)"></i>GURiN Archive（一部開架）</span>
+    <span><i style="background:var(--magenta);opacity:.7"></i>夢幻ラボ（構築中）</span>
+    <span><i style="background:var(--emerald);opacity:.7"></i>GURiN Academy（近日開門予定）</span>
+  </div>
+  <!-- 三施設の循環（内部メモ・非表示）：夢幻ラボで生まれる → GURiN Archiveに蓄積される →
+       GURiN Academyで体系化・実践へ → 実践から生まれた問いが夢幻ラボへ戻る。
+       GA ShiftingはGURiN Academy内包の中核プログラムとして扱い、今回は独立ピンにしない。
+       個人セッションは 2026-08-28 に独立ピンとして実装（session.html へ）。宇宙のクラウドも空の源泉として追加（#books へ）。 -->
+</section>
+
+<!-- 今日の入口 -->
+<section id="entrances">
+  <div class="eyebrow reveal">TODAY'S ENTRANCE</div>
+  <h2 class="reveal">今日の、入口。</h2>
+  <p class="lead reveal">測る。受け取る。ひらく。<br>今のあなたに合う入口から、どうぞ。</p>
+  <div class="entrances">
+    <a class="ent e-observe reveal" href="https://gurinq01.github.io/gurin-world/maboroshi.html" target="_blank" rel="noopener noreferrer">
+      <div class="scene"></div><div class="fog"></div><div class="life"></div>
+      <div class="body"><div class="verb">測る</div><div class="title-row"><span class="title-accent title-accent-turquoise"></span><h3>幻度チェックシート</h3></div><p>今の世界が、どんなふうに映っているのかを見る入口。</p></div>
+    </a>
+    <!-- 重複メモ（内部用・非表示）：#rona の「今日のロナメッセージへ」リンクと導線が重複。
+         2026-07-18 maki指示により、両方の経路をそのまま残す（ロナ経由／今日の入口から直接、の2導線として共存） -->
+    <a class="ent e-receive reveal" href="https://gurinq01.github.io/gurin-world/rona.html" target="_blank" rel="noopener noreferrer">
+      <div class="scene"></div><div class="fog"></div><div class="life"></div>
+      <div class="body"><div class="verb">受け取る</div><div class="title-row"><span class="title-accent title-accent-gold"></span><h3>今日のロナメッセージ</h3></div><p>一日ひとつ、今日の一節を受け取る入口。</p></div>
+    </a>
+    <!-- 仮枠（内容未定）：WORLD MAPが直前のセクションへ移動したため、旧「世界地図」カードは
+         内容未確定の入口プレースホルダーへ置き換え。新規画像は作らず、既存のsite_assets/spot_sea.webpと
+         既存のカード構造（scene/fog/life）をそのまま流用する。リンク先未定のためリンク要素ではなくdiv要素にしている -->
+    <a class="ent e-session reveal" href="session.html">
+      <div class="scene"></div><div class="fog"></div><div class="life"></div>
+      <div class="body"><div class="verb">受ける</div><div class="title-row"><span class="title-accent title-accent-turquoise"></span><h3>GURiN個人セッション</h3></div><p>あなた自身の世界を、直接ひらく時間。</p></div>
+    </a>
+  </div>
+</section>
+
+<!-- GURiN Worldとは -->
+<section id="whatis">
+  <div class="about-world reveal">
+    <div class="eyebrow">WHAT IS GURiN WORLD</div>
+    <h2>世界は、<br class="br-sp">あなたの内側にある。</h2>
+    <p>この世界は、<br>意識を通して映し出される、マボロシ世界。</p>
+    <p>見つめるたび、見え方が変わり、<br>ほどけるたび、新しい道が現れる。</p>
+    <p>GURiN Worldは、<br>その世界を歩き、創造していくための入口です。</p>
+    <div class="core-line">どの世界観から、起動しますか？</div>
+  </div>
+</section>
+
+<!-- NEXT：3つのフィールド -->
+<section id="next">
+  <div class="eyebrow reveal">NEXT</div>
+  <h2 class="reveal">次にひらく、<br class="br-sp">3つのフィールド。</h2>
+  <p class="lead reveal">ここから先、GURiN Worldは、<br>試す・記憶をひらく・深める、<br>3つのフィールドへ広がっていきます。</p>
+  <div class="routes">
+    <div class="route reveal">
+      <div class="thumb" style="background-image:url('site_assets/spot_sea.webp')"></div>
+      <div class="rbody">
+        <div class="pending-tag">構築中</div>
+        <h4>夢幻ラボ</h4>
+        <p>世界観と意識を、現実の中で実験していく場所。<br><br>月1〜2回のGURiNトークとQ&amp;Aを通して、<br>それぞれのマボロシ世界に新しい視点を持ち帰り、<br>現実の中で実装していきます。</p>
+      </div>
+    </div>
+    <div class="route reveal">
+      <div class="thumb" style="background-image:url('site_assets/spot_river.webp')"></div>
+      <div class="rbody">
+        <div class="pending-tag">一部開架</div>
+        <h4>GURiN Archive｜世界の書庫</h4>
+        <p>GURiN Worldに流れる、言葉と記憶を収める場所。<br><br>記事や辞書、宇宙のクラウド。<br>世界観の奥へつながる記憶を、ひらいていきます。</p>
+      </div>
+    </div>
+    <div class="route reveal">
+      <div class="thumb" style="background-image:url('site_assets/spot_academy.webp')"></div>
+      <div class="rbody">
+        <div class="pending-tag">近日開門予定</div>
+        <h4>GURiN Academy</h4>
+        <p>世界観を、学びと実践へつなげる場所。<br><br>宇宙のしくみ、未来のシナリオ、意識とテクノロジー、<br>インスピレーション、お金、仕事、人間関係、生老病死……<br><br>人類のあらゆる謎を、紐解いていきます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GURiN BOOKS：書物の入口（2026-07-27 追加）。#next と #about の間。今回は一冊のみ大きく表示。将来 複数冊を .book-feature を増やして拡張可 -->
+<section id="books">
+  <div class="eyebrow reveal">GURiN BOOKS</div>
+  <h2 class="reveal">書物の入口</h2>
+  <p class="lead reveal">宇宙から届いた、<br>未来から選りすぐられた26のメッセージ。</p>
+  <div class="book-feature reveal">
+    <div class="book-cover">
+      <img src="site_assets/books/book_uchu-no-cloud_cover_portrait.webp?v=20260907" alt="『宇宙のクラウド』表紙">
+    </div>
+    <div class="book-detail">
+      <h3 class="book-title">宇宙のクラウド</h3>
+      <p class="book-sub">——35年、3000篇の対話から<br class="br-sp">選んだ26のメッセージ</p>
+      <p class="book-desc">人間とは何か。世界とは何か。<br>人間、意識、男女、仕事、経営、お金、生と死、宇宙。<br>異なる問いの奥に流れる、一つの源泉を読み解く書物です。</p>
+      <p class="book-desc">35年にわたる宇宙との対話から、最初の26篇を選び、<br>解説、Q&amp;A、図解、観測画像、アプリとともに編集中です。</p>
+      <div class="book-status">近日公開予定</div>
+
+      <!-- ═══════════════════════════════════════════════════════════
+           公開の知らせを受け取る（2026-08-28・Kuu）
+
+           ★差し替えるのは2箇所だけ★
+             ① フォームのURL → 2026-08-29 差し替え済み
+             ② 〔仮〕の文言 → ゼイラスの文言（まだ〔仮〕）
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="book-notify">
+        <p>この世界は幻であることに気づいた人へ。<br>『宇宙のクラウド』は<strong>近日公開</strong>です。<br>その前に、直接お話しすることもできます。</p>
+        <a class="book-btn" href="session.html">GURiNの個人セッション</a>
+        <p class="sub">60分 30,000円／90分 45,000円（税込）</p>
+      </div>
+
+      <!-- 購入ページ完成後、この位置にボタンを追加：
+      <a class="book-cta" href="購入ページURL">この書物を見る</a> -->
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 個人セッション（2026-08-29 新設・GURiN指示）｜宇宙のクラウド → ここ → GURiN紹介 ═══ -->
+<section id="session">
+  <div class="eyebrow reveal">GURiN SESSION</div>
+  <h2 class="reveal">GURiN個人セッション</h2>
+  <p class="lead reveal">35年の探究と、延べ8,000を超えるセッション。<br>GURiNと直接対話し、自らの世界をひらいていく空間創造です。</p>
+
+  <div class="session-panel reveal">
+    <div class="sp-left">
+      <p class="sp-core">人間界を、脱出する。</p>
+      <p class="sp-lede">幻を知った、その先へ。<br>世界観が変わると、現実が変わる。</p>
+      <p class="sp-text">これまでの価値観や常識から、<br>新たな水平線へ渡っていきます。</p>
+    </div>
+    <div class="sp-right">
+      <dl class="sp-facts">
+        <div><dt>受け方</dt><dd>オンライン｜Google Meet<br><span>顔を出してお会いします</span></dd></div>
+        <div><dt>担当</dt><dd>GURiN本人</dd></div>
+        <div><dt>受けられる方</dt><dd>どなたでも<br><span>『宇宙のクラウド』をお読みでなくても、お受けいただけます</span></dd></div>
+        <div><dt>料金</dt><dd>60分　30,000円<br>90分　45,000円　<span>（税込）</span></dd></div>
+      </dl>
+      <a class="sp-btn" href="session.html">個人セッションを見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- GURiNについて -->
+<section id="about">
+  <div class="about-me reveal">
+    <div class="eyebrow">ABOUT GURiN</div>
+    <h2>「この世界は幻」を、<br>リアルに生きる。</h2>
+    <!-- 2026-07-23 本文差し替え：呼吸と意識のクラブ／会員制・実績を追記。構成・デザインは既存維持。段落は<br><br>、行は<br>で既存パターンを踏襲 -->
+    <p style="margin-top:30px">35年前、未来意識®メッセージを受け取り、<br>マスコミ勤務時代から個人セッションを開始。<br>社内では、呼吸と意識を整えるクラブを立ち上げ、<br>週1回・3年間運営。<br><br>意識が現実を映し出すしくみを、<br>言葉と実践を通して発信。<br><br>独立・起業後、<br>会員制の講座・書籍・事業を展開。<br>延べ8,000を超える個人セッション、<br>5,000回を超える講座を重ねる。<br><br>今、AIとともに、<br>その叡智を、彩り豊かなGURiN Worldとしてひらく。</p>
+    <!-- 2026-07-23 タグを立ち位置3つに集約（実績は本文へ移行済み）。初見でジャンルが伝わるよう芯だけ残す。今後追加可 -->
+    <div class="tags">
+      <span>意識のデザイナー</span><span>マボロシスト</span><span>意識と現実</span><span>意識 × テクノロジー</span>
+    </div>
+    <p class="maboroshist-line">マボロシストは、超リアリスト。</p>
+    <a class="more" href="https://note.com/gurin_q01/n/n5650a46ddccd" target="_blank" rel="noopener noreferrer">GURiNについて ↗</a>
+  </div>
+</section>
+
+<!-- 出口動画「ロナと、次の世界へ」（2026-07-25 追加）：入口は静止画で世界を見せ、出口でロナが次の世界へ誘う -->
+<section id="exit-video" class="reveal">
+  <div class="exit-frame">
+    <video id="rona-exit"
+           poster="site_assets/video/rona-next-world/rona-next-world-poster.webp"
+           muted autoplay playsinline preload="none" aria-label="ロナと、次の世界へ">
+      <!-- 遅延読み込み：near表示でsrcを注入するためsrcは空。data-属性に保持 -->
+    </video>
+    <button class="exit-sound" id="exit-sound-btn" type="button" aria-label="動画を音ありで最初から再生する">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 00-2.5-4.03v8.05A4.5 4.5 0 0016.5 12z"/></svg>
+      <span id="exit-sound-label">音ありで再生</span>
+    </button>
+  </div>
+  <div class="exit-copy">この先の世界を、ロナと歩く。</div>
+  <a class="exit-cta" href="#map">世界を歩く</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-creed">世界観が変わると、<br class="br-sp">世界が変わる。</div>
+  <div class="f-friend">今日も、幻を友に。🐱</div>
+  <div class="f-links">
+    <a href="#map">WORLD MAP</a><a href="#whatis">GURiN Worldとは</a><a href="#about">GURiNについて</a>
+    <a href="https://gurinq01.github.io/gurin-world/maboroshi.html" target="_blank">幻度チェック</a>
+    <a href="https://gurinq01.github.io/gurin-world/rona.html" target="_blank">今日のロナメッセージ</a>
+    <a href="https://note.com/gurin_q01" target="_blank" rel="noopener noreferrer">note ↗</a>
+    <a href="https://x.com/GURIN_Q01" target="_blank" rel="noopener noreferrer">X ↗</a>
+  </div>
+  <div class="copyright">© 2026 GURiN World</div>
+</footer>
+
+<script>
+/* 星：静かに、まばらに */
+const cv=document.getElementById('stars'),ctx=cv.getContext('2d');
+let W,H,st=[];const DPR=devicePixelRatio||1;
+function rs(){W=cv.width=innerWidth*DPR;H=cv.height=innerHeight*DPR;cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';}
+rs();addEventListener('resize',rs);
+/* 多色の生命光：白金・ターコイズ・金・青紫・マゼンタ・エメラルド */
+const COL=['237,237,242','95,212,208','95,212,208','245,166,35','143,139,214','212,107,176','212,107,176','87,201,154'];
+for(let i=0;i<46;i++)st.push({x:Math.random(),y:Math.random(),r:(Math.random()*1.1+.3)*DPR,ph:Math.random()*6.28,sp:Math.random()*.0006+.0002,c:COL[Math.floor(Math.random()*COL.length)]});
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function tick(){ctx.clearRect(0,0,W,H);for(const s of st){s.ph+=s.sp;const a=.1+.4*(0.5+0.5*Math.sin(s.ph));ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,6.28);ctx.fillStyle=`rgba(${s.c},${a})`;ctx.shadowColor=`rgba(${s.c},${a})`;ctx.shadowBlur=6*DPR;ctx.fill();ctx.shadowBlur=0;}if(!reduce)requestAnimationFrame(tick);}
+tick();
+/* スクロールで静かに現れる */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+/* ナビ背景 */
+addEventListener('scroll',()=>{document.getElementById('nav').style.background=scrollY>60?'rgba(7,13,27,.92)':'linear-gradient(to bottom,rgba(7,13,27,.9),rgba(7,13,27,0))';});
+
+/* ハンバーガーメニュー開閉 */
+const navEl=document.getElementById('nav');
+navEl.querySelector('.hamburger').addEventListener('click',()=>navEl.classList.toggle('menu-open'));
+navEl.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>navEl.classList.remove('menu-open')));
+
+/* 出口動画「ロナと、次の世界へ」：遅延読み込み・自動再生ミュート・音ありボタン・reduced-motion対応 */
+(function(){
+  const v=document.getElementById('rona-exit');
+  if(!v) return;
+  const base='site_assets/video/rona-next-world/rona-next-world';
+  const btn=document.getElementById('exit-sound-btn');
+  const label=document.getElementById('exit-sound-label');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let loaded=false;
+  /* WebM優先・MP4フォールバックのsourceを注入 */
+  function loadSources(){
+    if(loaded) return; loaded=true;
+    const webm=document.createElement('source');webm.src=base+'.webm';webm.type='video/webm';
+    const mp4=document.createElement('source');mp4.src=base+'.mp4';mp4.type='video/mp4';
+    v.appendChild(webm);v.appendChild(mp4);v.load();
+  }
+  /* 近づいたら読み込み。reduce時は自動再生しない（posterのまま） */
+  /* スマホ対策：読み込み直後の即再生は失敗しやすいため、再生可能になってから再生する */
+  function tryAutoplay(){
+    if(reduce) return;
+    v.muted=true;
+    const start=()=>{ v.play().catch(()=>{}); };
+    if(v.readyState>=3){ start(); }        /* 既に再生可能ならすぐ */
+    else{ v.addEventListener('canplay',start,{once:true}); }  /* まだなら準備完了を待つ */
+  }
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){
+      loadSources();
+      tryAutoplay();
+      io.disconnect();
+    }
+  }),{threshold:.35});
+  io.observe(v);
+  /* 音ありボタン：先頭へ戻す→ミュート解除→音付きで再生。終了後は「もう一度見る」 */
+  btn.addEventListener('click',()=>{
+    loadSources();
+    v.currentTime=0; v.muted=false; v.volume=1;
+    v.play().catch(()=>{});
+    label.textContent='もう一度見る';
+  });
+  v.addEventListener('ended',()=>{ if(!v.muted) label.textContent='もう一度見る'; });
+})();
+</script>
+</body>
 </html>
