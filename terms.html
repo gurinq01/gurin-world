@@ -66,7 +66,10 @@ dl.rules dd{margin:0; font-size:15px; color:var(--text)}
 .note{color:var(--muted); font-size:13.5px; letter-spacing:.08em}
 footer{padding:56px 0 78px; text-align:center; color:var(--muted); font-size:14px; letter-spacing:.14em}
 footer a{color:var(--muted)}
-/* ── 読みやすさ（2026-09-19・GURiN確定）──────────────────── */
+/* ── 読みやすさ（2026-09-19・GURiN確定）────────────────────
+   本文は session.html と同じD案（w500 ／ 18px ／ 字間.02em ／ 行間1.9）。
+   そのほかは 16px未満を +2px、下限13px。
+   ★既存CSSは書き換えていない。この塊を削れば元に戻る。            */
 body{font-size:18px; font-weight:500; line-height:1.9; letter-spacing:.02em}
 .brand{font-size:17px}
 .nav-links{font-size:14px}
