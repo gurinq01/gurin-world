@@ -31,13 +31,13 @@
 html{scroll-behavior:smooth}
 body{
   margin:0; background:var(--bg); color:var(--text);
-  font-family:'Noto Serif JP',serif; font-weight:300;
+  font-family:'Noto Serif JP',serif; font-weight:500;
   background-image:
     radial-gradient(ellipse 90% 40% at 50% 0%,var(--bg-darkest),transparent 60%),
     radial-gradient(ellipse 60% 45% at 24% 55%,rgba(0,0,139,.08),transparent 72%),
     radial-gradient(ellipse 70% 50% at 80% 100%,var(--bg-violet),transparent 70%);
   background-attachment:fixed;
-  line-height:2.1; letter-spacing:.05em; -webkit-font-smoothing:antialiased;
+  line-height:1.9; letter-spacing:.02em; -webkit-font-smoothing:antialiased;
 }
 a{color:var(--turquoise); text-decoration:none}
 a:hover{color:var(--cyan,#6FE9E4)}
@@ -70,7 +70,7 @@ h2{font-family:'Shippori Mincho',serif; font-weight:500; text-align:center;
 h3{font-family:'Shippori Mincho',serif; font-weight:500; font-size:20px; letter-spacing:.1em;
   color:var(--turquoise); margin:38px 0 14px}
 .lead{text-align:center; color:var(--text); font-size:16px; letter-spacing:.14em; margin-top:20px}
-p{font-size:17px; margin:0 0 24px}
+p{font-size:18px; margin:0 0 24px}
 .center{text-align:center}
 .rule{height:1px; background:linear-gradient(90deg,transparent,var(--line),transparent); margin:0}
 
@@ -135,7 +135,7 @@ ul.marks li:before{content:""; position:absolute; left:4px; top:16px; width:5px;
   background:linear-gradient(90deg,var(--gold),rgba(245,166,35,0))}
 .core{font-family:'Shippori Mincho',serif; font-size:clamp(17px,2.2vw,20px); letter-spacing:.08em;
   color:var(--gold); line-height:1.95; margin:18px 0 34px}
-strong{font-weight:400; color:var(--platinum); border-bottom:1px solid rgba(245,166,35,.35); padding-bottom:1px}
+strong{font-weight:600; color:var(--platinum); border-bottom:1px solid rgba(245,166,35,.35); padding-bottom:1px}
 h3{font-family:'Shippori Mincho',serif; font-weight:500; font-size:19px; letter-spacing:.09em;
   color:var(--turquoise); margin:36px 0 12px}
 /* 冒頭の要点 */
@@ -368,7 +368,7 @@ footer a{color:var(--muted)}
 .gwflow-badge span{font-size:9px;letter-spacing:.16em}.gwflow-badge b{font:400 17px/1 "Hiragino Mincho ProN","Yu Mincho",serif;letter-spacing:.04em}
 .gwflow-card h4{margin:12px 0 9px;color:var(--gwf-ink);letter-spacing:.02em;font:600 20px/1.5 "Hiragino Mincho ProN","Yu Mincho",serif}
 .gwflow-u{width:28px;height:1px;margin:0 auto 12px;background:var(--gwf-c);opacity:.75}
-.gwflow-card p{margin:0;font-size:13px;line-height:1.95;color:var(--gwf-body);text-align:left}
+.gwflow-card p{margin:0;font-size:14.5px;line-height:1.95;color:var(--gwf-body);text-align:left}
 .gwflow-st::after{content:"";position:absolute;top:50%;right:-1px;width:18px;height:1px;background:linear-gradient(90deg,var(--gwf-c),var(--gwf-cn));z-index:2}
 .gwflow-st::before{content:"";position:absolute;top:50%;right:-1px;width:6px;height:6px;border-top:1px solid var(--gwf-cn);border-right:1px solid var(--gwf-cn);transform:translateY(-50%) rotate(45deg);z-index:3}
 .gwflow-st:last-child::after,.gwflow-st:last-child::before{display:none}
