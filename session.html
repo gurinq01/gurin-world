@@ -346,6 +346,49 @@ footer a{color:var(--muted)}
 </section>
 
 <div class="rule"></div>
+<style>
+.gwflow{
+  --gwf-card:#0c1220;--gwf-page:#070b14;--gwf-ink:#ffffff;--gwf-body:#c5ced8;--gwf-dim:#8d9aa6;--gwf-gold:#F5A623;
+  margin:0 auto;max-width:1180px;font:15px/1.9 "Hiragino Sans","Yu Gothic",-apple-system,sans-serif;color:var(--gwf-body)}
+.gwflow *{box-sizing:border-box}
+.gwflow-hd{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap;margin:0 0 10px}
+.gwflow-hd b{font:400 42px/1 "Hiragino Mincho ProN","Yu Mincho",serif;letter-spacing:.2em;color:var(--gwf-gold)}
+.gwflow-hd i{width:1px;height:30px;background:rgba(255,255,255,.1);align-self:center}
+.gwflow-hd h3{margin:0;font:600 25px/1.4 "Hiragino Mincho ProN","Yu Mincho",serif;color:var(--gwf-ink);letter-spacing:.04em}
+.gwflow-lead{margin:0 0 46px;font-size:14px;color:var(--gwf-dim)}
+.gwflow-row{display:grid;grid-template-columns:repeat(5,1fr);align-items:stretch}
+.gwflow-st{position:relative;padding:0 9px;display:flex}
+.gwflow-st:first-child{padding-left:0}.gwflow-st:last-child{padding-right:0}
+.gwflow-card{position:relative;flex:1;min-width:0;background:var(--gwf-card);border:1px solid color-mix(in srgb,var(--gwf-c) 38%,transparent);border-radius:4px;padding:34px 17px 22px;text-align:center;display:flex;flex-direction:column}
+.gwflow-card::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:2px;border-radius:4px 4px 0 0;background:linear-gradient(90deg,var(--gwf-c),var(--gwf-cn))}
+.gwflow-badge{position:absolute;top:-21px;left:50%;transform:translateX(-50%);z-index:4;width:64px;height:42px;border:1px solid var(--gwf-c);border-radius:50%/58%;background:var(--gwf-page);color:var(--gwf-c);display:flex;flex-direction:column;justify-content:center;line-height:1.05}
+.gwflow-badge span{font-size:9px;letter-spacing:.16em}.gwflow-badge b{font:400 17px/1 "Hiragino Mincho ProN","Yu Mincho",serif;letter-spacing:.04em}
+.gwflow-card h4{margin:12px 0 9px;color:var(--gwf-ink);letter-spacing:.02em;font:600 20px/1.5 "Hiragino Mincho ProN","Yu Mincho",serif}
+.gwflow-u{width:28px;height:1px;margin:0 auto 12px;background:var(--gwf-c);opacity:.75}
+.gwflow-card p{margin:0;font-size:13px;line-height:1.95;color:var(--gwf-body);text-align:left}
+.gwflow-st::after{content:"";position:absolute;top:50%;right:-1px;width:18px;height:1px;background:linear-gradient(90deg,var(--gwf-c),var(--gwf-cn));z-index:2}
+.gwflow-st::before{content:"";position:absolute;top:50%;right:-1px;width:6px;height:6px;border-top:1px solid var(--gwf-cn);border-right:1px solid var(--gwf-cn);transform:translateY(-50%) rotate(45deg);z-index:3}
+.gwflow-st:last-child::after,.gwflow-st:last-child::before{display:none}
+@media(max-width:860px){
+  .gwflow-hd b{font-size:34px}.gwflow-hd h3{font-size:21px}.gwflow-hd i{display:none}
+  .gwflow-row{grid-template-columns:1fr;gap:26px}.gwflow-st{padding:0}.gwflow-card{padding:32px 20px 22px}
+  .gwflow-card h4{font-size:21px}.gwflow-card p{font-size:14.5px;line-height:2}
+  .gwflow-st::after{top:auto;bottom:-20px;right:50%;width:1px;height:14px;background:linear-gradient(180deg,var(--gwf-c),var(--gwf-cn))}
+  .gwflow-st::before{top:auto;bottom:-20px;right:50%;transform:translateX(50%) rotate(135deg)}
+}
+</style>
+<section class="wrap gwflow">
+  <div class="gwflow-hd"><b>FLOW</b><i></i><h3>お申し込みから、受けたあとまで</h3></div>
+  <p class="gwflow-lead">申し込む前に、通る道の全体を。</p>
+  <div class="gwflow-row">
+    <div class="gwflow-st" style="--gwf-c:#6fc6c6;--gwf-cn:#4fb2cb"><div class="gwflow-card"><div class="gwflow-badge"><span>STEP</span><b>01</b></div><h4>お申し込み</h4><div class="gwflow-u"></div><p>フォームから、ご希望の日時をお知らせください。</p></div></div>
+    <div class="gwflow-st" style="--gwf-c:#4fb2cb;--gwf-cn:#7b8ad8"><div class="gwflow-card"><div class="gwflow-badge"><span>STEP</span><b>02</b></div><h4>お支払い</h4><div class="gwflow-u"></div><p>日程の候補とお振込先を、GURiNからご返信します。お振込み後、セッションの日程を確定します。</p></div></div>
+    <div class="gwflow-st" style="--gwf-c:#7b8ad8;--gwf-cn:#b98cb4"><div class="gwflow-card"><div class="gwflow-badge"><span>STEP</span><b>STEP</b></div><h4>事前の1問</h4><div class="gwflow-u"></div><p>「このセッションで解放したいこと、解きたい謎」をおうかがいします。当日までに、GURiNが読んでいます。</p></div></div>
+    <div class="gwflow-st" style="--gwf-c:#b98cb4;--gwf-cn:#F5A623"><div class="gwflow-card"><div class="gwflow-badge"><span>STEP</span><b>04</b></div><h4>セッション&nbsp;60分</h4><div class="gwflow-u"></div><p>Google Meetで、GURiN本人と。簡単な瞑目と呼吸から始まります。</p></div></div>
+    <div class="gwflow-st" style="--gwf-c:#F5A623;--gwf-cn:#F5A623"><div class="gwflow-card"><div class="gwflow-badge"><span>STEP</span><b>05</b></div><h4>録音を受け取る</h4><div class="gwflow-u"></div><p>後日お渡しします。あとから何度も聞き返し、日常の中で使えるものにしていきます。</p></div></div>
+  </div>
+</section>
+
 <section class="wrap" id="apply">
   <div class="sec-head"><span class="label">セッションの概要</span></div>
   <table class="facts">
