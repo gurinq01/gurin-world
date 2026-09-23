@@ -401,6 +401,259 @@ footer a{color:var(--muted)}
   </div>
 </section>
 
+
+
+<div class="rule"></div>
+
+<!-- 差分16：受講生の声／GURiN確定版（公開前確認版） -->
+<style>
+/* ▼ ここから下が session.html へ入れるぶん（voice-* 接頭辞・既存CSSに影響しない） ▼ */
+.voice-section{--v-gold:#F5A623;--v-gold2:#887040;--v-turq:#558888;--v-turq2:#7fbcbc;
+ --v-purple:#a78bd8;--v-ink:#ffffff;--v-body:#e4e8ec;--v-dim:#9aa4ad;
+ max-width:880px;margin:0 auto;padding:64px 0}
+.voice-section *{box-sizing:border-box}
+
+.voice-intro{text-align:center;margin:0 0 64px}
+.voice-intro .voice-eyebrow{font-size:12px;letter-spacing:.34em;color:var(--v-turq2);
+ margin:0 0 10px;font-weight:500}
+.voice-intro h2{margin:0 0 22px;font:600 30px/1.5 "Hiragino Mincho ProN","Yu Mincho",serif;
+ color:var(--v-ink);letter-spacing:.03em}
+.voice-intro p{max-width:560px;margin:0 auto;font:500 17px/1.95 "Hiragino Sans","Yu Gothic",sans-serif;
+ color:var(--v-body);letter-spacing:.02em}
+
+.voice-timeline{position:relative}
+.voice-timeline::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;
+ background:linear-gradient(180deg,rgba(85,136,136,0),rgba(85,136,136,.35) 8%,rgba(85,136,136,.35) 92%,rgba(85,136,136,0));
+ transform:translateX(-.5px)}
+
+.voice-item{position:relative;width:46%;margin:0 0 56px;padding:0 40px 0 0}
+.voice-item.voice-right{margin-left:54%;padding:0 0 0 40px;text-align:left}
+.voice-item::after{content:"";position:absolute;top:6px;width:9px;height:9px;border-radius:50%;
+ background:var(--v-gold)}
+.voice-item.voice-left::after{right:-5px}
+.voice-item.voice-right::after{left:-5px}
+.voice-item:nth-of-type(2)::after{background:var(--v-turq2)}
+.voice-item:nth-of-type(4)::after{background:var(--v-purple)}
+.voice-item:nth-of-type(6)::after{background:var(--v-gold)}
+
+.voice-num{display:block;font:600 13px/1 "Hiragino Sans",sans-serif;letter-spacing:.12em;
+ color:var(--v-gold2);margin:0 0 6px}
+.voice-attr{margin:0 0 6px;font:500 15px/1.6 "Hiragino Sans","Yu Gothic",sans-serif;
+ color:var(--v-dim);letter-spacing:.02em}
+.voice-tag{margin:0 0 16px;font:500 12px/1.6 "Hiragino Sans","Yu Gothic",sans-serif;
+ color:var(--v-turq2);letter-spacing:.08em}
+.voice-core{margin:0 0 16px;font:600 19px/1.6 "Hiragino Mincho ProN","Yu Mincho",serif;
+ color:var(--v-ink)}
+.voice-core em{font-style:normal;color:var(--v-gold)}
+.voice-body{margin:0;font:500 16px/2 "Hiragino Sans","Yu Gothic",sans-serif;
+ color:var(--v-body);letter-spacing:.02em}
+.voice-body p{margin:0 0 14px}
+.voice-body p:last-child{margin-bottom:0}
+
+.voice-closing{margin:72px auto 0;max-width:600px;text-align:center;
+ padding:40px 0 0;border-top:1px solid rgba(85,136,136,.25)}
+.voice-closing h3{margin:0 0 18px;font:600 20px/1.6 "Hiragino Mincho ProN","Yu Mincho",serif;
+ color:var(--v-ink)}
+.voice-closing p{margin:0 0 14px;font:500 16px/2 "Hiragino Sans","Yu Gothic",sans-serif;
+ color:var(--v-body)}
+.voice-closing p:last-child{margin-bottom:0;color:var(--v-gold)}
+
+@media(max-width:760px){
+ .voice-section{padding:48px 0}
+ .voice-timeline::before{left:14px}
+ .voice-item,.voice-item.voice-right{width:auto;margin-left:36px;padding:0;text-align:left}
+ .voice-item::after,.voice-item.voice-right::after{left:-27px;right:auto}
+ .voice-intro h2{font-size:24px}
+ .voice-core{font-size:17px}
+ .voice-body{font-size:15.5px}
+}
+.voice-cta{text-align:center;margin:36px 0 0}
+.voice-cta a{display:inline-block;padding:14px 36px;border:1px solid var(--v-gold);color:var(--v-gold);
+ text-decoration:none;font:600 16px/1.6 "Hiragino Sans","Yu Gothic",sans-serif;letter-spacing:.06em}
+.voice-cta a:hover{background:rgba(245,166,35,.1)}
+.voice-body .voice-label{margin:0 0 8px;font:600 12px/1.6 "Hiragino Sans","Yu Gothic",sans-serif;
+ letter-spacing:.2em;color:var(--v-turq2)}
+.voice-before{margin:0 0 22px}
+.voice-before p:not(.voice-label){color:var(--v-dim)}
+.voice-after{padding:0 0 0 14px;border-left:1px solid var(--v-gold2)}
+.voice-after .voice-label{color:var(--v-gold)}
+.voice-pre{margin:0 0 4px;font:500 14px/1.6 "Hiragino Sans","Yu Gothic",sans-serif;color:var(--v-dim)}
+.voice-body .voice-rec{margin-top:14px;color:var(--v-gold);font-weight:600}
+.voice-intro p+p{margin-top:14px}
+.voice-for{margin-top:18px}
+.voice-for p:not(.voice-label){color:var(--v-gold);font-weight:600}
+.voice-closing p:last-child{color:var(--v-body)}
+.voice-cta h3{margin:0 0 14px;font:600 20px/1.6 "Hiragino Mincho ProN","Yu Mincho",serif;color:var(--v-ink)}
+.voice-cta p{margin:0 0 14px;font:500 16px/2 "Hiragino Sans","Yu Gothic",sans-serif;color:var(--v-body)}
+.voice-cta .voice-price{font:600 18px/1.9 "Hiragino Mincho ProN","Yu Mincho",serif;color:var(--v-ink)}
+.voice-cta{margin-top:56px !important}
+.voice-section .voice-body p{font-size:inherit}
+/* ▲ ここまで ▲ */
+</style>
+<section class="voice-section">
+
+  <div class="voice-intro">
+    <p class="voice-eyebrow">VOICE</p>
+    <h2>受講生の声</h2>
+    <p>それぞれが壁に当たりながら、<br>自らの感覚を信じ、「何か違う」と生きてきた。</p>
+    <p>仕事も、年齢も、抱えてきたものも違う。<br>けれど、人生のどこかで、<br>これまでの見方では先へ進めなくなったとき、<br>GURiNを訪れています。</p>
+    <p>35年間。<br>さまざまな人の現実に触れてきました。<br>その中から、6人の声を紹介します。</p>
+  </div>
+
+  <div class="voice-timeline">
+
+    <article class="voice-item voice-left">
+      <span class="voice-num">01</span>
+      <p class="voice-attr">医師・50代女性／メンタルクリニック開業医</p>
+      <p class="voice-core">「<em>悩み</em>」という概念が、消えた。</p>
+      <div class="voice-body">
+        <div class="voice-before">
+          <p class="voice-label">悩み</p>
+          <p>患者さんのことを自分のことのように抱えてしまい、眠れなくなることもありました。<br>医師として、患者さんの悩みにどこまで関わればいいのか、ずっと答えが出ませんでした。</p>
+        </div>
+        <div class="voice-after">
+          <p class="voice-label">そこから</p>
+          <p>セッションを受けて、「人を救う」は錯覚なのだと感じました。<br>人を変えることはできない。<br>だから、自らを変える方向へ。<br>そう考えるようになってから、揺れ動く気持ちが安定しました。</p>
+          <p>瞑想と呼吸を毎朝・毎晩続け、自ら実践しながら患者さんにも伝えています。<br>そして、いつの間にか、「悩み」という概念そのものが消えていました。</p>
+        </div>
+        <div class="voice-for">
+          <p class="voice-label">こんな方へ</p>
+          <p>人の悩みを背負いやすい仕事をしている方に。</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="voice-item voice-right">
+      <span class="voice-num">02</span>
+      <p class="voice-attr">専業主婦・子育て／30代女性</p>
+      <p class="voice-core">思い込んでいた世界から、<em>外へ</em>。</p>
+      <div class="voice-body">
+        <div class="voice-before">
+          <p class="voice-label">悩み</p>
+          <p>子どもが言うことを聞かず、苛立ってばかりいました。<br>「自分は子育てに向いていない」と思い込み、<br>「専業主婦」というレッテルにも苦しんでいました。</p>
+          <p>一方で、占いやスピリチュアルにも深く入り、<br>答えを外に探していました。</p>
+        </div>
+        <div class="voice-after">
+          <p class="voice-label">そこから</p>
+          <p>紹介で訪れたときは、GURiNのことも超能力系だと思っていました。<br>けれど、そこで向き合うことになったのは、<br>自分自身が持っていた「母親だからこうあるべき」という思い込みでした。</p>
+          <p>今は、子どもに苛立つことが減り、<br>子育てを「向いている・向いていない」で見ることもなくなりました。</p>
+        </div>
+        <div class="voice-for">
+          <p class="voice-label">こんな方へ</p>
+          <p>占いやスピリチュアルを渡り歩いて疲れた人にこそ、<br>一度、受けてみてほしいです。</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="voice-item voice-left">
+      <span class="voice-num">03</span>
+      <p class="voice-attr">IT企業勤務・40代男性／プログラマー</p>
+      <p class="voice-core"><em>働く意味</em>が、自分の中に戻ってきた。</p>
+      <div class="voice-body">
+        <div class="voice-before">
+          <p class="voice-label">悩み</p>
+          <p>コンピュータと向き合う毎日で眠りは浅く、<br>ストレスから過食することもありました。<br>何のために働いているのかも分からないまま、<br>生きることに疲れていました。</p>
+        </div>
+        <div class="voice-after">
+          <p class="voice-label">そこから</p>
+          <p>友人の紹介でGURiNを知り、<br>「未来の記憶を呼び起こす」という呼空という瞑想法を、1日3回続けるようになりました。<br>「睡眠は魂の移行の練習」と聞いてから、眠ることの意味そのものが変わり、眠りも深くなりました。</p>
+          <p>仕事も、遊びも、学びも、休むことも、<br>違いはなく、認識の違い。<br>そう腑に落ちたとき、<br>何のために働くのかを、自分の言葉で言えるようになりました。</p>
+        </div>
+        <div class="voice-for">
+          <p class="voice-label">こんな方へ</p>
+          <p>デジタルの世界で働きながら、<br>心も身体もすり減っている人に。</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="voice-item voice-right">
+      <span class="voice-num">04</span>
+      <p class="voice-attr">不動産会社経営・60代男性</p>
+      <p class="voice-core">仕事の<em>基礎から</em>、もう一度見直した。</p>
+      <div class="voice-body">
+        <div class="voice-before">
+          <p class="voice-label">悩み</p>
+          <p>若い頃から自己啓発に取り組み、<br>願望達成にも熱心でした。<br>ところが、不動産の仕事でトラブルが続き、<br>これまでの成功体験がまったく通用しなくなりました。<br>入院中のベッドで、途方に暮れていました。</p>
+        </div>
+        <div class="voice-after">
+          <p class="voice-label">そこから</p>
+          <p>自分の悩みを話そうと意気込んで個人セッションを受けました。<br>ところが、話は土地・不動産へ。</p>
+          <p>家や土地に情報があること。<br>物には空間に合う「位置」があること。<br>何十年もやってきた不動産の基礎そのものが、<br>別の角度から見えてきました。</p>
+          <p>その後、講座で「全天候型の思考」に触れ、<br>成功か失敗かで一喜一憂していた場所から、少しずつ離れていきました。<br>今は、仕事の組み立て方そのものが変わっています。</p>
+        </div>
+        <div class="voice-for">
+          <p class="voice-label">こんな方へ</p>
+          <p>これまでの成功法則だけでは、<br>もう先へ進めないと感じている経営者に。</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="voice-item voice-left">
+      <span class="voice-num">05</span>
+      <p class="voice-attr">一級建築士・インテリアデザイナー／50代女性</p>
+      <p class="voice-core">「こうあるべき」が、<em>少しずつ</em>薄くなった。</p>
+      <div class="voice-body">
+        <div class="voice-before">
+          <p class="voice-label">悩み</p>
+          <p>共同経営の事務所を離れて独立し、<br>離婚や別れも重なりました。</p>
+          <p>「夫とはこうあるべき」<br>「仕事はこうすべき」<br>そんな思いに、強く縛られていました。</p>
+        </div>
+        <div class="voice-after">
+          <p class="voice-label">そこから</p>
+          <p>GURiNとともに、空間そのものを見ていく考え方に触れました。<br>物には、空間に合う「位置」がある。<br>空間そのものの回路図をつくっていく。<br>建築の仕事をしてきた私には、<br>それが人生にも重なって見えました。</p>
+          <p>それまであれほどこだわっていた思いが、<br>少しずつ薄くなっていきました。<br>今は、イレギュラーを楽しみながら、<br>自ら選んだ道を生きています。</p>
+        </div>
+        <div class="voice-for">
+          <p class="voice-label">こんな方へ</p>
+          <p>「こうあるべき」という正解を守ることに、<br>少し疲れてしまった人に。</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="voice-item voice-right">
+      <span class="voice-num">06</span>
+      <p class="voice-attr">元中学校教師・50代女性</p>
+      <p class="voice-core">死は、<em>絶望ではない</em>。</p>
+      <div class="voice-body">
+        <div class="voice-before">
+          <p class="voice-label">悩み</p>
+          <p>教師という立場の中で、<br>ずっと「いい先生」であり続けようとしてきました。<br>家でも仕事を抱え、<br>「生徒のために」と頑張っていました。</p>
+          <p>50代になり、残りの人生を考えるようになった頃、<br>身内の死を通して絶望していた時期にGURiNを知りました。</p>
+        </div>
+        <div class="voice-after">
+          <p class="voice-label">そこから</p>
+          <p>最初は、GURiNの言葉を理解することができませんでした。<br>けれど、「存在しているだけでもいい」というところから、<br>少しずつ受け取れるようになりました。</p>
+          <p>半年後、突然、死について<br>「こういう感じなのか」と感じるようになりました。<br>言葉というより、その先にあるものを感じたのです。</p>
+          <p>今は、死は決して絶望ではないと感じながら、<br>「先生」である前に、ひとりの人として生きています。</p>
+        </div>
+        <div class="voice-for">
+          <p class="voice-label">こんな方へ</p>
+          <p>大切な人を見送り、<br>生きることと死ぬことについて立ち止まっている人に。</p>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="voice-closing">
+    <h3>この6人を通して見えてきたこと</h3>
+    <p>職業も、年齢も、抱えていたものも、<br>それぞれ違います。</p>
+    <p>けれど、共通しているのは、<br>自らの感覚を手放さず、<br>「何か違う」という感覚を持ち続けてきたこと。<br>そして、その先で、<br>これまでとは違う世界の見え方に出会っていること。</p>
+    <p>GURiNの個人セッションは、<br>悩みをなくすためだけの時間ではありません。<br>自らの見方が変わる。<br>そこから、現実の見え方が変わる。<br>そして、自らの現実をつくっていく。<br>そのための時間です。</p>
+    <p>35年間、<br>さまざまな人生を生きる人たちが、GURiNを訪れてきました。</p>
+  </div>
+
+  <div class="voice-cta">
+    <h3>個人セッションへ</h3>
+    <p class="voice-price">60分　30,000円（税込）<br>90分　45,000円（税込）</p>
+    <p>あなた自身の現実を、<br>あなた自身の感覚から見ていく時間です。</p>
+    <a href="#apply">個人セッションを申し込む</a>
+  </div>
+
+</section>
+
+<div class="rule"></div>
+
 <section class="wrap" id="apply">
   <div class="sec-head"><span class="label">セッションの概要</span></div>
   <table class="facts">
