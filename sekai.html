@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>この世界は幻。仮想現実の先を、意識とテクノロジーから｜GURiN World</title>
+<meta name="description" content="この世界は仮想現実？ 幻？ 現実とは何か。意識とテクノロジーの両方から、世界の見え方を変える。GURiN Worldの、3つの入口。">
+<link rel="canonical" href="https://gurinq01.github.io/gurin-world/sekai.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GURiN World">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="この世界は幻。仮想現実の先を、意識とテクノロジーから｜GURiN World">
+<meta property="og:description" content="この世界は仮想現実？ 幻？ 現実とは何か。意識とテクノロジーの両方から、世界の見え方を変える。GURiN Worldの、3つの入口。">
+<meta property="og:url" content="https://gurinq01.github.io/gurin-world/sekai.html">
+<meta property="og:image" content="https://gurinq01.github.io/gurin-world/site_assets/og_session_20260917.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#071632">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#071632; --bg-darkest:#070d1b; --bg-lit:#0a1d42; --bg-lit2:#102956;
+  --bg-violet:#171638; --bg-vivid:#00008b; --bg2:#0c1e33;
+  --platinum:#EDEDF2; --turquoise:#5FD4D0; --gold:#F5A623; --violet:#8f8bd6;
+  --text:#cfd2df; --muted:#8b90a6; --dim:#6b7089; --line:rgba(255,255,255,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:'Noto Serif JP',serif; font-weight:500;
+  background-image:
+    radial-gradient(ellipse 90% 40% at 50% 0%,var(--bg-darkest),transparent 60%),
+    radial-gradient(ellipse 60% 45% at 24% 55%,rgba(0,0,139,.08),transparent 72%),
+    radial-gradient(ellipse 70% 50% at 80% 100%,var(--bg-violet),transparent 70%);
+  background-attachment:fixed;
+  line-height:1.9; letter-spacing:.02em; -webkit-font-smoothing:antialiased;
+}
+a{color:var(--turquoise); text-decoration:none}
+a:hover{color:var(--cyan,#6FE9E4)}
+
+/* nav */
+nav{position:sticky; top:0; z-index:20; display:flex; justify-content:space-between; align-items:center;
+  padding:18px 26px; background:rgba(7,13,27,.72); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+.brand{font-family:'Shippori Mincho',serif; letter-spacing:.22em; color:var(--platinum); font-size:15px}
+.nav-links{display:flex; gap:22px; font-size:12px; letter-spacing:.16em; color:var(--muted)}
+.nav-links a{color:var(--muted)}
+.nav-links a:hover{color:var(--platinum)}
+@media(max-width:640px){ .nav-links{gap:14px; font-size:11px} }
+
+/* layout */
+.wrap{max-width:760px; margin:0 auto; padding:0 26px}
+section{padding:74px 0}
+/* ★.wrap が section の縦paddingを打ち消していたため、明示する（2026-08-28） */
+section.wrap{padding-top:78px; padding-bottom:78px}
+@media(max-width:640px){ section.wrap{padding-top:56px; padding-bottom:56px} }
+.eyebrow{text-align:center; font-size:13px; letter-spacing:.28em; color:var(--muted); margin-bottom:22px}
+.session-title{font-family:'Shippori Mincho',serif; font-weight:500; text-align:center;
+  font-size:clamp(24px,4vw,32px); letter-spacing:.12em; color:var(--platinum);
+  line-height:1.6; margin:0 0 30px; text-shadow:0 0 20px rgba(237,237,242,.18)}
+h1{font-family:'Shippori Mincho',serif; font-weight:500; text-align:center;
+  font-size:clamp(26px,5vw,44px); letter-spacing:.14em; color:var(--platinum);
+  text-shadow:0 0 26px rgba(237,237,242,.28); line-height:1.7; margin:0}
+h2{font-family:'Shippori Mincho',serif; font-weight:500; text-align:center;
+  font-size:clamp(22px,3.6vw,32px); letter-spacing:.12em; color:var(--platinum);
+  text-shadow:0 0 20px rgba(237,237,242,.22); line-height:1.6; margin:0 0 34px}
+h3{font-family:'Shippori Mincho',serif; font-weight:500; font-size:20px; letter-spacing:.1em;
+  color:var(--turquoise); margin:38px 0 14px}
+.lead{text-align:center; color:var(--text); font-size:16px; letter-spacing:.14em; margin-top:20px}
+p{font-size:18px; margin:0 0 24px}
+.center{text-align:center}
+.rule{height:1px; background:linear-gradient(90deg,transparent,var(--line),transparent); margin:0}
+
+/* hero */
+.hero{padding:100px 0 78px; text-align:center}
+.hero .sub{margin-top:30px; color:var(--text); font-size:17px}
+.hero .gold{color:var(--gold); letter-spacing:.12em}
+
+/* 引用のような、大きな一行 */
+.quiet{font-family:'Shippori Mincho',serif; font-size:clamp(18px,2.6vw,23px);
+  letter-spacing:.12em; color:var(--platinum); text-align:center; line-height:2; margin:44px 0}
+
+/* リスト */
+ul.marks{list-style:none; padding:0; margin:26px 0}
+ul.marks li{position:relative; padding-left:26px; margin-bottom:15px; font-size:16.5px; color:var(--text)}
+ul.marks li:before{content:""; position:absolute; left:4px; top:16px; width:5px; height:5px;
+  border-radius:50%; background:var(--turquoise); opacity:.75}
+
+/* 方位 */
+.dirs{display:grid; grid-template-columns:repeat(auto-fit,minmax(148px,1fr)); gap:12px; margin:26px 0}
+.dir{background:var(--bg2); border:1px solid var(--line); border-radius:12px; padding:22px 22px}
+.dir b{display:block; font-family:'Shippori Mincho',serif; font-size:19px; letter-spacing:.16em; margin-bottom:6px}
+.dir span{font-size:15px; color:var(--text); letter-spacing:.06em; line-height:1.9}
+.d-e b{color:var(--gold)} .d-w b{color:#D46BB0} .d-s b{color:var(--turquoise)} .d-n b{color:#57C99A}
+/* 点・面・空。★空のゴールドは【仮色】。正式決定していない（保留事項 #14）。決まったら d-kuu を差し替える */
+.d-ten b{color:#C9CEDC} .d-men b{color:var(--turquoise)} .d-kuu b{color:var(--gold)}
+
+/* 料金 */
+.plans{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin:30px 0}
+.plan{background:var(--bg2); border:1px solid var(--line); border-radius:14px; padding:26px 24px}
+.plan .name{font-family:'Shippori Mincho',serif; letter-spacing:.14em; color:var(--platinum); font-size:18px}
+.plan .time{margin-top:12px; font-size:26px; color:var(--platinum); font-family:'Shippori Mincho',serif; letter-spacing:.08em}
+.plan .fee{margin-top:8px; color:var(--gold); font-size:18px; letter-spacing:.1em}
+.plan .note{margin-top:14px; font-size:15px; color:var(--muted); line-height:1.95}
+.tag{display:inline-block; font-size:12px; letter-spacing:.16em; color:var(--dim);
+  border:1px solid var(--line); border-radius:999px; padding:5px 12px; margin-bottom:16px}
+
+/* 導線 */
+.route{margin:34px auto 0; max-width:420px}
+.route .step{text-align:center; padding:16px 0}
+.route .step b{display:block; font-family:'Shippori Mincho',serif; font-size:16px;
+  letter-spacing:.14em; color:var(--platinum); margin-bottom:4px}
+.route .step span{font-size:15px; color:var(--text)}
+.route .arrow{text-align:center; color:var(--muted); font-size:15px}
+
+/* CTA */
+.cta{text-align:center; margin-top:44px}
+.btn{display:inline-block; font-family:'Shippori Mincho',serif; font-size:16px; letter-spacing:.2em;
+  color:var(--platinum); border:1px solid rgba(95,212,208,.4); border-radius:999px;
+  padding:15px 40px; background:linear-gradient(180deg,rgba(95,212,208,.08),rgba(95,212,208,.02));
+  transition:.35s}
+.btn:hover{border-color:var(--turquoise); box-shadow:0 0 26px rgba(95,212,208,.18); color:#fff}
+.pending{display:inline-block; font-size:13.5px; letter-spacing:.16em; color:var(--muted);
+  border:1px solid var(--line); border-radius:999px; padding:7px 18px}
+
+/* ══ 3層構造：見出し → 核心の一行 → 本文（2026-08-28 ゼイラス完成稿） ══ */
+.sec-head{margin:0 0 8px}
+.sec-head .label{display:block; font-family:'Shippori Mincho',serif; font-weight:500;
+  font-size:clamp(24px,3.4vw,31px); letter-spacing:.1em; color:var(--platinum);
+  line-height:1.6; text-shadow:0 0 20px rgba(237,237,242,.2)}
+.sec-head:before{content:""; display:block; width:38px; height:2px; margin-bottom:22px;
+  background:linear-gradient(90deg,var(--gold),rgba(245,166,35,0))}
+.core{font-family:'Shippori Mincho',serif; font-size:clamp(17px,2.2vw,20px); letter-spacing:.08em;
+  color:var(--gold); line-height:1.95; margin:18px 0 34px}
+strong{font-weight:600; color:var(--platinum); border-bottom:1px solid rgba(245,166,35,.35); padding-bottom:1px}
+h3{font-family:'Shippori Mincho',serif; font-weight:500; font-size:19px; letter-spacing:.09em;
+  color:var(--turquoise); margin:36px 0 12px}
+/* 冒頭の要点 */
+.gist{background:var(--bg2); border:1px solid var(--line); border-radius:16px; padding:30px 30px; margin:30px 0}
+.gist p{font-size:17.5px; margin:0 0 14px}
+.gist p:last-child{margin:0}
+.gist .k{display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px;
+  border-radius:50%; border:1px solid rgba(245,166,35,.55); color:var(--gold);
+  font-family:'Shippori Mincho',serif; font-size:16px; letter-spacing:0; margin-right:14px;
+  flex:0 0 30px; line-height:1}
+.gist p{display:flex; align-items:flex-start; gap:0}
+.gist p span.k{margin-top:4px}
+.gist .txt{flex:1}
+.gist .sub-label{display:block; margin-top:7px; color:var(--turquoise); font-size:14px; letter-spacing:.1em}
+/* 特性の箇条 */
+.feats{list-style:none; padding:0; margin:30px 0}
+.feats li{background:var(--bg2); border:1px solid var(--line); border-radius:13px;
+  padding:20px 24px; margin-bottom:14px; font-size:16.5px; line-height:2.0}
+.feats b{display:block; font-family:'Shippori Mincho',serif; font-size:17.5px; letter-spacing:.1em;
+  color:var(--gold); margin-bottom:8px; font-weight:500}
+/* 締め */
+.closing{text-align:center; padding:20px 0 0}
+.closing .l1{font-family:'Shippori Mincho',serif; font-size:clamp(20px,3vw,27px);
+  letter-spacing:.14em; color:var(--platinum); line-height:2; margin:0 0 10px}
+.closing .l2{color:var(--gold); font-size:17px; letter-spacing:.1em}
+/* 実務の表 */
+.facts{width:100%; border-collapse:collapse; margin:26px 0; font-size:16px}
+.facts th,.facts td{border-bottom:1px solid var(--line); padding:17px 8px; text-align:left; vertical-align:top}
+.facts th{width:9em; color:var(--muted); font-weight:400; letter-spacing:.08em}
+.facts td .tbd{color:var(--muted)}
+.facts.price th{width:14.5em; color:var(--platinum); font-weight:400}
+@media(max-width:700px){ .facts.price th{width:9.5em} }
+/* 図解の入る場所（ゼイラス設計待ち） */
+.figure-slot{border:1px dashed rgba(95,212,208,.28); border-radius:16px; padding:52px 24px;
+  text-align:center; color:var(--muted); font-size:14px; letter-spacing:.1em; margin:30px 0;
+  background:rgba(95,212,208,.02)}
+/* 原典の引用（原典専用。他の文には使わない） */
+.genten{margin:36px 0; padding:28px 32px; border-left:2px solid var(--gold);
+  background:rgba(245,166,35,.05); border-radius:0 12px 12px 0}
+.genten .t{margin:0; font-family:'Shippori Mincho',serif; font-size:19px; line-height:2.25;
+  letter-spacing:.14em; color:var(--platinum)}
+.genten .src{margin:18px 0 0; font-size:13px; letter-spacing:.12em; color:var(--muted)}
+@media(max-width:700px){ .genten{padding:22px 20px} .genten .t{font-size:17px} }
+/* 図解 */
+.fig{margin:38px 0}
+.fig img{width:100%; height:auto; display:block; border-radius:18px; background:#050a14;
+  border:1px solid rgba(95,212,208,.14)}
+.fig figcaption{margin-top:12px; text-align:center; color:var(--muted); font-size:13px; letter-spacing:.1em}
+footer{padding:60px 0 80px; text-align:center; color:var(--muted); font-size:14px; letter-spacing:.14em}
+footer a{color:var(--muted)}
+/* 押す場所がひと目で分かるリンク（2026-09-01） */
+.about-link{display:inline-block; margin-top:9px; font-size:14px; letter-spacing:.1em;
+  color:var(--turquoise); text-decoration:none; border-bottom:1px solid rgba(95,212,208,.45);
+  padding-bottom:2px; transition:border-color .3s ease}
+.about-link:hover{border-bottom-color:rgba(95,212,208,.9)}
+.gwportrait{margin:0 0 26px;border:1px solid rgba(127,188,188,.22);border-radius:3px;
+  overflow:hidden;line-height:0}
+.gwportrait img{width:100%;height:auto;display:block}
+  /* ── 読みやすさ（2026-09-19・GURiN確定）仕上げの3箇所 ──
+   ★.gwflow-badge span だけ11px。丸バッジが64×42pxなので13pxでは溢れる。 */
+  .nav-links{font-size:13px}
+  .tag{font-size:14px}
+  .gwflow-badge span{font-size:11px}
+  /* ──────────────────────────────────────── */
+
+</style>
+<style>.feats b a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(245,166,35,.35)} h2.sec-head{text-align:left;margin:0 0 8px;font-size:inherit;text-shadow:none} .genten .t ruby rt{font-size:.5em;letter-spacing:.1em;color:var(--muted)}</style>
+<script data-goatcounter="https://gurinworld.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<nav>
+  <div class="brand">GURiN World</div>
+  <div class="nav-links">
+    <a href="https://gurinq01.github.io/gurin-world/">トップ</a>
+    <a href="about.html">はじめて</a>
+    <a href="session.html">セッション</a>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="eyebrow">GURiN WORLD ｜ 3つの入口</div>
+  <h1>この世界は幻。<br>仮想現実の先を、<br>意識とテクノロジーから見る</h1>
+</header>
+
+<section class="wrap">
+  <p>この世界は仮想現実なのではないか？</p>
+  <p>そんな問いが、今ではテクノロジーの進化とともに、現実的なテーマとして語られるようになりました。</p>
+  <p>GURiN Worldには、その問いへの入口が3つあります。</p>
+</section>
+
+<div class="rule"></div>
+
+<section class="wrap">
+  <h2 class="sec-head"><span class="label">この世界は仮想現実。では、現実とは何か？</span></h2>
+  <p>VR、メタバース、シミュレーション仮説、そしてAI。コンピュータがつくり出す世界は、どんどん現実に近づいています。でも、ここで一度、問いを変えてみます。</p>
+  <p>同じ場所にいても、そこにいる人によって見えている世界は違います。同じ世界を生きているように見えて、実際には、それぞれが異なる現実を映しています。</p>
+  <p>GURiNは、現実を「意識が映し出す世界」としてとらえています。意識が変われば、映る世界が変わる。</p>
+  <p>現実を、目の前の「点」から、見えない「面」へ、さらに「空」までひろげてとらえる。GURiN Worldの根幹「点・面・空」です。</p>
+  <h3>記事を読む</h3>
+<ul class="marks">
+<li><a href="https://note.com/gurin_q01/n/nb9378529c3c1" target="_blank" rel="noopener">この世界は仮想現実。では、現実とは何か？（8/30）</a></li>
+<li><a href="https://note.com/gurin_q01/n/n1c61786afda9" target="_blank" rel="noopener">「この世界は仮想現実」と気づいた人へ。マボロシストこそが、最強のリアリストである理由（6/9）</a></li>
+<li><a href="https://note.com/gurin_q01/n/n2154a0ce502c" target="_blank" rel="noopener">イーロン・マスクは、なぜ「この世界はシミュレーション」と語ったのか。― 仮想現実は、始まりである（7/25）</a></li>
+<li><a href="https://note.com/gurin_q01/m/m3e4ca0e91cd7" target="_blank" rel="noopener">マガジン：この世界は幻・仮想現実｜GURiN Worldの入口</a></li>
+</ul>
+</section>
+
+<div class="rule"></div>
+
+<section class="wrap">
+  <h2 class="sec-head"><span class="label">この世界は幻</span></h2>
+  <p>現実とは、自らの意識が生成しているもの。世界のどこへ行っても、意識が変わらなければ、何も変わらない。</p>
+  <p>「世界は、内側にある」。</p>
+  <p>自分が見ている世界は、自分の意識とともに現れている。そう考えると、「この世界は幻」という言葉も、少し違って見えてきます。</p>
+  <p>GURiN Worldでは、幻を、意識が映し出す世界としてとらえます。幻を知った人間が、AI時代を自在に生きる。それが、GURiN Worldの視点です。</p>
+  <h3>記事を読む</h3>
+<ul class="marks">
+<li><a href="https://note.com/gurin_q01/n/n5650a46ddccd" target="_blank" rel="noopener">この世界は、愛しい幻——GURiN Worldへようこそ（6/7）</a></li>
+<li><a href="https://note.com/gurin_q01/n/n8a57deed6303" target="_blank" rel="noopener">この世界は幻。「この世界は仮想現実」と思ってみる――ポストリアリティ時代に、意識を解放する（9/6）</a></li>
+<li><a href="https://note.com/gurin_q01/n/n6da68dd6be51" target="_blank" rel="noopener">幻には、攻略ルールがある——進化と創造のフィールドを、自在に歩く（7/26）</a></li>
+</ul>
+</section>
+
+<div class="rule"></div>
+
+<section class="wrap">
+  <h2 class="sec-head"><span class="label">意識とテクノロジー</span></h2>
+  <p>AIと人間は対立構造ではない。人間の意識の深さが、そのままテクノロジーの進化につながっている。</p>
+  <p>AIは、人間の知性を拡張するものになり、XRは現実と仮想世界の境界を変え、ロボットは「人間とは何か」という問いを映し出していく。</p>
+  <p>テクノロジーの進化は人類の深化とも重なります。</p>
+  <p>意識とテクノロジーの両方から、世界の見え方を、いまの暮らしにつなげていく。noteのマガジン「意識とテクノロジー｜AIと仮想現実の先へ」に、記事を集めています。</p>
+  <h3>記事を読む</h3>
+<ul class="marks">
+<li><a href="https://note.com/gurin_q01/m/m767bca287553" target="_blank" rel="noopener">マガジン：意識とテクノロジー｜AIと仮想現実の先へ（28本以上）</a></li>
+<li><a href="https://note.com/gurin_q01/n/na5168df77fb6" target="_blank" rel="noopener">この星、「地球」という未来のシナリオ―意識とテクノロジーからも。（8/21）</a></li>
+<li><a href="https://note.com/gurin_q01/n/nec65cb5f519c" target="_blank" rel="noopener">インスピレーション・テクノロジー Vol.1</a></li>
+<li><a href="https://note.com/gurin_q01/n/nd4fc8442cd92" target="_blank" rel="noopener">インスピレーション・テクノロジー Vol.2</a></li>
+<li><a href="https://note.com/gurin_q01/n/nbf5b99e38f56" target="_blank" rel="noopener">インスピレーション・テクノロジー Vol.3</a></li>
+</ul>
+</section>
+
+<div class="rule"></div>
+
+<section class="wrap">
+  <h2 class="sec-head"><span class="label">GURiN Worldの座標</span></h2>
+  <div class="dirs">
+    <div class="dir d-e"><b>東</b><span>世界観・思想・宇宙観・AIと意識の構造</span></div>
+    <div class="dir d-s"><b>南</b><span>お金・仕事・経営・テクノロジー・土地不動産</span></div>
+    <div class="dir d-w"><b>西</b><span>男女・親子・結婚・離婚、すべての人間関係</span></div>
+    <div class="dir d-n"><b>北</b><span>身体・呼吸・瞑想・言葉・老・病・死</span></div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section class="wrap">
+  <h2 class="sec-head"><span class="label">ここから先へ</span></h2>
+  <ul class="feats">
+    <li><b><a href="about.html">はじめての方へ</a></b>GURiN Worldとは何か。88本の記事の入口を、1枚にまとめています。</li>
+    <li><b><a href="session.html">GURiNの個人セッション</a></b>60分 30,000円／90分 45,000円（税込）</li>
+  </ul>
+</section>
+
+<footer>
+  <a href="https://gurinq01.github.io/gurin-world/">GURiN World</a>　／　
+  <a href="about.html">はじめての方へ</a>　／　
+  <a href="https://note.com/gurin_q01">note</a>　／　
+  <a href="terms.html">規定・特商法表記</a>
+  <div style="margin-top:22px">この幻を、共に。🐱</div>
+  <div style="margin-top:18px;font-size:10px;letter-spacing:.3em;color:#4a4f63">© 2026 GURiN World</div>
+</footer>
+
+</body>
+</html>
