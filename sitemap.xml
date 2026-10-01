@@ -61,4 +61,11 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://gurinq01.github.io/gurin-world/terms.html</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
 </urlset>
