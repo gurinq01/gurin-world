@@ -717,6 +717,23 @@ nav.menu-open .hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45
 @media(max-width:860px){.hero-btns{flex-direction:column;align-items:stretch;}.hero-btns .cta,.hero-btns .hero-line-btn{text-align:center;width:100%!important;max-width:420px;box-sizing:border-box;}}
 @media (prefers-reduced-motion:reduce){.hero-brand,.hero-h1,.hero-h2,.hero-pos,.hero-btns{animation:none;opacity:1;}}
 </style>
+<style id="entrance-20261120">
+/* ═══ 今日の入口（2026-11-20）：幻度・お金・モンスター診断。画像は仮→ゼイラスの本番に差し替え ═══ */
+.e-money .scene{background-image:url('site_assets/entrance_receive_river.webp');background-position:center 45%;}
+.e-monster .scene{background-image:url('site_assets/entrance_session_city.webp');background-position:center 40%;}
+.ent .scene{opacity:1!important;filter:saturate(1.15) brightness(1.08);}
+.ent .fog{background:linear-gradient(to top,rgba(5,10,20,.86) 0%,rgba(5,10,20,.55) 34%,rgba(5,10,20,0) 62%)!important;}
+.ent .verb{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Noto Sans CJK JP",sans-serif!important;font-weight:700!important;font-size:14px!important;}
+.ent h3,.ent .title-row h3{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Noto Sans CJK JP",sans-serif!important;font-weight:800!important;font-size:clamp(18px,1.6vw,21px)!important;letter-spacing:.02em!important;color:#fff!important;}
+.entrances{overflow:visible!important;padding-top:70px;}
+.ent{overflow:visible!important;}
+.ent .scene,.ent .fog{border-radius:inherit;}
+.ent h3{word-break:keep-all;overflow-wrap:anywhere;}
+.ent-pop{position:absolute;z-index:3;right:-14px;top:-70px;width:44%;max-width:210px;height:auto;pointer-events:none;filter:drop-shadow(0 10px 22px rgba(0,0,0,.45));transition:transform .5s ease;}
+.e-monster .ent-pop{width:44%;max-width:210px;top:-70px;right:-14px;}
+.ent:hover .ent-pop{transform:translateY(-6px) rotate(-2deg);}
+@media(max-width:860px){.entrances{padding-top:60px;row-gap:90px!important;}.ent-pop{width:40%;max-width:170px;top:-60px;right:-6px;}.e-monster .ent-pop{max-width:170px;}}
+</style>
 </head>
 <body>
 <canvas id="stars"></canvas>
@@ -852,25 +869,20 @@ nav.menu-open .hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45
 <section id="entrances">
   <div class="eyebrow reveal">TODAY'S ENTRANCE</div>
   <h2 class="reveal">今日の、入口。</h2>
-  <p class="lead reveal">測る。受け取る。ひらく。<br>今のあなたに合う入口から、どうぞ。</p>
+  <p class="lead reveal">測る。見つめる。見つける。<br>今のあなたに合う入口から、どうぞ。</p>
   <p class="entrance-link reveal"><a href="sekai.html">この世界は幻・仮想現実の入口</a></p>
   <div class="entrances">
     <a class="ent e-observe reveal" href="https://gurin.world/maboroshi.html" target="_blank" rel="noopener noreferrer">
-      <div class="scene"></div><div class="fog"></div><div class="life"></div>
+      <img class="ent-pop" src="site_assets/ov_maboroshi.png?v=20261120" alt="幻度チェックシートの画面" loading="lazy"><div class="scene"></div><div class="fog"></div><div class="life"></div>
       <div class="body"><div class="verb">測る</div><div class="title-row"><span class="title-accent title-accent-turquoise"></span><h3>幻度チェックシート</h3></div><p>今の世界が、どんなふうに映っているのかを見る入口。</p></div>
     </a>
-    <!-- 重複メモ（内部用・非表示）：#rona の「今日のロナメッセージへ」リンクと導線が重複。
-         2026-07-18 maki指示により、両方の経路をそのまま残す（ロナ経由／今日の入口から直接、の2導線として共存） -->
-    <a class="ent e-receive reveal" href="https://gurin.world/rona.html" target="_blank" rel="noopener noreferrer">
-      <div class="scene"></div><div class="fog"></div><div class="life"></div>
-      <div class="body"><div class="verb">受け取る</div><div class="title-row"><span class="title-accent title-accent-gold"></span><h3>今日のロナメッセージ</h3></div><p>一日ひとつ、今日の一節を受け取る入口。</p></div>
+    <a class="ent e-money reveal" href="https://gurin.world/okane.html" target="_blank" rel="noopener noreferrer">
+      <img class="ent-pop" src="site_assets/ov_okane.png?v=20261120" alt="お金のマボロシチェックシートの画面" loading="lazy"><div class="scene"></div><div class="fog"></div><div class="life"></div>
+      <div class="body"><div class="verb">見つめる</div><div class="title-row"><span class="title-accent title-accent-gold"></span><h3>お金のマボロシ<wbr>チェックシート</h3></div><p>お金と〇〇、結びつけていませんか？</p></div>
     </a>
-    <!-- 仮枠（内容未定）：WORLD MAPが直前のセクションへ移動したため、旧「世界地図」カードは
-         内容未確定の入口プレースホルダーへ置き換え。新規画像は作らず、既存のsite_assets/spot_sea.webpと
-         既存のカード構造（scene/fog/life）をそのまま流用する。リンク先未定のためリンク要素ではなくdiv要素にしている -->
-    <a class="ent e-session reveal" href="session.html">
-      <div class="scene"></div><div class="fog"></div><div class="life"></div>
-      <div class="body"><div class="verb">受ける</div><div class="title-row"><span class="title-accent title-accent-turquoise"></span><h3>GURiN個人セッション</h3></div><p>あなた自身の世界を、直接ひらく時間。</p></div>
+    <a class="ent e-monster reveal" href="https://gurin.world/shindan.html" target="_blank" rel="noopener noreferrer">
+      <img class="ent-pop" src="site_assets/ov_monster.png?v=20261120" alt="モンスター ソントク" loading="lazy"><div class="scene"></div><div class="fog"></div><div class="life"></div>
+      <div class="body"><div class="verb">見つける</div><div class="title-row"><span class="title-accent title-accent-turquoise"></span><h3>モンスター診断</h3></div><p>今、あなたの中にいるモンスターを知る。</p></div>
     </a>
   </div>
 </section>
