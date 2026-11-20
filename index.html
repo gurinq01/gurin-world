@@ -734,6 +734,13 @@ nav.menu-open .hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45
 .ent:hover .ent-pop{transform:translateY(-6px) rotate(-2deg);}
 @media(max-width:860px){.entrances{padding-top:60px;row-gap:90px!important;}.ent-pop{width:40%;max-width:170px;top:-60px;right:-6px;}.e-monster .ent-pop{max-width:170px;}}
 </style>
+<style id="map-20261120">
+/* ═══ WORLD MAP の文字（2026-11-20）：施設名・凡例を太めのゴシックに ═══ */
+.pin .pin-name{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Noto Sans CJK JP",sans-serif!important;font-weight:700!important;letter-spacing:.04em!important;}
+@media(min-width:861px){.pin .pin-name{font-size:15px!important;}.pin.gate .pin-name{font-size:14px!important;}}
+.map-legend,.map-legend span,.map-external,.map-external span,.map-external a{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Noto Sans CJK JP",sans-serif!important;font-weight:700!important;letter-spacing:.04em!important;}
+#next .lead,#next p{font-weight:600;}
+</style>
 </head>
 <body>
 <canvas id="stars"></canvas>
@@ -906,38 +913,7 @@ nav.menu-open .hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45
   </div>
 </section>
 
-<!-- NEXT：3つのフィールド -->
-<section id="next">
-  <div class="eyebrow reveal">NEXT</div>
-  <h2 class="reveal">次にひらく、<br class="br-sp">3つのフィールド。</h2>
-  <p class="lead reveal">ここから先、GURiN Worldは、<br>試す・記憶をひらく・深める、<br>3つのフィールドへ広がっていきます。</p>
-  <div class="routes">
-    <div class="route reveal">
-      <div class="thumb" style="background-image:url('site_assets/spot_sea.webp')"></div>
-      <div class="rbody">
-        <div class="pending-tag">構築中</div>
-        <h4>夢幻ラボ</h4>
-        <p>世界観と意識を、現実の中で実験していく場所。<br><br>月1〜2回のGURiNトークとQ&amp;Aを通して、<br>それぞれのマボロシ世界に新しい視点を持ち帰り、<br>現実の中で実装していきます。</p>
-      </div>
-    </div>
-    <div class="route reveal">
-      <div class="thumb" style="background-image:url('site_assets/spot_river.webp')"></div>
-      <div class="rbody">
-        <div class="pending-tag">一部開架</div>
-        <h4>GURiN Archive｜世界の書庫</h4>
-        <p>未来意識のメッセージを源泉に、GURiN Worldの記事、辞書、記録を収める書庫です。意識・仮想現実・テクノロジーをめぐる探究と、世界観が広がる言葉に出会えます。</p>
-      </div>
-    </div>
-    <div class="route reveal">
-      <div class="thumb" style="background-image:url('site_assets/spot_academy.webp')"></div>
-      <div class="rbody">
-        <div class="pending-tag">近日開門予定</div>
-        <h4>GURiN Academy</h4>
-        <p>世界観を、学びと実践へつなげる場所。<br><br>宇宙のしくみ、未来のシナリオ、意識とテクノロジー、<br>インスピレーション、お金、仕事、人間関係、生老病死……<br><br>人類のあらゆる謎を、紐解いていきます。</p>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- GURiN BOOKS：書物の入口（2026-07-27 追加／2026-11-20『宇宙のクラウド』を一度はずし、3冊の仮表紙に。表紙＝Kuuの仮→本番はゼイラス）。旧表紙 book_uchu-no-cloud_cover_portrait.webp は残す -->
 <section id="books">
@@ -1023,6 +999,39 @@ nav.menu-open .hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45
 </section>
 
 
+
+<!-- NEXT：3つのフィールド -->
+<section id="next">
+  <div class="eyebrow reveal">NEXT</div>
+  <h2 class="reveal">次にひらく、<br class="br-sp">3つのフィールド。</h2>
+  <p class="lead reveal">ここから先、GURiN Worldは、<br>試す・記憶をひらく・深める、<br>3つのフィールドへ広がっていきます。</p>
+  <div class="routes">
+    <div class="route reveal">
+      <div class="thumb" style="background-image:url('site_assets/spot_sea.webp')"></div>
+      <div class="rbody">
+        <div class="pending-tag">構築中</div>
+        <h4>夢幻ラボ</h4>
+        <p>世界観と意識を、現実の中で実験していく場所。<br><br>月1〜2回のGURiNトークとQ&amp;Aを通して、<br>それぞれのマボロシ世界に新しい視点を持ち帰り、<br>現実の中で実装していきます。</p>
+      </div>
+    </div>
+    <div class="route reveal">
+      <div class="thumb" style="background-image:url('site_assets/spot_river.webp')"></div>
+      <div class="rbody">
+        <div class="pending-tag">一部開架</div>
+        <h4>GURiN Archive｜世界の書庫</h4>
+        <p>未来意識のメッセージを源泉に、GURiN Worldの記事、辞書、記録を収める書庫です。意識・仮想現実・テクノロジーをめぐる探究と、世界観が広がる言葉に出会えます。</p>
+      </div>
+    </div>
+    <div class="route reveal">
+      <div class="thumb" style="background-image:url('site_assets/spot_academy.webp')"></div>
+      <div class="rbody">
+        <div class="pending-tag">近日開門予定</div>
+        <h4>GURiN Academy</h4>
+        <p>世界観を、学びと実践へつなげる場所。<br><br>宇宙のしくみ、未来のシナリオ、意識とテクノロジー、<br>インスピレーション、お金、仕事、人間関係、生老病死……<br><br>人類のあらゆる謎を、紐解いていきます。</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- 出口動画「ロナと、次の世界へ」（2026-07-25 追加）：入口は静止画で世界を見せ、出口でロナが次の世界へ誘う -->
 <section id="exit-video" class="reveal">
