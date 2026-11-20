@@ -129,15 +129,58 @@ a.about-link,a.more,a.rona-link,.entrance-link a{font-size:max(1em,16px);font-we
   .line-feature-text{font-size:16px!important;}
 }
 </style>
+<style id="gw-nav-20261120">
+/* ═══ メニュー共通（2026-11-20・GURiN決定：7項目＋SNS）═══ */
+nav .brand{text-decoration:none;}
+nav .nav-links{display:flex;align-items:center;gap:26px;}
+nav .nav-links a,nav .gw-sns summary{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Noto Sans CJK JP",Meiryo,sans-serif!important;
+  font-size:14.5px!important;font-weight:700!important;letter-spacing:.08em!important;color:#e4e6ef!important;text-decoration:none;}
+nav .nav-links a:hover,nav .gw-sns summary:hover{color:#5fd4d0!important;}
+nav .nav-links a.line-nav{color:#10243A!important;}
+nav .gw-sns{position:relative;}
+nav .gw-sns summary{list-style:none;cursor:pointer;user-select:none;}
+nav .gw-sns summary::-webkit-details-marker{display:none;}
+nav .gw-sns summary::after{content:" ▾";font-size:11px;}
+nav .gw-sns[open] summary::after{content:" ▴";}
+nav .gw-sns-menu{position:absolute;right:0;top:calc(100% + 12px);min-width:170px;background:rgba(7,13,27,.97);border:1px solid rgba(95,212,208,.3);border-radius:10px;padding:8px 0;box-shadow:0 14px 40px rgba(0,0,0,.5);z-index:80;}
+nav .gw-sns-menu a{display:block!important;padding:11px 20px!important;}
+nav .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;}
+nav .hamburger span{width:22px;height:2px;background:#e4e6ef;transition:transform .35s,opacity .35s;}
+nav.menu-open .hamburger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+nav.menu-open .hamburger span:nth-child(2){opacity:0;}
+nav.menu-open .hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media (max-width:1080px){ nav .nav-links{gap:18px;} nav .nav-links a,nav .gw-sns summary{font-size:13.5px!important;} }
+@media (max-width:900px){
+  nav .nav-links{display:none!important;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;
+    background:#070d1b;border-bottom:1px solid rgba(95,212,208,.25);padding:8px 0 16px;max-height:calc(100vh - 64px);overflow-y:auto;}
+  nav.menu-open{z-index:500!important;}
+  nav.menu-open .nav-links{display:flex!important;}
+  nav .nav-links a,nav .gw-sns summary{display:block;padding:14px 28px!important;font-size:16px!important;}
+  nav .nav-links a.line-nav{margin:6px 28px;text-align:center;}
+  nav .gw-sns-menu{position:static;border:0;box-shadow:none;background:transparent;padding:0 0 0 18px;}
+  nav .hamburger{display:flex;}
+}
+</style>
 </head>
 <body>
 
 <nav>
-  <div class="brand">GURiN World</div>
+  <a class="brand" href="https://gurin.world/">GURiN World</a>
   <div class="nav-links">
-    <a href="https://gurin.world/">世界へ戻る</a><a class="line-nav" href="https://gurin01shift.substack.com" target="_blank" rel="noopener noreferrer">メール特典</a>
-    <a href="https://gurin.world/session.html">個人セッション</a>
+    <a href="https://gurin.world/about.html">はじめての方へ</a>
+    <a class="line-nav" href="https://gurin01shift.substack.com" target="_blank" rel="noopener noreferrer">メール特典</a>
+    <a href="https://gurin.world/sekai.html">この世界は幻</a>
+    <a href="https://gurin.world/#entrances">入口</a>
+    <a href="https://gurin.world/#books">書物</a>
+    <a href="https://gurin.world/session.html">セッション</a>
+    <a href="https://gurin.world/#about">GURiN</a>
+    <details class="gw-sns"><summary>SNS</summary><div class="gw-sns-menu">
+      <a href="https://note.com/gurin_q01" target="_blank" rel="noopener noreferrer">note ↗</a>
+      <a href="https://gurin01shift.substack.com" target="_blank" rel="noopener noreferrer">Substack ↗</a>
+      <a href="https://www.youtube.com/@GURIN_Q01" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
+    </div></details>
   </div>
+  <div class="hamburger" aria-label="メニュー"><span></span><span></span><span></span></div>
 </nav>
 
 <header class="wrap" style="padding-top:64px">
@@ -221,5 +264,6 @@ a.about-link,a.more,a.rona-link,.entrance-link a{font-size:max(1em,16px);font-we
   <div style="margin-top:18px;font-size:10px;letter-spacing:.3em;color:#4a4f63">© 2026 GURiN World</div>
 </footer>
 
+<script id="gw-nav-js">document.querySelectorAll('nav').forEach(function(n){if(n.id==='nav')return;var h=n.querySelector('.hamburger');if(!h)return;h.addEventListener('click',function(){n.classList.toggle('menu-open')});n.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('menu-open')})});});</script>
 </body>
 </html>
