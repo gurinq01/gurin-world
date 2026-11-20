@@ -383,6 +383,19 @@ a.pin{text-decoration:none;}
 
 /* ---------- GURiN BOOKS：書物の入口（2026-07-27 追加） ---------- */
 /* 静かな書庫に一冊。左＝縦長表紙（大）、右＝書名・副題・概要・状態。既存の色・角丸・余白を継承 */
+/* GURiN BOOKS 3冊（2026-11-20）文字は太く大きく */
+#books .lead{font-family:"Noto Sans JP","Hiragino Sans",sans-serif;font-weight:700;font-size:17px;color:#fff;line-height:2;letter-spacing:.06em;}
+#books h2{font-weight:700;}
+.books3{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:64px;}
+.book3{text-align:center;font-family:"Noto Sans JP","Hiragino Sans",sans-serif;}
+.book3-cover img{width:100%;max-width:300px;height:auto;display:block;margin:0 auto;border-radius:8px;box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 0 1px var(--line);}
+.book3-no{margin-top:26px;font-family:"Noto Sans JP","Hiragino Sans",sans-serif;font-size:13px;font-weight:700;letter-spacing:.28em;color:var(--turquoise);}
+.book3-title{margin-top:8px;font-weight:700;font-size:clamp(22px,2.4vw,27px);letter-spacing:.08em;color:#fff;line-height:1.5;}
+.book3-line{text-wrap:balance;margin-top:12px;font-size:16px;font-weight:700;letter-spacing:.04em;line-height:1.8;color:var(--gold);}
+.book3-status{display:inline-block;margin-top:18px;font-size:14px;font-weight:700;letter-spacing:.16em;color:#fff;border:1px solid rgba(245,166,35,.5);border-radius:999px;padding:7px 18px;}
+.books3-notify{margin-top:64px;text-align:center;}
+.books3-notify p{font-family:"Noto Sans JP","Hiragino Sans",sans-serif;font-size:17px;font-weight:700;letter-spacing:.06em;line-height:2;color:var(--text);margin:0 0 20px;}
+@media(max-width:860px){.books3{grid-template-columns:1fr;gap:56px;}.book3-cover img{max-width:260px;}}
 .book-feature{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:60px;align-items:center;margin-top:72px;}
 .book-cover img{width:100%;height:auto;display:block;border-radius:10px;box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 0 1px var(--line);}
 .book-title{font-family:'Shippori Mincho',serif;font-weight:500;font-size:clamp(24px,3.4vw,32px);letter-spacing:.1em;color:var(--platinum);text-shadow:0 0 18px rgba(237,237,242,.22);line-height:1.5;}
@@ -638,7 +651,7 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
     <a href="session.html">セッション</a>
     <a href="#about">GURiN</a>
     <a href="https://note.com/gurin_q01" target="_blank">note</a>
-    <a href="https://x.com/GURIN_Q01" target="_blank">X</a>
+    <a href="https://gurin01shift.substack.com" target="_blank" rel="noopener noreferrer">Substack</a>
   </div>
   <div class="hamburger"><span></span><span></span><span></span></div>
 </nav>
@@ -711,10 +724,10 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
       <div class="jewel"></div><div class="pin-name">夢幻ラボ</div>
       <div class="label"><small class="soon">構築中</small></div>
     </div>
-    <!-- 宇宙のクラウド：空の源泉。ゴールド。#books へ -->
+    <!-- GURiN BOOKS：空の源泉。ゴールド。#books へ（2026-11-20『宇宙のクラウド』を一度はずし、3冊に） -->
     <a class="pin books" href="#books" style="left:33%;top:9%">
-      <div class="jewel"></div><div class="pin-name">宇宙のクラウド</div>
-      <div class="label"><small class="soon">近日公開予定</small></div>
+      <div class="jewel"></div><div class="pin-name">GURiN BOOKS</div>
+      <div class="label"><small class="soon">2027年 刊行予定</small></div>
     </a>
     <!-- 個人セッション：ターコイズ。session.html へ -->
     <a class="pin session" href="session.html" style="left:80%;top:24%">
@@ -729,11 +742,11 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
   <!-- 世界の外へ続く経路：地図直下・凡例より先に表示。第一フェーズはnote・Xのみ。
        将来、音声・動画などの経路も増設予定 -->
   <div class="map-external reveal">
-    <span>世界の外へ続く経路</span><a href="https://note.com/gurin_q01" target="_blank">note ↗</a><a href="https://x.com/GURIN_Q01" target="_blank">X ↗</a>
+    <span>世界の外へ続く経路</span><a href="https://note.com/gurin_q01" target="_blank">note ↗</a><a href="https://gurin01shift.substack.com" target="_blank" rel="noopener">Substack ↗</a>
   </div>
   <div class="map-legend reveal">
     <span><i style="background:var(--platinum)"></i>四方の門</span>
-    <span><i style="background:var(--gold)"></i>宇宙のクラウド（近日公開予定）</span>
+    <span><i style="background:var(--gold)"></i>GURiN BOOKS（2027年 刊行予定）</span>
     <span><i style="background:var(--turquoise)"></i>個人セッション</span>
     <span><i style="background:var(--violet)"></i>GURiN Archive（一部開架）</span>
     <span><i style="background:var(--magenta);opacity:.7"></i>夢幻ラボ（構築中）</span>
@@ -826,38 +839,37 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
   </div>
 </section>
 
-<!-- GURiN BOOKS：書物の入口（2026-07-27 追加）。#next と #about の間。今回は一冊のみ大きく表示。将来 複数冊を .book-feature を増やして拡張可 -->
+<!-- GURiN BOOKS：書物の入口（2026-07-27 追加／2026-11-20『宇宙のクラウド』を一度はずし、3冊の仮表紙に。表紙＝Kuuの仮→本番はゼイラス）。旧表紙 book_uchu-no-cloud_cover_portrait.webp は残す -->
 <section id="books">
   <div class="eyebrow reveal">GURiN BOOKS</div>
   <h2 class="reveal">書物の入口</h2>
-  <p class="lead reveal">宇宙から届いた、<br>未来から選りすぐられた26のメッセージ。</p>
-  <div class="book-feature reveal">
-    <div class="book-cover">
-      <img src="site_assets/books/book_uchu-no-cloud_cover_portrait.webp?v=20260907" alt="『宇宙のクラウド』表紙">
+  <p class="lead reveal">死から、この世界の幻へ。そして、意識とテクノロジーへ。<br>三冊でひとつにつながる、GURiN Worldの書物です。</p>
+  <div class="books3">
+    <div class="book3 reveal">
+      <div class="book3-cover"><img src="site_assets/books/book_shi_cover.webp?v=20261120" alt="『死とは命の光』表紙（仮）" loading="lazy"></div>
+      <div class="book3-no">BOOK 1</div>
+      <h3 class="book3-title">死とは命の光</h3>
+      <p class="book3-line">死は命の輝き</p>
+      <div class="book3-status">2027年 刊行予定</div>
     </div>
-    <div class="book-detail">
-      <h3 class="book-title">宇宙のクラウド</h3>
-      <p class="book-sub">——35年、3000篇の対話から<br class="br-sp">選んだ26のメッセージ</p>
-      <p class="book-desc">人間とは何か。世界とは何か。<br>人間、意識、男女、仕事、経営、お金、生と死、宇宙。<br>異なる問いの奥に流れる、一つの源泉を読み解く書物です。</p>
-      <p class="book-desc">35年にわたる宇宙との対話から、最初の26篇を選び、<br>解説、Q&amp;A、図解、画像、アプリとともに編集中です。</p>
-      <div class="book-status">近日公開予定</div>
-
-      <!-- ═══════════════════════════════════════════════════════════
-           公開の知らせを受け取る（2026-08-28・Kuu）
-
-           ★差し替えるのは2箇所だけ★
-             ① フォームのURL → 2026-08-29 差し替え済み
-             ② 〔仮〕の文言 → ゼイラスの文言（まだ〔仮〕）
-           ═══════════════════════════════════════════════════════════ -->
-      <div class="book-notify">
-        <p>この世界は幻であることに気づいた人へ。<br>『宇宙のクラウド』は<strong>近日公開</strong>です。<br>その前に、直接お話しすることもできます。</p>
-        <a class="book-btn" href="session.html">GURiNの個人セッション</a>
-        <p class="sub">60分 30,000円／90分 45,000円（税込）</p>
-      </div>
-
-      <!-- 購入ページ完成後、この位置にボタンを追加：
-      <a class="book-cta" href="購入ページURL">この書物を見る</a> -->
+    <div class="book3 reveal">
+      <div class="book3-cover"><img src="site_assets/books/book_kaso_cover.webp?v=20261120" alt="『この世界は仮想現実』表紙（仮）" loading="lazy"></div>
+      <div class="book3-no">BOOK 2</div>
+      <h3 class="book3-title">この世界は仮想現実</h3>
+      <p class="book3-line">目を閉じた方が現実　目を開けると幻</p>
+      <div class="book3-status">2027年 刊行予定</div>
     </div>
+    <div class="book3 reveal">
+      <div class="book3-cover"><img src="site_assets/books/book_techno_cover.webp?v=20261120" alt="『意識とテクノロジー』表紙（仮）" loading="lazy"></div>
+      <div class="book3-no">BOOK 3</div>
+      <h3 class="book3-title">意識とテクノロジー</h3>
+      <p class="book3-line">テクノロジーとは、人の意識拡張装置である。</p>
+      <div class="book3-status">2027年 刊行予定</div>
+    </div>
+  </div>
+  <div class="books3-notify reveal">
+    <p>刊行のお知らせは、メールでいち早くお届けします。</p>
+    <a class="book-btn" href="https://gurin01shift.substack.com" target="_blank" rel="noopener noreferrer">無料でメールを受け取る</a>
   </div>
 </section>
 
@@ -886,7 +898,7 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
       <dl class="sp-facts">
         <div><dt>受け方</dt><dd>オンライン｜Google Meet<br><span>顔を出してお会いします</span></dd></div>
         <div><dt>担当</dt><dd>GURiN本人</dd></div>
-        <div><dt>受けられる方</dt><dd>どなたでも<br><span>『宇宙のクラウド』をお読みでなくても、お受けいただけます</span></dd></div>
+        <div><dt>受けられる方</dt><dd>どなたでも</dd></div>
         <div><dt>料金</dt><dd>60分　30,000円<br>90分　45,000円　<span>（税込）</span></dd></div>
       </dl>
       <a class="sp-btn" href="session.html">個人セッションを見る</a>
@@ -945,7 +957,7 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
     <a href="https://gurin.world/maboroshi.html" target="_blank">幻度チェック</a><a href="sekai.html">この世界は幻・仮想現実</a><a href="https://note.com/gurin_q01/m/m767bca287553" target="_blank" rel="noopener noreferrer">意識とテクノロジー</a>
     <a href="https://gurin.world/rona.html" target="_blank">今日のロナメッセージ</a>
     <a href="https://note.com/gurin_q01" target="_blank" rel="noopener noreferrer">note ↗</a>
-    <a href="https://x.com/GURIN_Q01" target="_blank" rel="noopener noreferrer">X ↗</a>
+    <a href="https://gurin01shift.substack.com" target="_blank" rel="noopener noreferrer">Substack ↗</a>
   </div>
   <div class="copyright">© 2026 GURiN World</div>
 </footer>
