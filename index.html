@@ -394,6 +394,10 @@ a.pin{text-decoration:none;}
 .book3-line{text-wrap:balance;margin-top:12px;font-size:16px;font-weight:700;letter-spacing:.04em;line-height:1.8;color:var(--gold);}
 .book3-status{display:inline-block;margin-top:18px;font-size:14px;font-weight:700;letter-spacing:.16em;color:#fff;border:1px solid rgba(245,166,35,.5);border-radius:999px;padding:7px 18px;}
 .books3-notify{margin-top:64px;text-align:center;}
+.books3-btn{display:inline-block;font-family:"Noto Sans JP","Hiragino Sans",sans-serif;font-size:18px;font-weight:800;letter-spacing:.1em;padding:16px 44px;border-radius:999px;background:#F5A623;color:#10243A;text-decoration:none;box-shadow:0 8px 28px rgba(245,166,35,.28);transition:background .3s,transform .3s;}
+.books3-btn:hover{background:#ffc45b;color:#10243A;transform:translateY(-2px);}
+@media(max-width:860px){.books3-btn{font-size:17px;padding:15px 36px;}}
+
 .books3-notify p{font-family:"Noto Sans JP","Hiragino Sans",sans-serif;font-size:17px;font-weight:700;letter-spacing:.06em;line-height:2;color:var(--text);margin:0 0 20px;}
 @media(max-width:860px){.books3{grid-template-columns:1fr;gap:56px;}.book3-cover img{max-width:260px;}}
 .book-feature{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:60px;align-items:center;margin-top:72px;}
@@ -635,6 +639,35 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
  ]
 }
 </script>
+<style id="readable-20261120">
+/* ═══ 読みやすさの底上げ（2026-11-20・GURiN決定：50代以上でも読める）═══
+   見出し（明朝）は世界観の顔として残す。本文・説明・小さな文字は、太めのゴシック・明るい色・大きめに。 */
+:root{--text:#e8eaf2;--muted:#c4c8d8;}
+body{-webkit-font-smoothing:antialiased;}
+p,li,dd,dt,td,th,figcaption,.lead,.line-feature-text,.book-desc,.book-notify p,.sp-text,.sp-lede,.rbody p,.marks li,.facts td,.facts th{
+  font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Noto Sans CJK JP","Yu Gothic",Meiryo,sans-serif;
+  font-weight:500;}
+p,li,dd,td,figcaption,.book-desc,.sp-text,.rbody p{font-size:max(1em,17px);line-height:1.95;color:var(--text);}
+.lead{font-size:max(1em,18px)!important;font-weight:700;color:#fff;line-height:2;}
+th,dt{font-size:max(1em,16px);font-weight:700;color:#fff;}
+.line-feature-text{font-size:17px!important;color:var(--text)!important;line-height:1.95;}
+.line-feature-text a{font-weight:700;color:#F5A623;}
+/* 小さな文字の下限 */
+.eyebrow,.pending-tag,small,.soon,.src,.copyright,.map-legend,.map-external,.f-links a,.nav-links a,.book-status,.sp-facts span,.sub,.small,p.small{
+  font-size:max(1em,13.5px)!important;color:var(--muted);}
+.eyebrow{font-weight:700;color:#d9dce8;}
+.ent .body p,.ent p{font-size:16px!important;font-weight:500;color:#eef0f6;line-height:1.85;}
+td span[style*="font-size:14px"],dd span{font-size:15px!important;color:var(--muted)!important;}
+.map-legend,.map-external,.f-links a{font-size:14.5px!important;color:#d9dce8;}
+.pin .label small,.pin .soon{font-size:12.5px!important;}
+.copyright{color:#aeb3c6!important;}
+a.about-link,a.more,a.rona-link,.entrance-link a{font-size:max(1em,16px);font-weight:700;}
+@media(max-width:600px){
+  p,li,dd,td,figcaption,.book-desc,.sp-text,.rbody p{font-size:16.5px;}
+  .lead{font-size:17px!important;}
+  .line-feature-text{font-size:16px!important;}
+}
+</style>
 </head>
 <body>
 <canvas id="stars"></canvas>
@@ -869,7 +902,7 @@ footer{position:relative;z-index:1;text-align:center;padding:110px 40px 60px;
   </div>
   <div class="books3-notify reveal">
     <p>刊行のお知らせは、メールでいち早くお届けします。</p>
-    <a class="book-btn" href="https://gurin01shift.substack.com" target="_blank" rel="noopener noreferrer">無料でメールを受け取る</a>
+    <a class="books3-btn" href="https://gurin01shift.substack.com" target="_blank" rel="noopener noreferrer">無料でメールを受け取る</a>
   </div>
 </section>
 

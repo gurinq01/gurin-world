@@ -223,6 +223,35 @@ footer a{color:var(--muted)}
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style id="readable-20261120">
+/* ═══ 読みやすさの底上げ（2026-11-20・GURiN決定：50代以上でも読める）═══
+   見出し（明朝）は世界観の顔として残す。本文・説明・小さな文字は、太めのゴシック・明るい色・大きめに。 */
+:root{--text:#e8eaf2;--muted:#c4c8d8;}
+body{-webkit-font-smoothing:antialiased;}
+p,li,dd,dt,td,th,figcaption,.lead,.line-feature-text,.book-desc,.book-notify p,.sp-text,.sp-lede,.rbody p,.marks li,.facts td,.facts th{
+  font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Noto Sans CJK JP","Yu Gothic",Meiryo,sans-serif;
+  font-weight:500;}
+p,li,dd,td,figcaption,.book-desc,.sp-text,.rbody p{font-size:max(1em,17px);line-height:1.95;color:var(--text);}
+.lead{font-size:max(1em,18px)!important;font-weight:700;color:#fff;line-height:2;}
+th,dt{font-size:max(1em,16px);font-weight:700;color:#fff;}
+.line-feature-text{font-size:17px!important;color:var(--text)!important;line-height:1.95;}
+.line-feature-text a{font-weight:700;color:#F5A623;}
+/* 小さな文字の下限 */
+.eyebrow,.pending-tag,small,.soon,.src,.copyright,.map-legend,.map-external,.f-links a,.nav-links a,.book-status,.sp-facts span,.sub,.small,p.small{
+  font-size:max(1em,13.5px)!important;color:var(--muted);}
+.eyebrow{font-weight:700;color:#d9dce8;}
+.ent .body p,.ent p{font-size:16px!important;font-weight:500;color:#eef0f6;line-height:1.85;}
+td span[style*="font-size:14px"],dd span{font-size:15px!important;color:var(--muted)!important;}
+.map-legend,.map-external,.f-links a{font-size:14.5px!important;color:#d9dce8;}
+.pin .label small,.pin .soon{font-size:12.5px!important;}
+.copyright{color:#aeb3c6!important;}
+a.about-link,a.more,a.rona-link,.entrance-link a{font-size:max(1em,16px);font-weight:700;}
+@media(max-width:600px){
+  p,li,dd,td,figcaption,.book-desc,.sp-text,.rbody p{font-size:16.5px;}
+  .lead{font-size:17px!important;}
+  .line-feature-text{font-size:16px!important;}
+}
+</style>
 </head>
 <body>
 
